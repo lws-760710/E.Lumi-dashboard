@@ -566,7 +566,7 @@ body {
     <div class="df"><span class="dfn">결함 2</span>에이전트 실제 미작동<div class="dfd">프로세스만 있고 실제 판단 루프 없음 → 생존 신호 검증부터 시작</div></div>
     <div class="df"><span class="dfn">결함 3</span>투자 전략 코드 없음<div class="dfd">전략 이름만 있고 실제 알고리즘 없음 → 모멘텀 전략부터 구현 시작</div></div>
     <div class="df"><span class="dfn">결함 4</span>학습 데이터 부족<div class="dfd">실제 데이터 수집 진행 중 → 코인·분봉·뉴스 데이터 계속 수집 필요</div></div>
-    <div class="df"><span class="dfn">결함 5</span>레짐 탐지기 미구현<div class="dfd">ai_route/market_regime_detector.py는 ±5% 비교만 있는 스켈레톤 — 사용 불가.<br>quant_engine/market_analysis/regime_detector.py 새로 구현 필요 (RSI+MACD+VIX+볼린저+ATR 5개 지표)</div></div>
+    <div class="df"><span class="dfn">결함 5</span>실시간 시장 데이터 미연결<div class="dfd">현재 시장 상황을 실시간으로 보는 데이터 피드가 연결되지 않음</div></div>
   </div>
 </div>
 
@@ -592,10 +592,6 @@ body {
     </div>
     <div class="card">
       <div class="ct">🔜 다음 작업 순서</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-001 ai_route 서버 LUMI 시작 시 자동 실행 설정</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-002 Market Agent → POST /route 연결</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-003 텔레그램 알람 LUMI 이벤트 연결</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-004 dev_agent 루프 활성화 (자가 치유)</div>
       <div class="task"><div class="dot dp"></div>DF-005 코인 데이터 수집 (업비트)</div>
       <div class="task"><div class="dot dw"></div>DF-006 국내 주식 1분봉 1년 데이터</div>
       <div class="task"><div class="dot dw"></div>DF-007 미국 주식 1분봉 데이터</div>
