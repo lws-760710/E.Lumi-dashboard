@@ -1,716 +1,170 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LUMI 마스터 계획서 v4.0</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', -apple-system, sans-serif;
-  background: #f5f6fa;
-  color: #1a1a2e;
-  line-height: 1.7;
-  font-size: 14px;
-}
-
-/* ── 레이아웃 ── */
-.container {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 3rem;
-  padding-right: 180px;
-}
-
-/* ── 헤더 ── */
-.hdr {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 16px;
-  padding: 2rem 2rem 1.5rem;
-  margin-bottom: 2rem;
-  color: #fff;
-  box-shadow: 0 8px 32px rgba(102,126,234,0.3);
-}
-.hdr-title { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
-.hdr-sub { font-size: 13px; opacity: 0.85; margin-bottom: 1.5rem; }
-
-.kpi4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
-.kpi {
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 10px;
-  padding: 1rem;
-  backdrop-filter: blur(4px);
-}
-.kl { font-size: 11px; opacity: 0.8; margin-bottom: 4px; }
-.kv { font-size: 20px; font-weight: 700; }
-.ks { font-size: 11px; opacity: 0.7; margin-top: 3px; }
-
-/* ── 섹션 공통 ── */
-.sec { margin-bottom: 2rem; }
-.sec-anchor { position: relative; top: -80px; }
-
-.st {
-  font-size: 11px;
-  font-weight: 700;
-  color: #667eea;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #e8eaf6;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.st::before { content: ''; display: inline-block; width: 4px; height: 16px; background: linear-gradient(180deg,#667eea,#764ba2); border-radius: 2px; }
-
-/* ── 카드 ── */
-.card {
-  background: #ffffff;
-  border: 1px solid #e8eaf0;
-  border-radius: 12px;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  transition: box-shadow 0.2s, transform 0.2s;
-}
-.card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.1); transform: translateY(-1px); }
-.ct { font-size: 13px; font-weight: 700; color: #4a4a6a; margin-bottom: 1rem; padding-bottom: 8px; border-bottom: 1px solid #f0f0f8; }
-
-.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; }
-
-/* ── 철학 ── */
-.phil { padding: 10px 0; border-bottom: 1px solid #f5f5fb; }
-.phil:last-child { border-bottom: none; }
-.phil-t { font-weight: 600; color: #2d2d5e; margin-bottom: 3px; font-size: 13px; }
-.phil-d { color: #6b6b8a; font-size: 12px; line-height: 1.6; }
-
-/* ── 장비 ── */
-.dev {
-  background: #fafbff;
-  border: 1px solid #e8eaf0;
-  border-radius: 10px;
-  padding: 1rem;
-  transition: border-color 0.2s;
-}
-.dev:hover { border-color: #667eea; }
-.dn { font-weight: 700; color: #1a1a2e; margin-bottom: 5px; font-size: 13px; }
-.dr { color: #6b6b8a; font-size: 12px; line-height: 1.5; }
-.dbg { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 6px; margin-top: 8px; font-weight: 600; }
-.mac { background: #dbeafe; color: #1d4ed8; }
-.win { background: #fef3c7; color: #d97706; }
-.das { background: #d1fae5; color: #059669; }
-.mon { background: #f3f4f6; color: #6b7280; }
-
-/* ── Phase 진행률 ── */
-.pr {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 0;
-  border-bottom: 1px solid #f5f5fb;
-  font-size: 13px;
-}
-.pr:last-child { border-bottom: none; }
-.pn { width: 200px; flex-shrink: 0; color: #2d2d5e; font-weight: 500; }
-.pc { width: 140px; flex-shrink: 0; font-size: 11px; color: #9ca3af; }
-.bw { flex: 1; background: #e5e7eb; border-radius: 6px; height: 12px; overflow: hidden; }
-.bar { height: 100%; border-radius: 6px; }
-.bd { background: linear-gradient(90deg, #10b981, #059669); }
-.bp { background: linear-gradient(90deg, #3b82f6, #2563eb); }
-.bn { background: linear-gradient(90deg, #f59e0b, #d97706); }
-.be { background: #e5e7eb; width: 0%; }
-.pct { font-size: 12px; font-weight: 700; width: 38px; text-align: right; flex-shrink: 0; }
-.done-txt { color: #10b981; }
-.prog-txt { color: #3b82f6; }
-.wait-txt { color: #9ca3af; }
-
-.badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; flex-shrink: 0; }
-.bg { background: #d1fae5; color: #059669; }
-.bb { background: #dbeafe; color: #2563eb; }
-.by { background: #fef3c7; color: #d97706; }
-.bw2 { background: #f3f4f6; color: #6b7280; }
-
-/* ── 레짐 전략 ── */
-.re { padding: 10px 0; border-bottom: 1px solid #f5f5fb; }
-.re:last-child { border-bottom: none; }
-.ren { font-weight: 700; color: #2d2d5e; margin-bottom: 3px; font-size: 13px; }
-.res { color: #4a4a6a; font-size: 13px; }
-.rec { color: #9ca3af; font-size: 12px; margin-top: 3px; }
-
-/* ── 파이프라인 ── */
-.ps { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; }
-.psn {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff; display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; flex-shrink: 0;
-}
-.psname { font-weight: 600; color: #1a1a2e; font-size: 13px; }
-.psd { color: #6b6b8a; font-size: 12px; }
-
-/* ── 에이전트 ── */
-.ag { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f5f5fb; }
-.ag:last-child { border-bottom: none; }
-.agr {
-  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff; display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700;
-}
-.agn { font-weight: 700; color: #1a1a2e; font-size: 13px; }
-.agd { color: #6b6b8a; font-size: 12px; margin-top: 2px; line-height: 1.5; }
-.agm { font-size: 11px; color: #a5b4fc; margin-top: 4px; font-family: monospace; }
-
-/* ── 인간 개입 ── */
-.lv { padding: 12px 0; border-bottom: 1px solid #f5f5fb; }
-.lv:last-child { border-bottom: none; }
-.lvt { font-weight: 700; color: #2d2d5e; margin-bottom: 4px; font-size: 14px; }
-.lvc { color: #4a4a6a; font-size: 13px; }
-.lva { color: #667eea; font-size: 13px; margin-top: 3px; font-weight: 500; }
-
-/* ── 테이블 ── */
-.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
-.tbl th {
-  text-align: left; padding: 10px 12px;
-  font-size: 11px; color: #9ca3af;
-  border-bottom: 2px solid #e5e7eb;
-  font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-  background: #fafbff;
-}
-.tbl td { padding: 9px 12px; border-bottom: 1px solid #f5f5fb; color: #4a4a6a; vertical-align: top; }
-.tbl tr:last-child td { border-bottom: none; }
-.tbl tr:hover td { background: #fafbff; }
-.code { font-family: 'SF Mono', monospace; color: #667eea; font-size: 12px; font-weight: 600; }
-
-/* ── 결함 ── */
-.df { padding: 10px 0; border-bottom: 1px solid #f5f5fb; }
-.df:last-child { border-bottom: none; }
-.dfn { font-weight: 700; color: #ef4444; margin-right: 6px; }
-.dfd { color: #6b6b8a; font-size: 12px; margin-top: 3px; line-height: 1.5; }
-
-/* ── 태스크 ── */
-.task { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid #f5f5fb; font-size: 13px; color: #4a4a6a; }
-.task:last-child { border-bottom: none; }
-.dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-.dd { background: #10b981; }
-.dp { background: #3b82f6; }
-.dw { background: #f59e0b; }
-.dn2 { background: #d1d5db; }
-
-/* ── 마일스톤 ── */
-.ms { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid #f5f5fb; }
-.ms:last-child { border-bottom: none; }
-.ms-code { font-family: monospace; font-size: 12px; color: #667eea; font-weight: 700; width: 130px; flex-shrink: 0; }
-.ms-name { font-weight: 700; font-size: 14px; width: 150px; flex-shrink: 0; }
-.ms-desc { color: #6b6b8a; font-size: 13px; }
-
-/* ── 규칙 ── */
-.rule { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f5f5fb; font-size: 13px; color: #4a4a6a; }
-.rule:last-child { border-bottom: none; }
-.rx { color: #ef4444; flex-shrink: 0; font-weight: 700; font-size: 16px; line-height: 1.4; }
-
-/* ── 푸터 ── */
-.ft {
-  border-top: 2px solid #e8eaf0;
-  margin-top: 2rem; padding-top: 1rem;
-  display: flex; justify-content: space-between;
-  font-size: 12px; color: #9ca3af;
-}
-
-/* ══════════════════════════════════════
-   사이드 탭 네비게이션
-══════════════════════════════════════ */
-#side-nav {
-  position: fixed;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 155px;
-  background: rgba(255,255,255,0.97);
-  backdrop-filter: blur(12px);
-  border-left: 2px solid #e8eaf0;
-  border-radius: 12px 0 0 12px;
-  box-shadow: -4px 0 24px rgba(0,0,0,0.08);
-  z-index: 1000;
-  padding: 6px 0;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-#side-nav::-webkit-scrollbar { width: 3px; }
-#side-nav::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 2px; }
-
-.nav-item {
-  display: block;
-  padding: 7px 12px;
-  font-size: 11.5px;
-  color: #6b7280;
-  cursor: pointer;
-  transition: all 0.15s;
-  border-left: 3px solid transparent;
-  line-height: 1.4;
-  user-select: none;
-}
-.nav-item:hover { background: #f0f0ff; color: #667eea; }
-.nav-item.active {
-  background: linear-gradient(90deg, #ede9fe, #dbeafe);
-  color: #667eea;
-  font-weight: 700;
-  border-left: 3px solid #764ba2;
-}
-
-/* ── 맨 위로 버튼 ── */
-#scroll-top-btn {
-  position: fixed;
-  right: 170px;
-  bottom: 32px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(102,126,234,0.4);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.2s, transform 0.2s;
-  z-index: 999;
-}
-#scroll-top-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102,126,234,0.5); }
-
-@media (max-width: 1300px) {
-  .container { padding-right: 170px; }
-  #side-nav { width: 48px; }
-  .nav-item { font-size: 18px; padding: 8px; text-align: center; }
-  .nav-label { display: none; }
-}
-@media print {
-  #side-nav, #scroll-top-btn { display: none !important; }
-  .container { padding-right: 1.5rem; }
-  body { background: #fff; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMI 대시보드 | v4.20260616</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0d1117; color: #c9d1d9; line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        header {
+            text-align: center; margin-bottom: 48px;
+            border-bottom: 1px solid #30363d; padding-bottom: 28px;
+        }
+        h1 { font-size: 2.4em; color: #58a6ff; margin-bottom: 8px; }
+        .subtitle { color: #8b949e; font-size: 0.95em; margin-top: 6px; }
+        .date { color: #79c0ff; font-size: 0.9em; margin-top: 4px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px; margin-bottom: 36px;
+        }
+        .card {
+            background: #161b22; border: 1px solid #30363d;
+            border-radius: 8px; padding: 24px;
+            transition: border-color 0.25s;
+        }
+        .card:hover { border-color: #58a6ff; }
+        .card h2 { color: #58a6ff; font-size: 1.2em; margin-bottom: 16px; }
+        .card ul { list-style: none; }
+        .card li {
+            padding: 6px 0; color: #c9d1d9; font-size: 0.92em;
+            display: flex; align-items: flex-start; gap: 8px;
+            border-bottom: 1px solid #21262d;
+        }
+        .card li:last-child { border-bottom: none; }
+        .icon { min-width: 16px; font-weight: bold; }
+        .icon { color: #3fb950; }
+        li:has(.icon[data-type="warn"]) .icon { color: #f85149; }
+        li:has(.icon[data-type="play"]) .icon { color: #e3b341; }
+        .progress-wrap { margin-top: 20px; }
+        .progress-bar {
+            background: #30363d; height: 8px; border-radius: 4px; overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #3fb950, #58a6ff);
+            height: 100%; transition: width 0.4s;
+        }
+        .progress-label {
+            font-size: 0.82em; color: #8b949e; margin-top: 6px;
+            display: flex; justify-content: space-between;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 16px; margin-top: 32px; padding-top: 32px;
+            border-top: 1px solid #30363d;
+        }
+        .stat-box {
+            text-align: center; padding: 18px;
+            background: #161b22; border-radius: 8px;
+            border: 1px solid #30363d;
+        }
+        .stat-number { font-size: 2.2em; color: #58a6ff; font-weight: bold; }
+        .stat-label { color: #8b949e; font-size: 0.85em; margin-top: 6px; }
+        footer {
+            text-align: center; margin-top: 48px; padding-top: 28px;
+            border-top: 1px solid #30363d; color: #8b949e; font-size: 0.82em;
+        }
+        .update-time { color: #79c0ff; }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>LUMI 대시보드</h1>
+            <p class="date">2026년 06월 16일 업데이트</p>
+            <p class="subtitle">v4.20260616 &nbsp;|&nbsp; Mac Studio M4 Max 128GB</p>
+        </header>
 
-<!-- 사이드 탭 네비게이션 -->
-<nav id="side-nav">
-  <div class="nav-item" data-target="sec-overview">📊 <span class="nav-label">전체 현황</span></div>
-  <div class="nav-item" data-target="sec-equipment">🖥️ <span class="nav-label">장비 구성</span></div>
-  <div class="nav-item" data-target="sec-strategy">🎯 <span class="nav-label">투자 전략</span></div>
-  <div class="nav-item" data-target="sec-pipeline">🔄 <span class="nav-label">매매 과정</span></div>
-  <div class="nav-item" data-target="sec-agent">🤖 <span class="nav-label">AI 에이전트</span></div>
-  <div class="nav-item" data-target="sec-human">👤 <span class="nav-label">내 통제권</span></div>
-  <div class="nav-item" data-target="sec-phase">📈 <span class="nav-label">개발 진행표</span></div>
-  <div class="nav-item" data-target="sec-auto">🤖 <span class="nav-label">자율 운영</span></div>
-  <div class="nav-item" data-target="sec-evo">🔬 <span class="nav-label">자가 진화</span></div>
-  <div class="nav-item" data-target="sec-coin">🪙 <span class="nav-label">코인 운영</span></div>
-  <div class="nav-item" data-target="sec-milestone">🏆 <span class="nav-label">목표 달성</span></div>
-  <div class="nav-item" data-target="sec-defect">⚠️ <span class="nav-label">해결 과제</span></div>
-  <div class="nav-item" data-target="sec-today">✅ <span class="nav-label">오늘 성과</span></div>
-  <div class="nav-item" data-target="sec-rules">🚫 <span class="nav-label">절대 규칙</span></div>
-</nav>
+        <div class="grid">
+            <div class="card">
+                <h2>✅ 오늘 완료 (9)</h2>
+                <ul>
+            <li><span class="icon">✓</span> KIS-LIVE-014: 미체결 주문 추적 완료</li>
+            <li><span class="icon">✓</span> KIS-LIVE-015: 부분체결 BR-008 연결 완료</li>
+            <li><span class="icon">✓</span> KIS-LIVE-016: 실현/평가손익 정밀화 완료</li>
+            <li><span class="icon">✓</span> KIS-LIVE-017: read-only 2h 안정화 완료</li>
+            <li><span class="icon">✓</span> KIS-LIVE-018: KIS 최종 점검 + 마감 리포트 완료</li>
+            <li><span class="icon">✓</span> DF-001: KR 주식 30종목 10년 OHLCV → DAS 저장</li>
+            <li><span class="icon">✓</span> DF-002: US 주식 6종목 10년 OHLCV → DAS 저장 (yfinance)</li>
+            <li><span class="icon">✓</span> DF-003: FRED 거시경제 7지표 → DAS 저장</li>
+            <li><span class="icon">✓</span> DF-004: KOSPI 추가 24종목 10년 → DAS 저장</li>
+                </ul>
+            </div>
 
-<!-- 맨 위로 버튼 -->
-<button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+            <div class="card">
+                <h2>▶ 진행 중</h2>
+                <ul>
+            <li><span class="icon">▶</span> 현재 즉시 작업: DF-005 (코인 데이터)</li>
+                </ul>
+                <h2 style="margin-top:20px">⚠️ 핵심 결함</h2>
+                <ul>
+            <li><span class="icon">⚠</span> 1. 데이터 파이프라인 단절: DL→CR→SQ→Q 체인 실제 미연결 → DP-001부터 연결</li>
+            <li><span class="icon">⚠</span> 2. 에이전트 미작동: 프로세스만 있고 실제 판단 루프 미연결 → AL-001부터 검증</li>
+            <li><span class="icon">⚠</span> 3. 전략 코드 없음: SQ 라인 이름만 있고 알고리즘 없음 → ST-001부터 구현</li>
+            <li><span class="icon">⚠</span> 4. 데이터베이스 깡통: 실제 데이터 부족 → DF-005~010 계속 수집</li>
+            <li><span class="icon">⚠</span> 5. 레짐 탐지기 미구현: quant_engine/market_analysis/regime_detector.py 새로 구현 필요</li>
+                </ul>
+            </div>
 
-<div class="container">
+            <div class="card">
+                <h2>📋 다음 작업</h2>
+                <ul>
+            <li>AI-ROUTE-001: ai_route 서버 LUMI 시작 시 자동 실행 설정</li>
+            <li>AI-ROUTE-002: Market Agent → POST http://127.0.0.1:8000/route 연결</li>
+            <li>AI-ROUTE-003: 텔레그램 알람 LUMI 이벤트 연결 (messenger/ 활용)</li>
+            <li>AI-ROUTE-004: dev_agent 루프 활성화 (자가 치유)</li>
+            <li>DF-005: 코인 10년 (업비트 BTC/ETH/SOL/XRP/DOGE)</li>
+            <li>DF-006: KR 분봉 데이터 (주요 10종목 1분봉 1년)</li>
+            <li>DF-007: US 분봉 데이터 (빅테크 6종목 1분봉 1년)</li>
+            <li>DF-008: Feature 파이프라인 (기술지표 200+ 자동 계산)</li>
+            <li>DF-009: 뉴스/감성 (Naver/NewsAPI/DART 1년)</li>
+            <li>DF-010: 데이터 무결성 감시 스케줄러</li>
+                </ul>
+                <div class="progress-wrap">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:63%"></div>
+                    </div>
+                    <div class="progress-label">
+                        <span>Phase 진행</span>
+                        <span>14/22 (63%)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<!-- 헤더 -->
-<div class="hdr">
-  <div class="hdr-title">LUMI 퀀트 런타임 OS — 마스터 계획서 v4.0</div>
-  <div class="hdr-sub">2026년 6월 15일 | Mac Studio M4 Max 128GB 중심 Federation OS | 스스로 운영·생존·진화하는 AI 자본 운영체제</div>
-  <div class="kpi4">
-    <div class="kpi"><div class="kl">최종 목표</div><div class="kv" style="font-size:15px">CRY-010 완성</div><div class="ks">24시간 코인 자율운영</div></div>
-    <div class="kpi"><div class="kl">완료 구간</div><div class="kv">Phase 0~16</div><div class="ks">16c 진행 중 (75%)</div></div>
-    <div class="kpi"><div class="kl">오늘 완료</div><div class="kv">12개</div><div class="ks">KIS-LIVE + DF + 에이전트</div></div>
-    <div class="kpi"><div class="kl">운영 모드</div><div class="kv" style="color:#a5f3fc">모의 거래</div><div class="ks">실주문 3중 잠금</div></div>
-  </div>
-</div>
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-number">9</div>
+                <div class="stat-label">오늘 완료</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">14</div>
+                <div class="stat-label">Phase 완료</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">32</div>
+                <div class="stat-label">대기 작업</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">5</div>
+                <div class="stat-label">결함 추적</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">63%</div>
+                <div class="stat-label">전체 진행률</div>
+            </div>
+        </div>
 
-<!-- ① 전체 현황 -->
-<div id="sec-overview" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 1. 시스템 철학 &amp; 절대 원칙</div>
-  <div class="g2">
-    <div class="card">
-      <div class="ct">핵심 운영 철학</div>
-      <div class="phil"><div class="phil-t">생존 우선 (Survival First)</div><div class="phil-d">수익보다 손실 관리가 먼저. 미완성 상태의 실전 진입 절대 금지.</div></div>
-      <div class="phil"><div class="phil-t">통제된 자율 (Governed Autonomy)</div><div class="phil-d">완전 자율 AI가 아닌 인간 통제 하의 자율 운영. 긴급 정지는 자동+수동 양방향.</div></div>
-      <div class="phil"><div class="phil-t">재현 가능성 (Replayability)</div><div class="phil-d">모든 매매 이벤트 재현 가능. 왜 벌었고 왜 잃었는지 설명 가능해야 실전 허용.</div></div>
-      <div class="phil"><div class="phil-t">단계 순서 엄수</div><div class="phil-d">모의 → 소액 실전 → 제한 실전 → 자율 운영. 단계 건너뜀 절대 금지.</div></div>
-      <div class="phil"><div class="phil-t">개인 운영 가능 규모</div><div class="phil-d">혼자 유지·복구·이해·디버깅 가능한 시스템. 기업형 과확장 금지.</div></div>
+        <footer>
+            <p>자동 생성 <span class="update-time">2026-06-16 10:50:29</span></p>
+            <p style="margin-top:4px">LUMI Quant Runtime OS — 실주문 PAPER MODE 유지</p>
+        </footer>
     </div>
-    <div class="card">
-      <div class="ct">불패 승률 철학</div>
-      <div class="phil"><div class="phil-t">어떠한 시장에서도 수익 가능</div><div class="phil-d">모든 주식이 동시에 폭락하지 않는다. 시장엔 항상 수익 기회가 있다.</div></div>
-      <div class="phil"><div class="phil-t">레짐별 전략 자동 전환</div><div class="phil-d">강세장·횡보장·약세장·위기장 각각 최적 전략을 자동 선택.</div></div>
-      <div class="phil"><div class="phil-t">작지만 구조는 전문가급</div><div class="phil-d">규모는 개인이지만 기록·재현·감사·복구·로그 구조는 실제 금융회사 수준.</div></div>
-      <div class="phil"><div class="phil-t">자가 진화 시스템</div><div class="phil-d">매일 운영을 통해 학습하고 머신러닝으로 자가 진화. 실패 전략 스스로 제거.</div></div>
-      <div class="phil"><div class="phil-t">데이터 우선</div><div class="phil-d">실데이터 기반과 완료된 에이전트 시스템으로 사전 학습 후 실전 투입.</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ② 장비 구성 -->
-<div id="sec-equipment" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 2. 장비 구성 &amp; 역할</div>
-  <div class="g3">
-    <div class="dev"><div class="dn">Mac Studio M4 Max 128GB</div><div class="dr">주권 두뇌 · 모든 판단/실행/운영/실주문 · AI 거버넌스 · 런타임 · UI</div><span class="dbg mac">실거래 권한 있음</span></div>
-    <div class="dev"><div class="dn">Windows PC RTX4060 32GB</div><div class="dr">CUDA · GPU 연산 · 백테스트 · 대량 AI 추론 · 시뮬레이션 전용</div><span class="dbg win">연산 전용 노드</span></div>
-    <div class="dev"><div class="dn">DAS 32TB (썬더볼트 직결)</div><div class="dr">증거·재현·로그·스냅샷·데이터셋 · 10년+ 데이터 영구 보관</div><span class="dbg das">불변 저장소</span></div>
-    <div class="dev"><div class="dn">외장 SSD 2TB (썬더볼트)</div><div class="dr">실시간 캐시 · 활성 스냅샷 · 빠른 데이터 접근 (실시간 저장소)</div><span class="dbg das">고속 저장</span></div>
-    <div class="dev"><div class="dn">MacBook Pro M1 8GB</div><div class="dr">원격 관제 · 긴급 승인 · 이동형 지휘 노드</div><span class="dbg mon">관제·승인만</span></div>
-    <div class="dev"><div class="dn">iPad Pro (Tailscale)</div><div class="dr">실시간 상황판 · 리스크 모니터링 · 에이전트 상태 감시</div><span class="dbg mon">모니터링만</span></div>
-  </div>
-</div>
-
-<!-- ③ 투자 전략 -->
-<div id="sec-strategy" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 3. 시장 상황별 투자 전략</div>
-  <div class="card">
-    <div class="re"><div class="ren">📈 강세장 (주가 오를 때)</div><div class="res">추세추종 70% + 평균회귀 30%</div><div class="rec">판단 기준: VIX &lt; 15, 52주 신고가 종목 비중 증가</div></div>
-    <div class="re"><div class="ren">↔️ 횡보장 (주가 제자리일 때)</div><div class="res">평균회귀 60% + 변동성 수익화 40%</div><div class="rec">판단 기준: ATR &lt; 20일 평균, 박스권 탐지</div></div>
-    <div class="re"><div class="ren">📉 약세장 (주가 떨어질 때)</div><div class="res">방어 포지션 + 단기 헤지 50:50</div><div class="rec">판단 기준: VIX &gt; 25, 200일 이동평균 하향 돌파</div></div>
-    <div class="re"><div class="ren">🚨 위기장 (폭락 위기)</div><div class="res">현금 보유 90% 자동 전환</div><div class="rec">판단 기준: 유동성 위기 감지 + 위기 재현 패턴 일치 시 자동 발동</div></div>
-  </div>
-</div>
-
-<!-- ④ 매매 과정 -->
-<div id="sec-pipeline" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 4. 실전 매매 과정 (12단계)</div>
-  <div class="card">
-    <div class="ps"><div class="psn">1</div><div><div class="psname">시장 데이터 수신</div><div class="psd">KIS/키움 실시간 시세 + 체결·호가</div></div></div>
-    <div class="ps"><div class="psn">2</div><div><div class="psname">시장 상황 판단</div><div class="psd">강세장/횡보장/약세장/위기장 자동 분류</div></div></div>
-    <div class="ps"><div class="psn">3</div><div><div class="psname">전략 선택</div><div class="psd">시장 상황 + 자산 현황 기반 활성 전략군 선택</div></div></div>
-    <div class="ps"><div class="psn">4</div><div><div class="psname">매매 신호 생성</div><div class="psd">매수/매도 신호 + 종목 + 수량 + 가격</div></div></div>
-    <div class="ps"><div class="psn">5</div><div><div class="psname">과거 사례 비교</div><div class="psd">유사 과거 상황 3건 + 성공률 참고 보고</div></div></div>
-    <div class="ps"><div class="psn">6</div><div><div class="psname">손실 위험 검사</div><div class="psd">통과/차단. 차단 시 즉시 종료</div></div></div>
-    <div class="ps"><div class="psn">7</div><div><div class="psname">운영 규칙 검사</div><div class="psd">통과/승인 요청. 위반 시 실행 차단</div></div></div>
-    <div class="ps"><div class="psn">8</div><div><div class="psname">주문 최적화</div><div class="psd">분할 매수 계획 + 불리한 가격 최소화</div></div></div>
-    <div class="ps"><div class="psn">9</div><div><div class="psname">실제 주문 발행</div><div class="psd">KIS/키움 API → 주문번호 → 체결 모니터링</div></div></div>
-    <div class="ps"><div class="psn">10</div><div><div class="psname">체결 확인 및 기록</div><div class="psd">체결 기록 → 외장 저장소 증거 저장</div></div></div>
-    <div class="ps"><div class="psn">11</div><div><div class="psname">거래 사후 분석</div><div class="psd">모든 AI가 협업 → 손익 분석 → 자가진화 파이프라인 진입</div></div></div>
-    <div class="ps"><div class="psn">12</div><div><div class="psname">운영 리포트 생성</div><div class="psd">당일 운영보고서 자동 발행</div></div></div>
-  </div>
-</div>
-
-<!-- ⑤ AI 에이전트 -->
-<div id="sec-agent" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 5. AI 에이전트 조직 (7개)</div>
-  <div class="card">
-    <div class="ag"><div class="agr">1</div><div><div class="agn">🛡️ 리스크 에이전트</div><div class="agd">손실 한도 / 긴급 중지 / 생존 모드 — 무조건 최우선. 다른 모든 신호 차단 가능</div><div class="agm">qwen2.5:72b → claude-sonnet 폴백</div></div></div>
-    <div class="ag"><div class="agr">2</div><div><div class="agn">⚖️ 거버넌스 에이전트</div><div class="agd">운영 규칙 위반 검사 / 규정 준수 / 고액 거래 승인 대기</div><div class="agm">command-r-plus:104b → claude-sonnet 폴백</div></div></div>
-    <div class="ag"><div class="agr">3</div><div><div class="agn">📊 시장 에이전트</div><div class="agd">시장 상황 인지 / 강세·약세·위기 판단 / 투자 기회 탐지</div><div class="agm">qwen2.5:72b → gemini-1.5-pro 폴백</div></div></div>
-    <div class="ag"><div class="agr">4</div><div><div class="agn">⚡ 실행 에이전트</div><div class="agd">실제 주문 실행 / 체결 최적화 / 불리한 가격 최소화 — 상위 3개 모두 통과 시에만 실행</div><div class="agm">deepseek-coder-v2:16b → gpt-4o-mini 폴백</div></div></div>
-    <div class="ag"><div class="agr">5</div><div><div class="agn">🔍 과거 재현 에이전트</div><div class="agd">과거 유사 상황 비교 / 참고 정보 제공 — 직접 거래 불가</div><div class="agm">nomic-embed-text → text-embedding-3-small 폴백</div></div></div>
-    <div class="ag"><div class="agr">6</div><div><div class="agn">📝 요약 에이전트</div><div class="agd">운영 보고서 생성 / 뉴스 요약 / 당일 결과 정리 — 기록·보고 전용</div><div class="agm">llama3.1:70b → claude-haiku 폴백</div></div></div>
-    <div class="ag"><div class="agr">7</div><div><div class="agn">🔧 감시 에이전트</div><div class="agd">시스템 건강 / 생존 신호 / 장애 감지 — 인프라 담당</div><div class="agm">gemma4:27b (규칙 기반)</div></div></div>
-  </div>
-</div>
-
-<!-- ⑥ 내 통제권 -->
-<div id="sec-human" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 6. 내 통제권 — 인간 개입 3단계</div>
-  <div class="card">
-    <div class="lv">
-      <div class="lvt">🟢 1단계 — 완전 자동</div>
-      <div class="lvc">조건: 일반 매매 / 정해진 한도 내 / 개별 종목 매수·매도 / 전략 파라미터 미세 조정</div>
-      <div class="lva">→ 개입 없음. 나중에 리포트만 확인</div>
-    </div>
-    <div class="lv">
-      <div class="lvt">🟡 2단계 — 사후 보고</div>
-      <div class="lvc">조건: 단일 거래 100만원 이상 / 신규 종목 편입 / 업종 비중 10% 이상 변경</div>
-      <div class="lva">→ 30분 내 확인. 거부 시 자동 청산</div>
-    </div>
-    <div class="lv">
-      <div class="lvt">🔴 3단계 — 사전 승인 필수</div>
-      <div class="lvc">조건: 거래 단위 1,000만원 초과 / 전략 전체 전환 / 계좌 구조 변경 / 레짐 전환 / 브로커 신규 추가</div>
-      <div class="lva">→ 반드시 마스터(나) 승인 후 실행</div>
-    </div>
-  </div>
-</div>
-
-<!-- ⑦ 개발 진행표 -->
-<div id="sec-phase" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 7. 개발 진행표 (2026-06-15 기준)</div>
-  <div class="card">
-    <div class="pr"><div class="pn">거버넌스+사법+금융헌법</div><div class="pc">Phase 0 | GOV-01~08</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">완료</span></div>
-    <div class="pr"><div class="pn">런타임 핵심 계층</div><div class="pc">Phase 1 | C-58~148</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">완료</span></div>
-    <div class="pr"><div class="pn">인프라 연합</div><div class="pc">Phase 2 | INF-1~3R6</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">완료</span></div>
-    <div class="pr"><div class="pn">장비 + 운영</div><div class="pc">Phase 3~4 | DEV/OPS</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">완료</span></div>
-    <div class="pr"><div class="pn">API 연합</div><div class="pc">Phase 5 | API-01~07</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">완료</span></div>
-    <div class="pr"><div class="pn">데이터 레이크 (구조)</div><div class="pc">Phase 6 | DL-001~007</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">구조완료</span></div>
-    <div class="pr"><div class="pn">위기 인텔리전스</div><div class="pc">Phase 7 | CR-001~007</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">구조완료</span></div>
-    <div class="pr"><div class="pn">시니어 퀀트 인텔리전스</div><div class="pc">Phase 8 | SQ-001~007</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">구조완료</span></div>
-    <div class="pr"><div class="pn">퀀트 런타임 메인</div><div class="pc">Phase 9 | Q-001~012</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">완료</span></div>
-    <div class="pr"><div class="pn">브로커 / 멀티마켓</div><div class="pc">Phase 10 | BR-001~009</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">완료</span></div>
-    <div class="pr"><div class="pn">윈도우 + 에이전트 거버넌스</div><div class="pc">Phase 11~12 | WIN/AG</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">완료</span></div>
-    <div class="pr"><div class="pn">운영 + 실전 거래 기반</div><div class="pc">Phase 13~14 | OPSX/RL</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">완료</span></div>
-    <div class="pr"><div class="pn">현실 감사</div><div class="pc">Phase 15 | R-1~R-10</div><div class="bw"><div class="bar bd" style="width:98%"></div></div><div class="pct done-txt">98%</div><span class="badge bg">완료</span></div>
-    <div class="pr"><div class="pn">HTS 시각화 백엔드</div><div class="pc">Phase 16 | VIS-001~011A</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">완료</span></div>
-    <div class="pr"><div class="pn">KIS 실데이터 연동</div><div class="pc">Phase 16b | KIS-LIVE-005~018</div><div class="bw"><div class="bar bd" style="width:100%"></div></div><div class="pct done-txt">100%</div><span class="badge bg">오늘완료</span></div>
-    <div class="pr"><div class="pn">HTS 독립 시각화</div><div class="pc">Phase 16c | KIS/KIWOOM/UPBIT-VIS</div><div class="bw"><div class="bar bp" style="width:75%"></div></div><div class="pct prog-txt">75%</div><span class="badge bb">진행중</span></div>
-    <div class="pr"><div class="pn">데이터 수집</div><div class="pc">신규 | DF-001~010</div><div class="bw"><div class="bar bn" style="width:40%"></div></div><div class="pct prog-txt">40%</div><span class="badge by">진행중</span></div>
-    <div class="pr"><div class="pn">데이터 파이프라인 연결</div><div class="pc">신규 | DP-001~006</div><div class="bw"><div class="bar be"></div></div><div class="pct wait-txt">0%</div><span class="badge bw2">대기</span></div>
-    <div class="pr"><div class="pn">전략 알고리즘 구현</div><div class="pc">신규 | ST-001~005</div><div class="bw"><div class="bar be"></div></div><div class="pct wait-txt">0%</div><span class="badge bw2">대기</span></div>
-    <div class="pr"><div class="pn">에이전트 생존 루프</div><div class="pc">신규 | AL-001~005</div><div class="bw"><div class="bar be"></div></div><div class="pct wait-txt">0%</div><span class="badge bw2">대기</span></div>
-    <div class="pr"><div class="pn">데이터센터 UI</div><div class="pc">신규 | DC-001~006</div><div class="bw"><div class="bar be"></div></div><div class="pct wait-txt">0%</div><span class="badge by">신규</span></div>
-    <div class="pr"><div class="pn">브로커 데이터 UI</div><div class="pc">신규 | BD-001~004</div><div class="bw"><div class="bar be"></div></div><div class="pct wait-txt">0%</div><span class="badge by">신규</span></div>
-    <div class="pr"><div class="pn">관제센터 고도화</div><div class="pc">CONTROL-VIS-001</div><div class="bw"><div class="bar be"></div></div><div class="pct wait-txt">0%</div><span class="badge bw2">대기</span></div>
-    <div class="pr"><div class="pn">통합 트레이딩 터미널</div><div class="pc">TERM-VIS-001</div><div class="bw"><div class="bar be"></div></div><div class="pct wait-txt">0%</div><span class="badge bw2">대기</span></div>
-    <div class="pr"><div class="pn">자율 운영 시스템</div><div class="pc">Phase 18 | AUTO-001~011</div><div class="bw"><div class="bar be"></div></div><div class="pct wait-txt">0%</div><span class="badge bw2">대기</span></div>
-    <div class="pr"><div class="pn">자가 진화 시스템</div><div class="pc">Phase 19 | EVO-001~011</div><div class="bw"><div class="bar be"></div></div><div class="pct wait-txt">0%</div><span class="badge bw2">대기</span></div>
-    <div class="pr"><div class="pn">코인 24시간 자율운영</div><div class="pc">Phase 20 | CRY-001~010</div><div class="bw"><div class="bar be"></div></div><div class="pct wait-txt">0%</div><span class="badge bw2">최종목표</span></div>
-    <div class="pr"><div class="pn">블로그·유튜브·SaaS</div><div class="pc">Phase 21 | 장기 확장</div><div class="bw"><div class="bar be"></div></div><div class="pct wait-txt">-</div><span class="badge bw2">후순위</span></div>
-  </div>
-</div>
-
-<!-- ⑧ 자율 운영 -->
-<div id="sec-auto" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 8. 자율 운영 시스템 (AUTO-001~011)</div>
-  <div class="card">
-    <table class="tbl">
-      <thead><tr><th>코드</th><th>단계명</th><th>핵심 내용</th><th>완료 기준</th><th>장비</th></tr></thead>
-      <tbody>
-        <tr><td class="code">AUTO-001</td><td>자율 세션 계획기</td><td class="wait-txt">AI가 오늘 운영·거래·관망 여부를 자동 판단</td><td>세션 모드 JSON 정상 출력</td><td>Mac Studio</td></tr>
-        <tr><td class="code">AUTO-002</td><td>런타임 자동 시퀀서</td><td class="wait-txt">장 개장 전 자동 기동, 장 종료 후 자동 정리·로그 백업</td><td>개장/종료 자동화 1회 완주</td><td>Mac+Win</td></tr>
-        <tr><td class="code">AUTO-003</td><td>자율 시장 모드 전환</td><td class="wait-txt">레짐 판단 → 전략군 자동 전환 (공격/균형/방어/생존)</td><td>레짐 변경 시 전략 자동 전환 확인</td><td>Mac Studio</td></tr>
-        <tr><td class="code">AUTO-004</td><td>자율 리스크 재판소</td><td class="wait-txt">이상 거래 → 자동 재심 → 헌법 위반 검사 → 강제 중지</td><td>위반 시나리오 3종 자동 차단 확인</td><td>Mac Studio</td></tr>
-        <tr><td class="code">AUTO-005</td><td>운영 규칙 강제 집행</td><td class="wait-txt">AI 행동 실시간 규칙 대조, 위반 즉시 실행 차단</td><td>위반 0건 24시간 운영</td><td>Mac Studio</td></tr>
-        <tr><td class="code">AUTO-006</td><td>자가 복구 런타임</td><td class="wait-txt">프로세스 종료 → 자동 재시작 → 손상 복구 → 정상 재개</td><td>강제 종료 후 자동 복구 2분 이내</td><td>Mac+Win+DAS</td></tr>
-        <tr><td class="code">AUTO-007</td><td>운영 성능 저하 감지</td><td class="wait-txt">승률 급락·API 오류 증가·메모리 누수 자동 감지 및 진단</td><td>성능 저하 판정 후 자동 조치 확인</td><td>Mac+Win</td></tr>
-        <tr><td class="code">AUTO-008</td><td>자율 자산 배분</td><td class="wait-txt">성과·리스크 기반 자동 자산 배분 (현금/국내/해외/코인)</td><td>배분 비율 자동 조정 1주 검증</td><td>Mac Studio</td></tr>
-        <tr><td class="code">AUTO-009</td><td>예비금 자동 관리</td><td class="wait-txt">운용자금·비상 예비금·생활 자금·세금 준비금 자동 관리</td><td>예비금 비율 유지 1개월 검증</td><td>Mac Studio</td></tr>
-        <tr><td class="code">AUTO-010</td><td>승인 요청 자동화</td><td class="wait-txt">고액 거래 → 마스터 승인 요청 자동화 (텔레그램+iPad)</td><td>승인 알림 1회 이상 실제 수신</td><td>Mac+iPad</td></tr>
-        <tr><td class="code">AUTO-011</td><td>30일 무중단 검증</td><td class="wait-txt">30일 자동 운영·복구·감시·리포트 끊김 없이 수행</td><td>30일 완주 = AI 자율운영 공식 시작</td><td>전체 연합</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ⑨ 자가 진화 -->
-<div id="sec-evo" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 9. 자가 진화 시스템 (EVO-001~011)</div>
-  <div class="card">
-    <table class="tbl">
-      <thead><tr><th>코드</th><th>단계명</th><th>핵심 내용</th><th>장비</th></tr></thead>
-      <tbody>
-        <tr><td class="code">EVO-001</td><td>실전 경험 기억</td><td class="wait-txt">거래 분석 자동화 → 외장 저장소 장기 기억 축적</td><td>DAS+Mac</td></tr>
-        <tr><td class="code">EVO-002</td><td>판단 근거 아카이브</td><td class="wait-txt">왜 그 거래를 했는지 AI 판단 근거 영구 기록</td><td>DAS</td></tr>
-        <tr><td class="code">EVO-003</td><td>실패 전략 분석</td><td class="wait-txt">손실 거래 패턴 분류 → 실패 원인 AI 분석</td><td>Win GPU</td></tr>
-        <tr><td class="code">EVO-004</td><td>시장 변화 학습</td><td class="wait-txt">시장 상황 변화 감지 → 전략 파라미터 자동 업데이트 후보 생성</td><td>Mac+Win</td></tr>
-        <tr><td class="code">EVO-005</td><td>신규 전략 생성</td><td class="wait-txt">AI가 과거 데이터 기반 신규 전략 후보 코드 생성</td><td>Win GPU</td></tr>
-        <tr><td class="code">EVO-006~007</td><td>과거 재현 + 위기 검증</td><td class="wait-txt">신규 전략을 10년 데이터 + 위기 시뮬레이션으로 검증</td><td>Win+DAS</td></tr>
-        <tr><td class="code">EVO-008~009</td><td>모의 → 실전 승격</td><td class="wait-txt">검증 통과 전략 모의 적용 → 마스터 승인 → 실전 반영</td><td>Mac+Win</td></tr>
-        <tr><td class="code">EVO-010~011</td><td>자기 판단 + 진화 감사</td><td class="wait-txt">AI 자기 판단 계층 + 자가진화 행동 제한 및 감사</td><td>Mac+DAS</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ⑩ 코인 운영 -->
-<div id="sec-coin" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 10. 코인 24시간 자율운영 (CRY-001~010) — 최종 목표</div>
-  <div class="card">
-    <table class="tbl">
-      <thead><tr><th>코드</th><th>단계명</th><th>핵심 내용</th><th>장비</th></tr></thead>
-      <tbody>
-        <tr><td class="code">CRY-001</td><td>코인 시장 인지</td><td class="wait-txt">업비트 + 글로벌 거래소 실시간 시세 통합</td><td>Mac+Win</td></tr>
-        <tr><td class="code">CRY-002</td><td>다중 거래소 연동</td><td class="wait-txt">업비트·바이낸스·OKX 동시 연결</td><td>Mac Studio</td></tr>
-        <tr><td class="code">CRY-003</td><td>24시간 런타임</td><td class="wait-txt">주말·야간 포함 24시간 무중단 운영</td><td>Mac+DAS</td></tr>
-        <tr><td class="code">CRY-004~005</td><td>거래소 장애 복구 + 자금 관리</td><td class="wait-txt">거래소 다운 시 자동 대체 거래소 전환, 안정 코인 관리</td><td>Mac+Win</td></tr>
-        <tr><td class="code">CRY-006~007</td><td>자동 배분 + 위험 제어</td><td class="wait-txt">코인 자산 자동 배분, 거래소 간 위험 제어</td><td>Mac+Win</td></tr>
-        <tr><td class="code">CRY-008~009</td><td>무중단 복구 + 차익 감시</td><td class="wait-txt">24시간 자동 복구, 거래소 간 가격 차이 수익 기회 감시</td><td>전체</td></tr>
-        <tr><td class="code" style="color:#d97706;font-weight:700">CRY-010</td><td style="color:#d97706;font-weight:600">🏆 코인 실전운영 시작</td><td style="color:#d97706">코인 24H 자율운영 시작 = 제1 프로젝트 최종 완성</td><td>전체 연합</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ⑪ 목표 달성 -->
-<div id="sec-milestone" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 11. 목표 달성 마일스톤</div>
-  <div class="card">
-    <div class="ms"><div class="ms-code">RL-011 완료</div><div class="ms-name" style="color:#10b981">🚀 실전 운영 시작</div><div class="ms-desc">실제 돈으로 AI 자동매매 시작</div></div>
-    <div class="ms"><div class="ms-code">AUTO-011 완료</div><div class="ms-name" style="color:#3b82f6">🤖 AI 자율운영</div><div class="ms-desc">30일 무중단 자율운영 검증 통과 — 사람 개입 최소화</div></div>
-    <div class="ms"><div class="ms-code">EVO-011 완료</div><div class="ms-name" style="color:#8b5cf6">🔬 AI 자가진화</div><div class="ms-desc">전략 스스로 생성·검증·반영 — 시장 변화에 자동 적응</div></div>
-    <div class="ms"><div class="ms-code">CRY-010 완료</div><div class="ms-name" style="color:#d97706">🏆 제1 프로젝트 완성</div><div class="ms-desc">24시간 코인 자율운영 = 스스로 운영·생존·진화하는 AI 자본 운영체제 완성</div></div>
-  </div>
-</div>
-
-<!-- ⑫ 해결 과제 -->
-<div id="sec-defect" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 12. 해결 과제 — 5대 핵심 결함</div>
-  <div class="card">
-    <div class="df"><span class="dfn">결함 1</span>데이터 흐름 단절<div class="dfd">데이터 수집 → 위기분석 → 시장인지 → 신호 생성 체인이 실제로 연결되지 않음 → 단계적 연결 필요</div></div>
-    <div class="df"><span class="dfn">결함 2</span>에이전트 실제 미작동<div class="dfd">프로세스만 있고 실제 판단 루프 없음 → 생존 신호 검증부터 시작</div></div>
-    <div class="df"><span class="dfn">결함 3</span>투자 전략 코드 없음<div class="dfd">전략 이름만 있고 실제 알고리즘 없음 → 모멘텀 전략부터 구현 시작</div></div>
-    <div class="df"><span class="dfn">결함 4</span>학습 데이터 부족<div class="dfd">실제 데이터 수집 진행 중 → 코인·분봉·뉴스 데이터 계속 수집 필요</div></div>
-    <div class="df"><span class="dfn">결함 5</span>레짐 탐지기 미구현<div class="dfd">ai_route/market_regime_detector.py는 ±5% 비교만 있는 스켈레톤 — 사용 불가.<br>quant_engine/market_analysis/regime_detector.py 새로 구현 필요 (RSI+MACD+VIX+볼린저+ATR 5개 지표)</div></div>
-  </div>
-</div>
-
-<!-- ⑬ 오늘 성과 -->
-<div id="sec-today" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 13. 오늘 성과 &amp; 다음 작업</div>
-  <div class="g2">
-    <div class="card">
-      <div class="ct">✅ 오늘(2026-06-15) 완료</div>
-      <div class="task"><div class="dot dd"></div>KIS-LIVE-014 미체결 주문 추적</div>
-      <div class="task"><div class="dot dd"></div>KIS-LIVE-015 부분체결 연결</div>
-      <div class="task"><div class="dot dd"></div>KIS-LIVE-016 실현/평가손익 정밀화</div>
-      <div class="task"><div class="dot dd"></div>KIS-LIVE-017 2시간 안정화</div>
-      <div class="task"><div class="dot dd"></div>KIS-LIVE-018 최종 점검 + 마감 리포트</div>
-      <div class="task"><div class="dot dd"></div>DF-001 국내 주식 30종목 10년 데이터</div>
-      <div class="task"><div class="dot dd"></div>DF-002 미국 주식 6종목 10년 데이터</div>
-      <div class="task"><div class="dot dd"></div>DF-003 거시경제 7개 지표</div>
-      <div class="task"><div class="dot dd"></div>DF-004 코스피 추가 24종목 10년</div>
-      <div class="task"><div class="dot dd"></div>Claude Code AI 에이전트 6개 구축</div>
-      <div class="task"><div class="dot dd"></div>MCP 도구 11개 설치 완료</div>
-      <div class="task"><div class="dot dd"></div>운영 가이드 v3.1 전면 업데이트</div>
-    </div>
-    <div class="card">
-      <div class="ct">🔜 다음 작업 순서</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-001 ai_route 서버 LUMI 시작 시 자동 실행 설정</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-002 Market Agent → POST /route 연결</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-003 텔레그램 알람 LUMI 이벤트 연결</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-004 dev_agent 루프 활성화 (자가 치유)</div>
-      <div class="task"><div class="dot dp"></div>DF-005 코인 데이터 수집 (업비트)</div>
-      <div class="task"><div class="dot dw"></div>DF-006 국내 주식 1분봉 1년 데이터</div>
-      <div class="task"><div class="dot dw"></div>DF-007 미국 주식 1분봉 데이터</div>
-      <div class="task"><div class="dot dw"></div>DF-008 기술지표 자동 계산</div>
-      <div class="task"><div class="dot dw"></div>DF-009 뉴스/감성 데이터</div>
-      <div class="task"><div class="dot dw"></div>DF-010 데이터 무결성 감시</div>
-      <div class="task"><div class="dot dn2"></div>DP-001~006 데이터 흐름 연결</div>
-      <div class="task"><div class="dot dn2"></div>ST-001~005 투자 전략 구현</div>
-      <div class="task"><div class="dot dn2"></div>AL-001~005 에이전트 생존 루프</div>
-      <div class="task"><div class="dot dn2"></div>DC-001~006 데이터센터 화면</div>
-      <div class="task"><div class="dot dn2"></div>BD-001~004 브로커 데이터 화면</div>
-      <div class="task"><div class="dot dn2"></div>CONTROL-VIS-001 관제센터 고도화</div>
-      <div class="task"><div class="dot dn2"></div>TERM-VIS-001 통합 트레이딩 화면</div>
-      <div class="task"><div class="dot dn2"></div>AUTO-001 자율 세션 시작</div>
-    </div>
-  </div>
-</div>
-
-<!-- ⑭ 절대 규칙 -->
-<div id="sec-rules" class="sec-anchor"></div>
-<div class="sec">
-  <div class="st">Part 14. 절대 규칙 (변경 불가)</div>
-  <div class="card">
-    <div class="rule"><div class="rx">🚫</div>실제 주문 자동 실행 절대 금지 — 마스터(나) 명시적 승인 전까지 실거래 모드 설정 불가</div>
-    <div class="rule"><div class="rx">🚫</div>새 구조 추가 금지 — 기존 라인 완성만 허용. 지금은 설계가 아닌 연결 단계</div>
-    <div class="rule"><div class="rx">🚫</div>단계 건너뜀 금지 — 모의 → 소액 실전 → 제한 실전 → 자율 운영 순서 엄수</div>
-    <div class="rule"><div class="rx">🚫</div>완료 기준 = 코드 존재가 아닌 실제 작동 확인</div>
-    <div class="rule"><div class="rx">🚫</div>파일 삭제 전 반드시 마스터 확인</div>
-    <div class="rule"><div class="rx">🚫</div>ai_route/ 절대 수정 금지 (외부 API 창구 — 건드리면 전체 연결 끊김)</div>
-    <div class="rule"><div class="rx">🚫</div>비밀번호 파일(.env) 에이전트 수정 금지</div>
-    <div class="rule"><div class="rx">🚫</div>legacy/ 폴더 절대 건드리지 말 것</div>
-    <div class="rule"><div class="rx">🚫</div>막히면 새로 만들지 말고 전체 검색 먼저</div>
-    <div class="rule"><div class="rx">🚫</div>초거대 인프라 금지 — 혼자 유지·복구·이해 가능한 규모 유지</div>
-  </div>
-</div>
-
-<div class="ft">
-  <span>LUMI Quant Runtime OS | 마스터 계획서 v4.0</span>
-  <span>2026년 6월 15일 업데이트 | Mac Studio M4 Max 128GB</span>
-</div>
-
-</div><!-- /container -->
-
-<script>
-// ── 사이드 탭 네비 ──
-const navItems = document.querySelectorAll('.nav-item');
-const sections = [];
-
-navItems.forEach(item => {
-  item.addEventListener('click', () => {
-    const id = item.dataset.target;
-    const el = document.getElementById(id);
-    if (el) {
-      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 20, behavior: 'smooth' });
-    }
-  });
-  const id = item.dataset.target;
-  const el = document.getElementById(id);
-  if (el) sections.push({ el, item });
-});
-
-// IntersectionObserver로 현재 섹션 하이라이트
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const id = entry.target.id;
-      navItems.forEach(n => n.classList.remove('active'));
-      const active = document.querySelector(`.nav-item[data-target="${id}"]`);
-      if (active) active.classList.add('active');
-    }
-  });
-}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
-
-sections.forEach(({ el }) => observer.observe(el));
-
-// ── 맨 위로 버튼 ──
-const scrollBtn = document.getElementById('scroll-top-btn');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    scrollBtn.style.display = 'flex';
-  } else {
-    scrollBtn.style.display = 'none';
-  }
-});
-</script>
-
-<!-- ai_route 통합 계획 - 2026-06-16 추가 -->
-<div class="sec">
-  <div class="st">Part 15. ai_route 통합 계획</div>
-  <div class="g2">
-    <div class="card">
-      <div class="ct">현황 (2026-06-16 분석 완료)</div>
-      <div class="task"><div class="dot dd"></div>위치: ai_route/ (수정 절대 금지)</div>
-      <div class="task"><div class="dot dd"></div>역할: AI 라우팅 허브 (lumi_sub_executor)</div>
-      <div class="task"><div class="dot dd"></div>포트: 8000 (FastAPI)</div>
-      <div class="task"><div class="dot dd"></div>실제 운영: 40일+ 증거 (router.log 324MB)</div>
-      <div class="task"><div class="dot dd"></div>텔레그램 봇 12개 명령어 완성 — 즉시 활용 가능</div>
-      <div class="task"><div class="dot dd"></div>분석 보고서: docs/ai_route_analysis/ 16개 파일</div>
-      <div class="ct" style="margin-top:16px; color:#ef4444;">⚠️ 주의</div>
-      <div class="task"><div class="dot" style="background:#ef4444;width:8px;height:8px;border-radius:50%;margin-right:8px;flex-shrink:0;"></div>market_regime_detector.py: ±5% 비교만 있는 스켈레톤 — 사용 불가</div>
-      <div class="task"><div class="dot dp"></div>ST-001: quant_engine/market_analysis/regime_detector.py 별도 구현 필요</div>
-    </div>
-    <div class="card">
-      <div class="ct">연결 순서 (AI-ROUTE-001 → 004)</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-001 ai_route 서버 LUMI 시작 시 자동 실행</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-002 Market Agent → POST http://127.0.0.1:8000/route 연결</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-003 텔레그램 알람 LUMI 이벤트 연결 (messenger/ 활용)</div>
-      <div class="task"><div class="dot dw"></div>AI-ROUTE-004 dev_agent 루프 활성화 (자가 치유)</div>
-      <div class="ct" style="margin-top:16px;">즉시 활용 가능</div>
-      <div class="task"><div class="dot dd"></div>POST /route — AI 쿼리 라우팅 (Gemini→GPT-4o→Claude→Ollama)</div>
-      <div class="task"><div class="dot dd"></div>/status /ask /devfix — 텔레그램 명령어</div>
-      <div class="task"><div class="dot dp"></div>Market Agent 연결 (AI-ROUTE-002 완료 후 즉시 활성)</div>
-    </div>
-  </div>
-</div>
-
 </body>
 </html>
