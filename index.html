@@ -1,90 +1,147 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUMI 대시보드 | v4.20260616</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0d1117; color: #c9d1d9; line-height: 1.6;
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
-        header {
-            text-align: center; margin-bottom: 48px;
-            border-bottom: 1px solid #30363d; padding-bottom: 28px;
-        }
-        h1 { font-size: 2.4em; color: #58a6ff; margin-bottom: 8px; }
-        .subtitle { color: #8b949e; font-size: 0.95em; margin-top: 6px; }
-        .date { color: #79c0ff; font-size: 0.9em; margin-top: 4px; }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 24px; margin-bottom: 36px;
-        }
-        .card {
-            background: #161b22; border: 1px solid #30363d;
-            border-radius: 8px; padding: 24px;
-            transition: border-color 0.25s;
-        }
-        .card:hover { border-color: #58a6ff; }
-        .card h2 { color: #58a6ff; font-size: 1.2em; margin-bottom: 16px; }
-        .card ul { list-style: none; }
-        .card li {
-            padding: 6px 0; color: #c9d1d9; font-size: 0.92em;
-            display: flex; align-items: flex-start; gap: 8px;
-            border-bottom: 1px solid #21262d;
-        }
-        .card li:last-child { border-bottom: none; }
-        .icon { min-width: 16px; font-weight: bold; }
-        .icon { color: #3fb950; }
-        li:has(.icon[data-type="warn"]) .icon { color: #f85149; }
-        li:has(.icon[data-type="play"]) .icon { color: #e3b341; }
-        .progress-wrap { margin-top: 20px; }
-        .progress-bar {
-            background: #30363d; height: 8px; border-radius: 4px; overflow: hidden;
-        }
-        .progress-fill {
-            background: linear-gradient(90deg, #3fb950, #58a6ff);
-            height: 100%; transition: width 0.4s;
-        }
-        .progress-label {
-            font-size: 0.82em; color: #8b949e; margin-top: 6px;
-            display: flex; justify-content: space-between;
-        }
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 16px; margin-top: 32px; padding-top: 32px;
-            border-top: 1px solid #30363d;
-        }
-        .stat-box {
-            text-align: center; padding: 18px;
-            background: #161b22; border-radius: 8px;
-            border: 1px solid #30363d;
-        }
-        .stat-number { font-size: 2.2em; color: #58a6ff; font-weight: bold; }
-        .stat-label { color: #8b949e; font-size: 0.85em; margin-top: 6px; }
-        footer {
-            text-align: center; margin-top: 48px; padding-top: 28px;
-            border-top: 1px solid #30363d; color: #8b949e; font-size: 0.82em;
-        }
-        .update-time { color: #79c0ff; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMI 대시보드 | v4.20260616.11</title>
+  <style>
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    body{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#0d1117; color:#c9d1d9; line-height:1.6; }
+
+    /* ── 상단 상태바 ── */
+    .sbar{
+      position:fixed; top:0; left:0; right:0; height:44px;
+      background:#161b22; border-bottom:1px solid #30363d;
+      display:flex; align-items:center; padding:0 20px; gap:28px; z-index:9999;
+      box-shadow:0 2px 6px rgba(0,0,0,.4);
+    }
+    .sitem{ display:flex; align-items:center; gap:7px; font-size:12px; font-weight:500; }
+    .sdot{ width:8px; height:8px; border-radius:50%; display:inline-block; flex-shrink:0; }
+    .paper-badge{
+      margin-left:auto; background:rgba(248,81,73,.15); color:#f85149;
+      border:1px solid #f85149; border-radius:4px; padding:3px 10px;
+      font-size:11px; font-weight:700; letter-spacing:.5px;
+    }
+
+    /* ── 메인 ── */
+    .container{ max-width:1200px; margin:0 auto; padding:64px 20px 24px; }
+    header{ text-align:center; margin-bottom:40px; border-bottom:1px solid #30363d; padding-bottom:24px; }
+    h1{ font-size:2.2em; color:#58a6ff; margin-bottom:6px; }
+    .subtitle{ color:#8b949e; font-size:.9em; margin-top:4px; }
+    .section{ background:#161b22; border:1px solid #30363d; border-radius:8px; padding:24px; margin-bottom:24px; }
+    .sec-title{ font-size:1.1em; font-weight:600; margin-bottom:18px; padding-bottom:10px; border-bottom:1px solid #30363d; }
+
+    /* ── 기존 카드 그리드 ── */
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; margin-bottom:24px; }
+    .card{ background:#161b22; border:1px solid #30363d; border-radius:8px; padding:22px; transition:border-color .2s; }
+    .card:hover{ border-color:#58a6ff; }
+    .card h2{ color:#58a6ff; font-size:1.1em; margin-bottom:14px; }
+    .card ul{ list-style:none; }
+    .card li{ padding:5px 0; font-size:.9em; display:flex; align-items:flex-start; gap:8px; border-bottom:1px solid #21262d; }
+    .card li:last-child{ border-bottom:none; }
+    .icon{ min-width:16px; font-weight:bold; color:#3fb950; }
+    .progress-wrap{ margin-top:16px; }
+    .progress-bar{ background:#30363d; height:8px; border-radius:4px; overflow:hidden; }
+    .progress-fill{ background:linear-gradient(90deg,#3fb950,#58a6ff); height:100%; }
+    .progress-label{ font-size:.8em; color:#8b949e; margin-top:5px; display:flex; justify-content:space-between; }
+    .stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:14px; margin-bottom:24px; padding:20px; background:#161b22; border:1px solid #30363d; border-radius:8px; }
+    .stat-box{ text-align:center; padding:14px; background:#0d1117; border-radius:6px; border:1px solid #30363d; }
+    .stat-number{ font-size:2em; color:#58a6ff; font-weight:bold; }
+    .stat-label{ color:#8b949e; font-size:.82em; margin-top:4px; }
+
+    /* ── 5대 결함 ── */
+    .defects-grid{ display:grid; gap:14px; }
+    .defect-card{ background:#0d1117; border:1px solid #30363d; border-left:4px solid #f85149; border-radius:6px; padding:14px; }
+    .dc-title{ font-weight:600; font-size:.95em; margin-bottom:3px; }
+    .dc-desc{ font-size:.82em; color:#8b949e; margin-bottom:10px; }
+    .pb-wrap{ background:#30363d; border-radius:4px; height:7px; overflow:hidden; margin-bottom:7px; }
+    .pb-fill{ height:100%; border-radius:4px; transition:width .5s; }
+    .pb-meta{ display:flex; justify-content:space-between; align-items:center; font-size:.8em; }
+    .badge{ display:inline-block; padding:1px 7px; border-radius:3px; font-size:.78em; font-weight:600; }
+    .badge-progress{ background:rgba(88,166,255,.2); color:#58a6ff; }
+    .badge-pending{ background:rgba(139,148,158,.15); color:#8b949e; }
+
+    /* ── 타임라인 ── */
+    .timeline{ display:flex; gap:12px; overflow-x:auto; padding:8px 0; }
+    .tl-item{ flex-shrink:0; width:180px; background:#0d1117; border:1px solid #30363d; border-radius:6px; padding:12px; text-align:center; }
+    .tl-item.completed{ border-color:#2ea043; background:rgba(46,160,67,.08); }
+    .tl-item.in-progress{ border-color:#58a6ff; background:rgba(88,166,255,.08); }
+    .tl-item.pending{ border-color:#6e40aa; background:rgba(110,64,170,.08); }
+    .tl-status{ font-size:.75em; font-weight:600; text-transform:uppercase; margin-bottom:6px; color:#8b949e; }
+    .tl-item.completed .tl-status{ color:#2ea043; }
+    .tl-item.in-progress .tl-status{ color:#58a6ff; }
+    .tl-item.pending .tl-status{ color:#9b6fff; }
+    .tl-id{ font-weight:700; font-size:.9em; margin-bottom:4px; }
+    .tl-desc{ font-size:.78em; color:#8b949e; }
+
+    /* ── 히스토리 ── */
+    .hist-list{ display:flex; flex-direction:column; gap:10px; }
+    .hist-row{ display:flex; gap:12px; padding:10px 12px; background:#0d1117; border:1px solid #30363d; border-radius:5px; font-size:.88em; align-items:center; }
+    .hist-date{ color:#8b949e; min-width:90px; font-size:.82em; }
+    .hist-id{ color:#58a6ff; font-weight:600; min-width:110px; }
+    .hist-desc{ color:#c9d1d9; }
+
+    /* ── 전체 스케줄 ── */
+    details{ margin-bottom:10px; }
+    summary{ cursor:pointer; padding:10px 14px; background:#0d1117; border:1px solid #30363d; border-radius:5px; font-weight:600; font-size:.9em; user-select:none; list-style:none; display:flex; align-items:center; gap:8px; }
+    summary::-webkit-details-marker{ display:none; }
+    summary::before{ content:'▶'; font-size:.7em; color:#58a6ff; transition:transform .2s; }
+    details[open] summary::before{ transform:rotate(90deg); }
+    summary:hover{ background:#161b22; }
+    details[open] summary{ border-bottom-left-radius:0; border-bottom-right-radius:0; border-bottom:none; }
+    .sched-list{ background:#0d1117; border:1px solid #30363d; border-top:none; border-radius:0 0 5px 5px; padding:10px 12px; }
+    .sched-row{ display:flex; align-items:center; padding:7px 8px; border-left:3px solid #30363d; margin-bottom:7px; font-size:.88em; gap:10px; }
+    .sched-row:last-child{ margin-bottom:0; }
+    .sched-row.completed{ border-left-color:#2ea043; color:#8b949e; }
+    .sched-row.in-progress{ border-left-color:#58a6ff; background:rgba(88,166,255,.05); }
+    .sched-row.pending{ border-left-color:#6e40aa; }
+    .sched-id{ font-weight:600; color:#58a6ff; min-width:110px; font-size:.85em; }
+    .sched-desc{ flex:1; }
+    .sched-pb{ width:44px; height:5px; background:#30363d; border-radius:3px; overflow:hidden; flex-shrink:0; }
+
+    footer{ text-align:center; margin-top:40px; padding-top:24px; border-top:1px solid #30363d; color:#8b949e; font-size:.82em; }
+    .update-time{ color:#79c0ff; }
+
+    @media(max-width:768px){
+      .sbar{ flex-wrap:wrap; height:auto; padding:10px; gap:10px; }
+      .container{ padding:90px 12px 12px; }
+      h1{ font-size:1.6em; }
+      .tl-item{ width:150px; }
+      .hist-row{ flex-wrap:wrap; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>LUMI 대시보드</h1>
-            <p class="date">2026년 06월 16일 업데이트</p>
-            <p class="subtitle">v4.20260616 &nbsp;|&nbsp; Mac Studio M4 Max 128GB</p>
-        </header>
 
-        <div class="grid">
-            <div class="card">
-                <h2>✅ 오늘 완료 (9)</h2>
-                <ul>
+  <!-- ▶ 상단 시스템 상태 바 -->
+  <div class="sbar">
+    <div class="sitem">
+      <span class="sdot" style="background:#2ea043"></span><span>정상</span>
+      <span>ai_route 서버</span>
+    </div>
+    <div class="sitem">
+      <span class="sdot" style="background:#2ea043"></span><span>정상</span>
+      <span>퀀트엔진</span>
+    </div>
+    <div class="sitem">
+      <span class="sdot" style="background:#2ea043"></span><span>정상</span>
+      <span>텔레그램 봇</span>
+    </div>
+    <div class="paper-badge">🔴 모의 거래 중 (PAPER MODE)</div>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>LUMI 개발 대시보드</h1>
+      <p class="subtitle">v4.20260616.11 &nbsp;|&nbsp; Mac Studio M4 Max 128GB</p>
+      <p class="subtitle" style="margin-top:4px">2026년 06월 16일 업데이트</p>
+    </header>
+
+    <!-- ▶ 기존 카드 그리드 -->
+    <div class="grid">
+      <div class="card">
+        <h2>✅ 오늘 완료 (9)</h2>
+        <ul>
             <li><span class="icon">✓</span> KIS-LIVE-014: 미체결 주문 추적 완료</li>
             <li><span class="icon">✓</span> KIS-LIVE-015: 부분체결 BR-008 연결 완료</li>
             <li><span class="icon">✓</span> KIS-LIVE-016: 실현/평가손익 정밀화 완료</li>
@@ -94,27 +151,25 @@
             <li><span class="icon">✓</span> DF-002: US 주식 6종목 10년 OHLCV → DAS 저장 (yfinance)</li>
             <li><span class="icon">✓</span> DF-003: FRED 거시경제 7지표 → DAS 저장</li>
             <li><span class="icon">✓</span> DF-004: KOSPI 추가 24종목 10년 → DAS 저장</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2>▶ 진행 중</h2>
-                <ul>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>▶ 진행 중</h2>
+        <ul>
             <li><span class="icon">▶</span> 현재 즉시 작업: DF-005 (코인 데이터)</li>
-                </ul>
-                <h2 style="margin-top:20px">⚠️ 핵심 결함</h2>
-                <ul>
+        </ul>
+        <h2 style="margin-top:18px">⚠️ 핵심 결함</h2>
+        <ul>
             <li><span class="icon">⚠</span> 1. 데이터 파이프라인 단절: DL→CR→SQ→Q 체인 실제 미연결 → DP-001부터 연결</li>
             <li><span class="icon">⚠</span> 2. 에이전트 미작동: 프로세스만 있고 실제 판단 루프 미연결 → AL-001부터 검증</li>
             <li><span class="icon">⚠</span> 3. 전략 코드 없음: SQ 라인 이름만 있고 알고리즘 없음 → ST-001부터 구현</li>
             <li><span class="icon">⚠</span> 4. 데이터베이스 깡통: 실제 데이터 부족 → DF-005~010 계속 수집</li>
             <li><span class="icon">⚠</span> 5. 레짐 탐지기 미구현: quant_engine/market_analysis/regime_detector.py 새로 구현 필요</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2>📋 다음 작업</h2>
-                <ul>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>📋 다음 작업</h2>
+        <ul>
             <li>AI-ROUTE-001: ai_route 서버 LUMI 시작 시 자동 실행 설정</li>
             <li>AI-ROUTE-002: Market Agent → POST http://127.0.0.1:8000/route 연결</li>
             <li>AI-ROUTE-003: 텔레그램 알람 LUMI 이벤트 연결 (messenger/ 활용)</li>
@@ -125,46 +180,415 @@
             <li>DF-008: Feature 파이프라인 (기술지표 200+ 자동 계산)</li>
             <li>DF-009: 뉴스/감성 (Naver/NewsAPI/DART 1년)</li>
             <li>DF-010: 데이터 무결성 감시 스케줄러</li>
-                </ul>
-                <div class="progress-wrap">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width:63%"></div>
-                    </div>
-                    <div class="progress-label">
-                        <span>Phase 진행</span>
-                        <span>14/22 (63%)</span>
-                    </div>
-                </div>
-            </div>
+        </ul>
+        <div class="progress-wrap">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width:63%"></div>
+          </div>
+          <div class="progress-label">
+            <span>Phase 진행</span>
+            <span>14/22 (63%)</span>
+          </div>
         </div>
-
-        <div class="stats">
-            <div class="stat-box">
-                <div class="stat-number">9</div>
-                <div class="stat-label">오늘 완료</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">14</div>
-                <div class="stat-label">Phase 완료</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">32</div>
-                <div class="stat-label">대기 작업</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">5</div>
-                <div class="stat-label">결함 추적</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">63%</div>
-                <div class="stat-label">전체 진행률</div>
-            </div>
-        </div>
-
-        <footer>
-            <p>자동 생성 <span class="update-time">2026-06-16 11:22:25</span></p>
-            <p style="margin-top:4px">LUMI Quant Runtime OS — 실주문 PAPER MODE 유지</p>
-        </footer>
+      </div>
     </div>
+
+    <!-- ▶ 통계 -->
+    <div class="stats">
+      <div class="stat-box"><div class="stat-number">9</div><div class="stat-label">오늘 완료</div></div>
+      <div class="stat-box"><div class="stat-number">14</div><div class="stat-label">Phase 완료</div></div>
+      <div class="stat-box"><div class="stat-number">32</div><div class="stat-label">대기 작업</div></div>
+      <div class="stat-box"><div class="stat-number">5</div><div class="stat-label">결함 추적</div></div>
+      <div class="stat-box"><div class="stat-number">63%</div><div class="stat-label">전체 진행률</div></div>
+    </div>
+
+    <!-- ▶ 5대 결함 진행률 -->
+    <div class="section">
+      <div class="sec-title">🚨 5대 핵심 결함 해결 진행률</div>
+      <div class="defects-grid">
+
+        <div class="defect-card" style="border-left-color:#f85149">
+          <div class="dc-title">결함1: 데이터 파이프라인 단절</div>
+          <div class="dc-desc">DL→CR→SQ→Q 체인 (DP-001~004)</div>
+          <div class="pb-wrap"><div class="pb-fill" style="width:0%;background:#f85149"></div></div>
+          <div class="pb-meta">
+            <span>0 / 4 완료</span>
+            <span style="font-weight:bold">0%</span>
+            <span class="badge badge-pending">예정</span>
+          </div>
+        </div>
+
+        <div class="defect-card" style="border-left-color:#f85149">
+          <div class="dc-title">결함2: 에이전트 미작동</div>
+          <div class="dc-desc">판단 루프 미연결 (AL-001~005)</div>
+          <div class="pb-wrap"><div class="pb-fill" style="width:0%;background:#f85149"></div></div>
+          <div class="pb-meta">
+            <span>0 / 5 완료</span>
+            <span style="font-weight:bold">0%</span>
+            <span class="badge badge-pending">예정</span>
+          </div>
+        </div>
+
+        <div class="defect-card" style="border-left-color:#f85149">
+          <div class="dc-title">결함3: 전략 코드 없음</div>
+          <div class="dc-desc">알고리즘 미구현 (ST-001~005)</div>
+          <div class="pb-wrap"><div class="pb-fill" style="width:0%;background:#f85149"></div></div>
+          <div class="pb-meta">
+            <span>0 / 5 완료</span>
+            <span style="font-weight:bold">0%</span>
+            <span class="badge badge-pending">예정</span>
+          </div>
+        </div>
+
+        <div class="defect-card" style="border-left-color:#58a6ff">
+          <div class="dc-title">결함4: 데이터베이스 부족</div>
+          <div class="dc-desc">DAS 데이터 수집 (DF-001~010)</div>
+          <div class="pb-wrap"><div class="pb-fill" style="width:40%;background:#58a6ff"></div></div>
+          <div class="pb-meta">
+            <span>4 / 10 완료</span>
+            <span style="font-weight:bold">40%</span>
+            <span class="badge badge-progress">진행 중</span>
+          </div>
+        </div>
+
+        <div class="defect-card" style="border-left-color:#f85149">
+          <div class="dc-title">결함5: 레짐 탐지기 미구현</div>
+          <div class="dc-desc">RSI+MACD+VIX+볼린저+ATR (ST-001)</div>
+          <div class="pb-wrap"><div class="pb-fill" style="width:0%;background:#f85149"></div></div>
+          <div class="pb-meta">
+            <span>0 / 1 완료</span>
+            <span style="font-weight:bold">0%</span>
+            <span class="badge badge-pending">예정</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ▶ 오늘 타임라인 -->
+    <div class="section">
+      <div class="sec-title">📅 오늘 작업 타임라인</div>
+      <div class="timeline">
+        <div class="tl-item completed">
+          <div class="tl-status">어제 완료</div>
+          <div class="tl-id">KIS-LIVE-017</div>
+          <div class="tl-desc">read-only 2h 안정화</div>
+        </div>
+        <div class="tl-item completed">
+          <div class="tl-status">어제 완료</div>
+          <div class="tl-id">KIS-LIVE-018</div>
+          <div class="tl-desc">최종 점검 + 마감</div>
+        </div>
+        <div class="tl-item in-progress">
+          <div class="tl-status">진행 중</div>
+          <div class="tl-id">DF-005</div>
+          <div class="tl-desc">코인 10년 데이터</div>
+        </div>
+        <div class="tl-item pending">
+          <div class="tl-status">예정</div>
+          <div class="tl-id">DF-006</div>
+          <div class="tl-desc">KR 분봉 1분봉 1년</div>
+        </div>
+        <div class="tl-item pending">
+          <div class="tl-status">예정</div>
+          <div class="tl-id">AI-ROUTE-001</div>
+          <div class="tl-desc">자동 실행 설정</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ▶ 최근 작업 히스토리 -->
+    <div class="section">
+      <div class="sec-title">📜 최근 작업 히스토리 (최근 5개)</div>
+      <div class="hist-list">
+      <div class="hist-row">
+        <span class="hist-date">2026-06-15</span>
+        <span class="hist-id">KIS-LIVE-014</span>
+        <span class="hist-desc">미체결 주문 추적 완료</span>
+      </div>
+      <div class="hist-row">
+        <span class="hist-date">2026-06-15</span>
+        <span class="hist-id">KIS-LIVE-015</span>
+        <span class="hist-desc">부분체결 BR-008 연결 완료</span>
+      </div>
+      <div class="hist-row">
+        <span class="hist-date">2026-06-15</span>
+        <span class="hist-id">KIS-LIVE-016</span>
+        <span class="hist-desc">실현/평가손익 정밀화 완료</span>
+      </div>
+      <div class="hist-row">
+        <span class="hist-date">2026-06-15</span>
+        <span class="hist-id">KIS-LIVE-017</span>
+        <span class="hist-desc">read-only 2h 안정화 완료</span>
+      </div>
+      <div class="hist-row">
+        <span class="hist-date">2026-06-15</span>
+        <span class="hist-id">KIS-LIVE-018</span>
+        <span class="hist-desc">KIS 최종 점검 + 마감 리포트 완료</span>
+      </div>
+      </div>
+    </div>
+
+    <!-- ▶ 전체 개발 스케줄 -->
+    <div class="section">
+      <div class="sec-title">🗓️ 전체 개발 스케줄</div>
+
+      <details>
+        <summary>✅ 완료된 Phase (0 ~ 16b)</summary>
+        <div class="sched-list">
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 0</span>
+          <span class="sched-desc">Governance + Judicial + 금융헌법</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 1</span>
+          <span class="sched-desc">Runtime Core Layer</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 2</span>
+          <span class="sched-desc">Infrastructure Federation</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 3~4</span>
+          <span class="sched-desc">Device + Operations</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 5</span>
+          <span class="sched-desc">API Federation</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 6</span>
+          <span class="sched-desc">Data Lake 구조</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 7</span>
+          <span class="sched-desc">Crisis Intelligence</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 8</span>
+          <span class="sched-desc">Senior Quant Intelligence</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 9</span>
+          <span class="sched-desc">Quant Runtime Main</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 10</span>
+          <span class="sched-desc">Broker/Multi-Market</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 11~12</span>
+          <span class="sched-desc">Windows + Agent Governance</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 13~14</span>
+          <span class="sched-desc">OPSX + Real Live Trading</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 15</span>
+          <span class="sched-desc">Reality Audit</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 16</span>
+          <span class="sched-desc">VIS/HTS 백엔드</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">Phase 16b</span>
+          <span class="sched-desc">KIS 실데이터 연동</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+        </div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>🔄 진행 중</summary>
+        <div class="sched-list">
+        <div class="sched-row in-progress">
+          <span class="sched-id">DF-005</span>
+          <span class="sched-desc">코인 10년 (업비트 BTC/ETH/SOL/XRP/DOGE)</span>
+          <div class="sched-pb"><div style="width:30%;background:#58a6ff;height:100%;border-radius:2px"></div></div>
+        </div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>📌 AI-ROUTE 연결 라인 (001~004)</summary>
+        <div class="sched-list">
+        <div class="sched-row pending">
+          <span class="sched-id">AI-ROUTE-001</span>
+          <span class="sched-desc">ai_route 서버 자동 실행</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">AI-ROUTE-002</span>
+          <span class="sched-desc">Market Agent → POST /route 연결</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">AI-ROUTE-003</span>
+          <span class="sched-desc">텔레그램 알람 연결</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">AI-ROUTE-004</span>
+          <span class="sched-desc">dev_agent 루프 활성화</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>📥 DATA-FETCH 라인 (DF-005~010)</summary>
+        <div class="sched-list">
+        <div class="sched-row in-progress">
+          <span class="sched-id">DF-005</span>
+          <span class="sched-desc">코인 10년 (업비트 BTC/ETH/SOL/XRP/DOGE)</span>
+          <div class="sched-pb"><div style="width:30%;background:#58a6ff;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DF-006</span>
+          <span class="sched-desc">KR 분봉 1분봉 1년 (주요 10종목)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DF-007</span>
+          <span class="sched-desc">US 분봉 1분봉 1년 (빅테크 6종목)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DF-008</span>
+          <span class="sched-desc">Feature 파이프라인 (기술지표 200+)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DF-009</span>
+          <span class="sched-desc">뉴스/감성 (Naver/NewsAPI/DART)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DF-010</span>
+          <span class="sched-desc">데이터 무결성 감시 스케줄러</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>🔗 DATA-PIPE 라인 (DP-001~006)</summary>
+        <div class="sched-list">
+        <div class="sched-row pending">
+          <span class="sched-id">DP-001</span>
+          <span class="sched-desc">DL → Feature 파이프라인</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DP-002</span>
+          <span class="sched-desc">Feature → CR (위기 Replay)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DP-003</span>
+          <span class="sched-desc">CR → SQ (시장인지 엔진)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DP-004</span>
+          <span class="sched-desc">SQ → Q (신호 런타임)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DP-005</span>
+          <span class="sched-desc">Q → Execution (Paper 주문)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DP-006</span>
+          <span class="sched-desc">Execution → EVO (학습 루프)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>🎯 STRAT 전략 구현 (ST-001~005)</summary>
+        <div class="sched-list">
+        <div class="sched-row pending">
+          <span class="sched-id">ST-001</span>
+          <span class="sched-desc">LumiRegimeDetector (RSI+MACD+VIX+볼린저+ATR)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">ST-002</span>
+          <span class="sched-desc">평균회귀 Mean Reversion</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">ST-003</span>
+          <span class="sched-desc">변동성 수익화</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">ST-004</span>
+          <span class="sched-desc">위기 역발상 진입</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">ST-005</span>
+          <span class="sched-desc">멀티팩터 통합</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>🤖 AGENT-LIVE 라인 (AL-001~005)</summary>
+        <div class="sched-list">
+        <div class="sched-row pending">
+          <span class="sched-id">AL-001</span>
+          <span class="sched-desc">에이전트 Heartbeat (7개 × 5초)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">AL-002</span>
+          <span class="sched-desc">실제 판단 루프 (Market Agent 10회)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">AL-003</span>
+          <span class="sched-desc">에이전트 간 통신 (E2E)</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">AL-004</span>
+          <span class="sched-desc">Paper 매매 루프</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">AL-005</span>
+          <span class="sched-desc">Postmortem 루프</span>
+          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+        </div>
+        </div>
+      </details>
+    </div>
+
+    <footer>
+      <p>자동 생성 <span class="update-time">2026-06-16 11:25:23</span></p>
+      <p style="margin-top:4px">LUMI Quant Runtime OS — v4.20260616.11 — 실주문 PAPER MODE 유지</p>
+    </footer>
+  </div>
 </body>
 </html>
