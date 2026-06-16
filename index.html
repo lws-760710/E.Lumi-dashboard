@@ -58,6 +58,7 @@
     .pb-fill{ height:100%; border-radius:4px; transition:width .5s; }
     .pb-meta{ display:flex; justify-content:space-between; align-items:center; font-size:.8em; }
     .badge{ display:inline-block; padding:1px 7px; border-radius:3px; font-size:.78em; font-weight:600; }
+    .badge-done{ background:rgba(46,160,67,.2); color:#2ea043; }
     .badge-progress{ background:rgba(88,166,255,.2); color:#58a6ff; }
     .badge-pending{ background:rgba(139,148,158,.15); color:#8b949e; }
 
@@ -94,10 +95,11 @@
     .sched-row:last-child{ margin-bottom:0; }
     .sched-row.completed{ border-left-color:#2ea043; color:#8b949e; }
     .sched-row.in-progress{ border-left-color:#58a6ff; background:rgba(88,166,255,.05); }
-    .sched-row.pending{ border-left-color:#6e40aa; }
+    .sched-row.pending{ border-left-color:#8b949e; }
     .sched-id{ font-weight:600; color:#58a6ff; min-width:110px; font-size:.85em; }
     .sched-desc{ flex:1; }
-    .sched-pb{ width:44px; height:5px; background:#30363d; border-radius:3px; overflow:hidden; flex-shrink:0; }
+    .sched-pb{ width:88px; height:5px; background:#30363d; border-radius:3px; overflow:hidden; flex-shrink:0; }
+    .sched-pct{ min-width:36px; text-align:right; font-size:.75em; color:#8b949e; flex-shrink:0; }
 
     /* ── 시스템 완성률 위젯 ── */
     .completion-widget{
@@ -303,14 +305,14 @@
           </div>
         </div>
 
-        <div class="defect-card" style="border-left-color:#58a6ff">
+        <div class="defect-card" style="border-left-color:#2ea043">
           <div class="dc-title">결함4: 데이터베이스 부족</div>
           <div class="dc-desc">DAS 데이터 수집 (DF-001~010)</div>
-          <div class="pb-wrap"><div class="pb-fill" style="width:40%;background:#58a6ff"></div></div>
+          <div class="pb-wrap"><div class="pb-fill" style="width:100%;background:#2ea043"></div></div>
           <div class="pb-meta">
-            <span>4 / 10 완료</span>
-            <span style="font-weight:bold">40%</span>
-            <span class="badge badge-progress">진행 중</span>
+            <span>10 / 10 완료</span>
+            <span style="font-weight:bold">100%</span>
+            <span class="badge badge-done">완료</span>
           </div>
         </div>
 
@@ -332,29 +334,29 @@
       <div class="sec-title">📅 오늘 작업 타임라인</div>
       <div class="timeline">
         <div class="tl-item completed">
-          <div class="tl-status">어제 완료</div>
-          <div class="tl-id">KIS-LIVE-017</div>
-          <div class="tl-desc">read-only 2h 안정화</div>
+          <div class="tl-status">완료</div>
+          <div class="tl-id">DF-008</div>
+          <div class="tl-desc">Feature 파이프라인 (219개 지표 × 46종목)</div>
         </div>
         <div class="tl-item completed">
-          <div class="tl-status">어제 완료</div>
-          <div class="tl-id">KIS-LIVE-018</div>
-          <div class="tl-desc">최종 점검 + 마감</div>
+          <div class="tl-status">완료</div>
+          <div class="tl-id">DF-009</div>
+          <div class="tl-desc">뉴스/감성 수집 (6,712건)</div>
+        </div>
+        <div class="tl-item completed">
+          <div class="tl-status">완료</div>
+          <div class="tl-id">DF-010</div>
+          <div class="tl-desc">데이터 무결성 PASS 146/146</div>
+        </div>
+        <div class="tl-item completed">
+          <div class="tl-status">완료</div>
+          <div class="tl-id">dashboard_watcher</div>
+          <div class="tl-desc">CLAUDE.md 변경 감지 데몬 설치</div>
         </div>
         <div class="tl-item in-progress">
           <div class="tl-status">진행 중</div>
-          <div class="tl-id">DF-005</div>
-          <div class="tl-desc">코인 10년 데이터</div>
-        </div>
-        <div class="tl-item pending">
-          <div class="tl-status">예정</div>
-          <div class="tl-id">DF-006</div>
-          <div class="tl-desc">KR 분봉 1분봉 1년</div>
-        </div>
-        <div class="tl-item pending">
-          <div class="tl-status">예정</div>
-          <div class="tl-id">AI-ROUTE-001</div>
-          <div class="tl-desc">자동 실행 설정</div>
+          <div class="tl-id">DP-001</div>
+          <div class="tl-desc">DL → Feature 파이프라인 자동 실행</div>
         </div>
       </div>
     </div>
@@ -364,27 +366,27 @@
       <div class="sec-title">📜 최근 작업 히스토리 (최근 5개)</div>
       <div class="hist-list">
       <div class="hist-row">
-        <span class="hist-date">2026-06-15</span>
+        <span class="hist-date">2026-06-16</span>
         <span class="hist-id">KIS-LIVE-014</span>
         <span class="hist-desc">미체결 주문 추적 완료</span>
       </div>
       <div class="hist-row">
-        <span class="hist-date">2026-06-15</span>
+        <span class="hist-date">2026-06-16</span>
         <span class="hist-id">KIS-LIVE-015</span>
         <span class="hist-desc">부분체결 BR-008 연결 완료</span>
       </div>
       <div class="hist-row">
-        <span class="hist-date">2026-06-15</span>
+        <span class="hist-date">2026-06-16</span>
         <span class="hist-id">KIS-LIVE-016</span>
         <span class="hist-desc">실현/평가손익 정밀화 완료</span>
       </div>
       <div class="hist-row">
-        <span class="hist-date">2026-06-15</span>
+        <span class="hist-date">2026-06-16</span>
         <span class="hist-id">KIS-LIVE-017</span>
         <span class="hist-desc">read-only 2h 안정화 완료</span>
       </div>
       <div class="hist-row">
-        <span class="hist-date">2026-06-15</span>
+        <span class="hist-date">2026-06-16</span>
         <span class="hist-id">KIS-LIVE-018</span>
         <span class="hist-desc">KIS 최종 점검 + 마감 리포트 완료</span>
       </div>
@@ -402,76 +404,91 @@
           <span class="sched-id">Phase 0</span>
           <span class="sched-desc">Governance + Judicial + 금융헌법</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 1</span>
           <span class="sched-desc">Runtime Core Layer</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 2</span>
           <span class="sched-desc">Infrastructure Federation</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 3~4</span>
           <span class="sched-desc">Device + Operations</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 5</span>
           <span class="sched-desc">API Federation</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 6</span>
           <span class="sched-desc">Data Lake 구조</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 7</span>
           <span class="sched-desc">Crisis Intelligence</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 8</span>
           <span class="sched-desc">Senior Quant Intelligence</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 9</span>
           <span class="sched-desc">Quant Runtime Main</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 10</span>
           <span class="sched-desc">Broker/Multi-Market</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 11~12</span>
           <span class="sched-desc">Windows + Agent Governance</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 13~14</span>
           <span class="sched-desc">OPSX + Real Live Trading</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 15</span>
           <span class="sched-desc">Reality Audit</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 16</span>
           <span class="sched-desc">VIS/HTS 백엔드</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">Phase 16b</span>
           <span class="sched-desc">KIS 실데이터 연동</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         </div>
       </details>
@@ -480,9 +497,10 @@
         <summary>🔄 진행 중</summary>
         <div class="sched-list">
         <div class="sched-row in-progress">
-          <span class="sched-id">DF-005</span>
-          <span class="sched-desc">코인 10년 (업비트 BTC/ETH/SOL/XRP/DOGE)</span>
-          <div class="sched-pb"><div style="width:30%;background:#58a6ff;height:100%;border-radius:2px"></div></div>
+          <span class="sched-id">DP-001</span>
+          <span class="sched-desc">DL → Feature 파이프라인 자동 실행</span>
+          <div class="sched-pb"><div style="width:0%;background:#58a6ff;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         </div>
       </details>
@@ -493,22 +511,26 @@
         <div class="sched-row pending">
           <span class="sched-id">AI-ROUTE-001</span>
           <span class="sched-desc">ai_route 서버 자동 실행</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">AI-ROUTE-002</span>
           <span class="sched-desc">Market Agent → POST /route 연결</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">AI-ROUTE-003</span>
           <span class="sched-desc">텔레그램 알람 연결</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">AI-ROUTE-004</span>
           <span class="sched-desc">dev_agent 루프 활성화</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         </div>
       </details>
@@ -516,35 +538,41 @@
       <details open>
         <summary>📥 DATA-FETCH 라인 (DF-005~010)</summary>
         <div class="sched-list">
-        <div class="sched-row in-progress">
+        <div class="sched-row completed">
           <span class="sched-id">DF-005</span>
-          <span class="sched-desc">코인 10년 (업비트 BTC/ETH/SOL/XRP/DOGE)</span>
-          <div class="sched-pb"><div style="width:30%;background:#58a6ff;height:100%;border-radius:2px"></div></div>
+          <span class="sched-desc">코인 10년 (업비트 BTC/ETH/SOL/XRP/DOGE 10종)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
-        <div class="sched-row pending">
+        <div class="sched-row completed">
           <span class="sched-id">DF-006</span>
-          <span class="sched-desc">KR 분봉 1분봉 1년 (주요 10종목)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <span class="sched-desc">KR 분봉 (10종목 1m×7d + 5m×60d, 67,318행)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
-        <div class="sched-row pending">
+        <div class="sched-row completed">
           <span class="sched-id">DF-007</span>
-          <span class="sched-desc">US 분봉 1분봉 1년 (빅테크 6종목)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <span class="sched-desc">US 분봉 (6종목 1m×7d + 5m×60d, 44,460행)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
-        <div class="sched-row pending">
+        <div class="sched-row completed">
           <span class="sched-id">DF-008</span>
-          <span class="sched-desc">Feature 파이프라인 (기술지표 200+)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <span class="sched-desc">Feature 파이프라인 (219개 지표 × 46종목, 375.7MB)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
-        <div class="sched-row pending">
+        <div class="sched-row completed">
           <span class="sched-id">DF-009</span>
-          <span class="sched-desc">뉴스/감성 (Naver/NewsAPI/DART)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <span class="sched-desc">뉴스/감성 (Naver+NewsAPI, 6,712건)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
-        <div class="sched-row pending">
+        <div class="sched-row completed">
           <span class="sched-id">DF-010</span>
-          <span class="sched-desc">데이터 무결성 감시 스케줄러</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <span class="sched-desc">데이터 무결성 감시 스케줄러 (PASS 146/146)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
         </div>
         </div>
       </details>
@@ -555,32 +583,38 @@
         <div class="sched-row pending">
           <span class="sched-id">DP-001</span>
           <span class="sched-desc">DL → Feature 파이프라인</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">DP-002</span>
           <span class="sched-desc">Feature → CR (위기 Replay)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">DP-003</span>
           <span class="sched-desc">CR → SQ (시장인지 엔진)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">DP-004</span>
           <span class="sched-desc">SQ → Q (신호 런타임)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">DP-005</span>
           <span class="sched-desc">Q → Execution (Paper 주문)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">DP-006</span>
           <span class="sched-desc">Execution → EVO (학습 루프)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         </div>
       </details>
@@ -591,27 +625,32 @@
         <div class="sched-row pending">
           <span class="sched-id">ST-001</span>
           <span class="sched-desc">LumiRegimeDetector (RSI+MACD+VIX+볼린저+ATR)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">ST-002</span>
           <span class="sched-desc">평균회귀 Mean Reversion</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">ST-003</span>
           <span class="sched-desc">변동성 수익화</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">ST-004</span>
           <span class="sched-desc">위기 역발상 진입</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">ST-005</span>
           <span class="sched-desc">멀티팩터 통합</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         </div>
       </details>
@@ -622,34 +661,39 @@
         <div class="sched-row pending">
           <span class="sched-id">AL-001</span>
           <span class="sched-desc">에이전트 Heartbeat (7개 × 5초)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">AL-002</span>
           <span class="sched-desc">실제 판단 루프 (Market Agent 10회)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">AL-003</span>
           <span class="sched-desc">에이전트 간 통신 (E2E)</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">AL-004</span>
           <span class="sched-desc">Paper 매매 루프</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">AL-005</span>
           <span class="sched-desc">Postmortem 루프</span>
-          <div class="sched-pb"><div style="width:0%;background:#6e40aa;height:100%;border-radius:2px"></div></div>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         </div>
       </details>
     </div>
 
     <footer>
-      <p>자동 생성 <span class="update-time">2026-06-16 22:50:50</span></p>
+      <p>자동 생성 <span class="update-time">2026-06-16 22:52:01</span></p>
       <p style="margin-top:4px">LUMI Quant Runtime OS — v4.20260616.22 — 실주문 PAPER MODE 유지</p>
     </footer>
   </div>
