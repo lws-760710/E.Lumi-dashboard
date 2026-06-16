@@ -99,6 +99,38 @@
     .sched-desc{ flex:1; }
     .sched-pb{ width:44px; height:5px; background:#30363d; border-radius:3px; overflow:hidden; flex-shrink:0; }
 
+    /* ── 시스템 완성률 위젯 ── */
+    .completion-widget{
+      background:#161b22; border:1px solid #30363d; border-radius:8px;
+      padding:24px; margin-bottom:24px;
+    }
+    .cw-title{ font-size:1.1em; font-weight:600; margin-bottom:20px;
+      padding-bottom:10px; border-bottom:1px solid #30363d; }
+    .cw-rows{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    @media(max-width:600px){ .cw-rows{ grid-template-columns:1fr; } }
+    .cw-row{ padding:18px; background:#0d1117; border:1px solid #30363d; border-radius:6px; }
+    .cw-row.highlight{
+      border-color:#3fb950; background:rgba(63,185,80,.06);
+      box-shadow:0 0 0 1px #3fb950;
+    }
+    .cw-label{ font-size:.85em; color:#8b949e; margin-bottom:8px; }
+    .cw-row.highlight .cw-label{ color:#3fb950; font-weight:600; }
+    .cw-pct{
+      font-size:3em; font-weight:700; color:#58a6ff; line-height:1;
+      margin-bottom:10px;
+    }
+    .cw-row.highlight .cw-pct{ color:#3fb950; font-size:3.6em; }
+    .cw-bar-wrap{ background:#30363d; border-radius:4px; height:8px; overflow:hidden; margin-bottom:8px; }
+    .cw-bar-fill{ height:100%; border-radius:4px; transition:width .6s ease; }
+    .cw-note{ font-size:.78em; color:#8b949e; }
+    .cw-row.highlight .cw-note{ color:#2ea043; font-weight:500; }
+    .cw-badge{
+      display:inline-block; margin-top:8px; padding:2px 8px;
+      border-radius:3px; font-size:.75em; font-weight:700;
+    }
+    .cw-badge.dim{ background:rgba(139,148,158,.15); color:#8b949e; }
+    .cw-badge.live{ background:rgba(63,185,80,.2); color:#3fb950; border:1px solid #3fb950; }
+
     footer{ text-align:center; margin-top:40px; padding-top:24px; border-top:1px solid #30363d; color:#8b949e; font-size:.82em; }
     .update-time{ color:#79c0ff; }
 
@@ -136,6 +168,34 @@
       <p class="subtitle">v4.20260616.17 &nbsp;|&nbsp; Mac Studio M4 Max 128GB</p>
       <p class="subtitle" style="margin-top:4px">2026년 06월 16일 업데이트</p>
     </header>
+
+    <!-- ▶ 시스템 완성률 위젯 -->
+    <div class="completion-widget">
+      <div class="cw-title">📊 시스템 완성률 — 두 기준의 차이를 직시하라</div>
+      <div class="cw-rows">
+
+        <div class="cw-row">
+          <div class="cw-label">코드 존재 기준</div>
+          <div class="cw-pct">80%</div>
+          <div class="cw-bar-wrap">
+            <div class="cw-bar-fill" style="width:80%;background:#58a6ff"></div>
+          </div>
+          <div class="cw-note">Phase 0~17 완료 기준 (파일/모듈 존재)</div>
+          <span class="cw-badge dim">참고용 — 작동 보장 아님</span>
+        </div>
+
+        <div class="cw-row highlight">
+          <div class="cw-label">★ 실제 작동 기준 (진짜 완성률)</div>
+          <div class="cw-pct">35%</div>
+          <div class="cw-bar-wrap">
+            <div class="cw-bar-fill" style="width:35%;background:#3fb950"></div>
+          </div>
+          <div class="cw-note">테스트 PASS + 로그 확인 + 실제 작동 검증 완료 기준</div>
+          <span class="cw-badge live">이것이 진짜 진행률</span>
+        </div>
+
+      </div>
+    </div>
 
     <!-- ▶ 기존 카드 그리드 -->
     <div class="grid">
@@ -586,7 +646,7 @@
     </div>
 
     <footer>
-      <p>자동 생성 <span class="update-time">2026-06-16 17:06:21</span></p>
+      <p>자동 생성 <span class="update-time">2026-06-16 17:19:02</span></p>
       <p style="margin-top:4px">LUMI Quant Runtime OS — v4.20260616.17 — 실주문 PAPER MODE 유지</p>
     </footer>
   </div>
