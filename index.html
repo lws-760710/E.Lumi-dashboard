@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUMI 대시보드 v2.0 | v5.20260617.00</title>
+  <title>LUMI 대시보드 v2.0 | v5.20260617.01</title>
   <style>
     *{ margin:0; padding:0; box-sizing:border-box; }
     body{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#0d1117; color:#c9d1d9; line-height:1.6; }
@@ -163,13 +163,13 @@
     <div class="sitem"><span class="sdot" style="background:#2ea043"></span><span>정상</span><span>퀀트엔진</span></div>
     <div class="sitem"><span class="sdot" style="background:#2ea043"></span><span>정상</span><span>텔레그램 봇</span></div>
     <div class="paper-badge">🔴 모의 거래 중 (PAPER MODE)</div>
-    <span class="sbar-time" style="margin-left:12px">2026-06-17 00:56:36</span>
+    <span class="sbar-time" style="margin-left:12px">2026-06-17 01:13:15</span>
   </div>
 
   <div class="container">
     <header>
       <h1>LUMI 개발 대시보드 v2.0</h1>
-      <p class="subtitle">v5.20260617.00 &nbsp;|&nbsp; Mac Studio M4 Max 128GB</p>
+      <p class="subtitle">v5.20260617.01 &nbsp;|&nbsp; Mac Studio M4 Max 128GB</p>
       <p class="subtitle" style="margin-top:4px">2026년 06월 17일 업데이트</p>
     </header>
 
@@ -178,9 +178,9 @@
 
     <div class="metric-grid">
       <div class="metric-card">
-        <div class="metric-num" style="color:#58a6ff">35%</div>
-        <div class="metric-label">실제 작동 완성률</div>
-        <div class="metric-sub">진짜 기준</div>
+        <div class="metric-num" style="color:#58a6ff">0%</div>
+        <div class="metric-label">실전 준비도 (자동계산)</div>
+        <div class="metric-sub">데이터20+파이프30+전략20+에이전트15+라우터15</div>
       </div>
       <div class="metric-card">
         <div class="metric-num" style="color:#3fb950">16</div>
@@ -188,8 +188,8 @@
         <div class="metric-sub">2026-06-17</div>
       </div>
       <div class="metric-card">
-        <div class="metric-num" style="color:#f0883e">389MB</div>
-        <div class="metric-label">DAS 데이터 용량</div>
+        <div class="metric-num" style="color:#f0883e">390.7MB</div>
+        <div class="metric-label">DAS 데이터 용량 ✅</div>
         <div class="metric-sub">153개 파일 · 무결성 PASS</div>
       </div>
       <div class="metric-card">
@@ -219,107 +219,84 @@
         </defs>
 
         <!-- 행1: DAS → Feature → Regime → Signal -->
-        <!-- DAS 데이터 ✅ -->
-        <rect x="10"  y="20" width="140" height="60" rx="6" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
-        <text x="80"  y="44" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">DAS 데이터</text>
-        <text x="80"  y="62" text-anchor="middle" fill="#8b949e" font-size="10">389MB · 153파일 ✅</text>
+        <rect x="10"  y="20" width="140" height="60" rx="6" fill="#0d2137" stroke="#58a6ff" stroke-width="1.5"/>
+        <text x="80"  y="44" text-anchor="middle" fill="#58a6ff" font-size="12" font-weight="600">DAS 데이터</text>
+        <text x="80"  y="62" text-anchor="middle" fill="#8b949e" font-size="10">390.7MB · 153파일</text>
 
-        <!-- Feature Engine ✅ -->
-        <rect x="190" y="20" width="150" height="60" rx="6" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
-        <text x="265" y="44" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">Feature Engine</text>
-        <text x="265" y="62" text-anchor="middle" fill="#8b949e" font-size="10">219개 지표 · 46종목 ✅</text>
+        <rect x="190" y="20" width="150" height="60" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
+        <text x="265" y="44" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Feature Engine</text>
+        <text x="265" y="62" text-anchor="middle" fill="#8b949e" font-size="10">219개 지표 · 46종목</text>
 
-        <!-- RegimeClassifier ⚠️ -->
         <rect x="370" y="20" width="150" height="60" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
         <text x="445" y="44" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Regime Classifier</text>
-        <text x="445" y="62" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증 ⚠️</text>
+        <text x="445" y="62" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증</text>
 
-        <!-- SignalRuntime ⚠️ -->
         <rect x="550" y="20" width="150" height="60" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
         <text x="625" y="44" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Signal Runtime</text>
-        <text x="625" y="62" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증 ⚠️</text>
+        <text x="625" y="62" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증</text>
 
         <!-- 행1 화살표 -->
-        <line x1="150" y1="50" x2="188" y2="50" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arr-g)"/>
+        <line x1="150" y1="50" x2="188" y2="50" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr-g)"/>
         <line x1="340" y1="50" x2="368" y2="50" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
         <line x1="520" y1="50" x2="548" y2="50" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
 
-        <!-- SignalRuntime → StrategyRuntime (아래로) -->
+        <!-- Signal → Strategy (아래로) -->
         <line x1="625" y1="80" x2="625" y2="148" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
 
-        <!-- 행2: StrategyRuntime → RiskRuntime → Governance → AI Federation -->
-        <!-- StrategyRuntime ⚠️ -->
+        <!-- 행2: Strategy → Risk → Governance → AI Federation -->
         <rect x="550" y="150" width="150" height="60" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
         <text x="625" y="174" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Strategy Runtime</text>
-        <text x="625" y="192" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증 ⚠️</text>
+        <text x="625" y="192" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증</text>
 
-        <!-- RiskRuntime ⚠️ -->
         <rect x="370" y="150" width="150" height="60" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
         <text x="445" y="174" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Risk Runtime</text>
-        <text x="445" y="192" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증 ⚠️</text>
+        <text x="445" y="192" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증</text>
 
-        <!-- Governance ✅ -->
+        <!-- Governance: always done -->
         <rect x="190" y="150" width="150" height="60" rx="6" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
         <text x="265" y="174" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">Governance</text>
         <text x="265" y="192" text-anchor="middle" fill="#8b949e" font-size="10">금융헌법 · 사법 ✅</text>
 
-        <!-- AI Federation ⚠️ -->
-        <rect x="10"  y="150" width="150" height="60" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
-        <text x="85"  y="174" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">AI Federation</text>
-        <text x="85"  y="192" text-anchor="middle" fill="#8b949e" font-size="10">ai_route UP · 미연결 ⚠️</text>
+        <rect x="10"  y="150" width="150" height="60" rx="6" fill="#0d2137" stroke="#58a6ff" stroke-width="1.5"/>
+        <text x="85"  y="174" text-anchor="middle" fill="#58a6ff" font-size="12" font-weight="600">AI Federation</text>
+        <text x="85"  y="192" text-anchor="middle" fill="#8b949e" font-size="10">ai_route UP · 미연결</text>
 
         <!-- 행2 화살표 (←방향) -->
         <line x1="548" y1="180" x2="522" y2="180" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
         <line x1="368" y1="180" x2="342" y2="180" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
         <line x1="188" y1="180" x2="162" y2="180" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arr-g)"/>
 
-        <!-- StrategyRuntime → ExecutionEngine (아래로) -->
-        <line x1="760" y1="180" x2="760" y2="148" stroke="#3fb950" stroke-width="1.5"/>
-        <!-- BrokerGateway row: right side -->
+        <!-- 행3: BrokerGateway / ExecutionEngine (always done) -->
+        <rect x="730" y="20"  width="140" height="60" rx="6" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
+        <text x="800" y="44"  text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">Broker Gateway</text>
+        <text x="800" y="62"  text-anchor="middle" fill="#8b949e" font-size="10">KIS·키움·업비트 ✅</text>
 
-        <!-- 행3: BrokerGateway → ExecutionEngine → Portfolio (우측 열) -->
-        <!-- BrokerGateway ✅ -->
-        <rect x="730" y="20" width="140" height="60" rx="6" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
-        <text x="800" y="44" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">Broker Gateway</text>
-        <text x="800" y="62" text-anchor="middle" fill="#8b949e" font-size="10">KIS·키움·업비트 ✅</text>
-
-        <!-- ExecutionEngine ✅ -->
         <rect x="730" y="150" width="140" height="60" rx="6" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
         <text x="800" y="174" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">Execution Engine</text>
         <text x="800" y="192" text-anchor="middle" fill="#8b949e" font-size="10">PAPER MODE ✅</text>
 
-        <!-- BrokerGateway ↔ ExecutionEngine -->
-        <line x1="800" y1="80" x2="800" y2="148" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arr-g)"/>
-
-        <!-- Strategy → Execution 연결 -->
+        <line x1="800" y1="80"  x2="800" y2="148" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arr-g)"/>
         <line x1="700" y1="180" x2="728" y2="180" stroke="#f0883e" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-o)"/>
 
-        <!-- 행4: AuditReplay → EVO -->
-        <!-- AuditReplay ⚠️ -->
+        <!-- 행4: Audit → EVO / Portfolio (always done) -->
         <rect x="190" y="270" width="150" height="55" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
         <text x="265" y="292" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Audit &amp; Replay</text>
-        <text x="265" y="310" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증 ⚠️</text>
+        <text x="265" y="310" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증</text>
 
-        <!-- EVO ⏳ -->
         <rect x="370" y="270" width="150" height="55" rx="6" fill="#161b22" stroke="#484f58" stroke-width="1.5"/>
         <text x="445" y="292" text-anchor="middle" fill="#8b949e" font-size="12" font-weight="600">EVO 자가학습</text>
-        <text x="445" y="310" text-anchor="middle" fill="#484f58" font-size="10">미착수 ⏳</text>
+        <text x="445" y="310" text-anchor="middle" fill="#8b949e" font-size="10">미착수</text>
 
-        <!-- Portfolio ✅ -->
         <rect x="550" y="270" width="150" height="55" rx="6" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
         <text x="625" y="292" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">Portfolio Recon</text>
         <text x="625" y="310" text-anchor="middle" fill="#8b949e" font-size="10">PnL 추적 ✅</text>
 
-        <!-- 행4 화살표 -->
         <line x1="340" y1="297" x2="368" y2="297" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
         <line x1="520" y1="297" x2="548" y2="297" stroke="#484f58" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr)"/>
 
-        <!-- ExecutionEngine → Portfolio (아래로) -->
         <line x1="800" y1="210" x2="800" y2="250" stroke="#3fb950" stroke-width="1.5"/>
         <line x1="800" y1="250" x2="625" y2="250" stroke="#3fb950" stroke-width="1.5"/>
         <line x1="625" y1="250" x2="625" y2="268" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arr-g)"/>
-
-        <!-- Governance → AuditReplay -->
         <line x1="265" y1="210" x2="265" y2="268" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arr-g)"/>
 
         <!-- 범례 -->
@@ -1207,8 +1184,8 @@
     </div>
 
     <footer>
-      <p>자동 생성 <span class="update-time">2026-06-17 00:56:36</span></p>
-      <p style="margin-top:4px">LUMI Quant Runtime OS — v5.20260617.00 — 실주문 PAPER MODE 유지</p>
+      <p>자동 생성 <span class="update-time">2026-06-17 01:13:15</span></p>
+      <p style="margin-top:4px">LUMI Quant Runtime OS — v5.20260617.01 — 실주문 PAPER MODE 유지</p>
     </footer>
   </div>
 </body>
