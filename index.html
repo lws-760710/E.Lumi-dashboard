@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUMI 대시보드 v2.0 | v5.20260618.02</title>
+  <title>LUMI 대시보드 v2.1 | v6.20260618.01</title>
   <style>
     *{ margin:0; padding:0; box-sizing:border-box; }
     body{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#0d1117; color:#c9d1d9; line-height:1.6; }
@@ -168,9 +168,9 @@
 
   <div class="container">
     <header>
-      <h1>LUMI 개발 대시보드 v2.0</h1>
-      <p class="subtitle">v5.20260618.02 &nbsp;|&nbsp; Mac Studio M4 Max 128GB</p>
-      <p class="subtitle" style="margin-top:4px">2026년 06월 18일 업데이트</p>
+      <h1>LUMI 개발 대시보드 v2.1</h1>
+      <p class="subtitle">v6.20260618.01 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; CLAUDE.md v3.9</p>
+      <p class="subtitle" style="margin-top:4px">2026년 06월 18일 업데이트 — DC 6탭 확정 · LEARN 신규 · 7등급 시스템 · 11,250종목 목표</p>
     </header>
 
     <!-- 섹션 1: 핵심 지표 카드 -->
@@ -183,9 +183,9 @@
         <div class="metric-sub">데이터20+파이프30+전략20+에이전트15+라우터15</div>
       </div>
       <div class="metric-card">
-        <div class="metric-num" style="color:#3fb950">19</div>
+        <div class="metric-num" style="color:#3fb950">35</div>
         <div class="metric-label">오늘 완료 항목</div>
-        <div class="metric-sub">2026-06-18</div>
+        <div class="metric-sub">DC×6 + COM×4 + TA×3 + TB×5 + DF×10 + 기타</div>
       </div>
       <div class="metric-card">
         <div class="metric-num" style="color:#f0883e">390.7MB</div>
@@ -514,10 +514,16 @@
         <td style="color:#8b949e;font-size:.88em">← 진짜 완성률</td>
       </tr>
       <tr>
-        <td class="m-label">데이터 수집</td>
+        <td class="m-label">데이터 수집 (DF)</td>
+        <td class="m-pct" style="color:#58a6ff">55%</td>
+        <td><span class="mini-bar" style="width:82px;background:#58a6ff"></span></td>
+        <td style="color:#8b949e;font-size:.88em">10/18 (DF-001~010✅, DF-011~018⏳)</td>
+      </tr>
+      <tr>
+        <td class="m-label">데이터센터 UI (DC)</td>
         <td class="m-pct" style="color:#2ea043">60%</td>
         <td><span class="mini-bar" style="width:90px;background:#2ea043"></span></td>
-        <td style="color:#8b949e;font-size:.88em">6/10 ⏳</td>
+        <td style="color:#8b949e;font-size:.88em">6/10 (DC-001~006✅, DC-007~010⏳)</td>
       </tr>
       <tr>
         <td class="m-label">파이프라인 연결</td>
@@ -526,13 +532,25 @@
         <td style="color:#8b949e;font-size:.88em">1/6 ⏳</td>
       </tr>
       <tr>
-        <td class="m-label">전략 구현</td>
-        <td class="m-pct" style="color:#f85149">0%</td>
-        <td><span class="mini-bar" style="width:0px;background:#f85149"></span></td>
-        <td style="color:#8b949e;font-size:.88em">0/5 ⏳</td>
+        <td class="m-label">Team B 에이전트 (TB)</td>
+        <td class="m-pct" style="color:#a371f7">62%</td>
+        <td><span class="mini-bar" style="width:93px;background:#a371f7"></span></td>
+        <td style="color:#8b949e;font-size:.88em">5/8 (TB-001~005✅, TB-006~008⏳)</td>
       </tr>
       <tr>
-        <td class="m-label">에이전트 작동</td>
+        <td class="m-label">Team A 시스템 (TA)</td>
+        <td class="m-pct" style="color:#f0883e">60%</td>
+        <td><span class="mini-bar" style="width:90px;background:#f0883e"></span></td>
+        <td style="color:#8b949e;font-size:.88em">3/5 (TA-001~003✅, TA-004~005⏳)</td>
+      </tr>
+      <tr>
+        <td class="m-label">학습 파이프라인 (LEARN)</td>
+        <td class="m-pct" style="color:#484f58">0%</td>
+        <td><span class="mini-bar" style="width:0px;background:#484f58"></span></td>
+        <td style="color:#8b949e;font-size:.88em">0/8 ⏳ 신규</td>
+      </tr>
+      <tr>
+        <td class="m-label">전략 구현</td>
         <td class="m-pct" style="color:#f85149">0%</td>
         <td><span class="mini-bar" style="width:0px;background:#f85149"></span></td>
         <td style="color:#8b949e;font-size:.88em">0/5 ⏳</td>
@@ -611,25 +629,25 @@
           </div>
         </div>
 
-        <div class="defect-card" style="border-left-color:#58a6ff">
+        <div class="defect-card" style="border-left-color:#2ea043">
           <div class="dc-title">결함4: 데이터베이스 부족</div>
-          <div class="dc-desc">DAS 데이터 수집 (DF-001~010)</div>
-          <div class="pb-wrap"><div class="pb-fill" style="width:60%;background:#f85149"></div></div>
+          <div class="dc-desc">DF-001~010 완료 ✅ · DF-011~018 확장 목표 (11,250종목)</div>
+          <div class="pb-wrap"><div class="pb-fill" style="width:55%;background:#58a6ff"></div></div>
           <div class="pb-meta">
-            <span>6 / 10 완료</span>
-            <span style="font-weight:bold">60%</span>
-            <span class="badge badge-progress">진행 중</span>
+            <span>10 / 18 완료</span>
+            <span style="font-weight:bold">55%</span>
+            <span class="badge badge-progress">확장 중</span>
           </div>
         </div>
 
-        <div class="defect-card" style="border-left-color:#f85149">
-          <div class="dc-title">결함5: 레짐 탐지기 미구현</div>
-          <div class="dc-desc">RSI+MACD+VIX+볼린저+ATR (ST-001)</div>
-          <div class="pb-wrap"><div class="pb-fill" style="width:0%;background:#f85149"></div></div>
+        <div class="defect-card" style="border-left-color:#2ea043">
+          <div class="dc-title">결함5: 레짐 탐지기 현황 정정</div>
+          <div class="dc-desc">quant_engine/regime_classifier/classify.py ✅ 완전 구현 · ai_route 연결(DP-003)만 남음</div>
+          <div class="pb-wrap"><div class="pb-fill" style="width:85%;background:#f0883e"></div></div>
           <div class="pb-meta">
-            <span>0 / 1 완료</span>
-            <span style="font-weight:bold">0%</span>
-            <span class="badge badge-pending">예정</span>
+            <span>구현 완료 / 연결 대기</span>
+            <span style="font-weight:bold">85%</span>
+            <span class="badge badge-progress">DP-003 대기</span>
           </div>
         </div>
       </div>
@@ -652,10 +670,18 @@
       <tr>
         <td style="font-weight:600;white-space:nowrap">📥 DATA-FETCH</td>
         <td style="color:#8b949e;font-size:.88em">데이터 수집</td>
-        <td><div class="line-bar"><div style="height:100%;width:90px;background:#58a6ff;border-radius:3px"></div></div></td>
-        <td style="color:#58a6ff;font-weight:600;text-align:right">60%</td>
+        <td><div class="line-bar"><div style="height:100%;width:83px;background:#58a6ff;border-radius:3px"></div></div></td>
+        <td style="color:#58a6ff;font-weight:600;text-align:right">55%</td>
+        <td style="color:#8b949e;text-align:center">10/18</td>
+        <td style="color:#58a6ff;font-size:.85em;white-space:nowrap">🔄 확장중</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;white-space:nowrap">💾 DC-UI</td>
+        <td style="color:#8b949e;font-size:.88em">데이터관리센터 (6탭)</td>
+        <td><div class="line-bar"><div style="height:100%;width:90px;background:#2ea043;border-radius:3px"></div></div></td>
+        <td style="color:#2ea043;font-weight:600;text-align:right">60%</td>
         <td style="color:#8b949e;text-align:center">6/10</td>
-        <td style="color:#58a6ff;font-size:.85em;white-space:nowrap">🔄 진행중</td>
+        <td style="color:#2ea043;font-size:.85em;white-space:nowrap">🔄 진행중</td>
       </tr>
       <tr>
         <td style="font-weight:600;white-space:nowrap">🔗 DATA-PIPE</td>
@@ -666,11 +692,27 @@
         <td style="color:#58a6ff;font-size:.85em;white-space:nowrap">🔄 진행중</td>
       </tr>
       <tr>
-        <td style="font-weight:600;white-space:nowrap">📊 DC-UI</td>
-        <td style="color:#8b949e;font-size:.88em">데이터센터 UI</td>
+        <td style="font-weight:600;white-space:nowrap">🟣 Team B (TB)</td>
+        <td style="color:#8b949e;font-size:.88em">KIS+업비트 에이전트</td>
+        <td><div class="line-bar"><div style="height:100%;width:93px;background:#a371f7;border-radius:3px"></div></div></td>
+        <td style="color:#a371f7;font-weight:600;text-align:right">62%</td>
+        <td style="color:#8b949e;text-align:center">5/8</td>
+        <td style="color:#a371f7;font-size:.85em;white-space:nowrap">🔄 진행중</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;white-space:nowrap">🟠 Team A (TA)</td>
+        <td style="color:#8b949e;font-size:.88em">키움 시스템팀</td>
+        <td><div class="line-bar"><div style="height:100%;width:90px;background:#f0883e;border-radius:3px"></div></div></td>
+        <td style="color:#f0883e;font-weight:600;text-align:right">60%</td>
+        <td style="color:#8b949e;text-align:center">3/5</td>
+        <td style="color:#f0883e;font-size:.85em;white-space:nowrap">🔄 진행중</td>
+      </tr>
+      <tr>
+        <td style="font-weight:600;white-space:nowrap">📚 LEARN</td>
+        <td style="color:#8b949e;font-size:.88em">학습 파이프라인 (신규)</td>
         <td><div class="line-bar"><div style="height:100%;width:0px;background:#484f58;border-radius:3px"></div></div></td>
         <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
-        <td style="color:#8b949e;text-align:center">0/10</td>
+        <td style="color:#8b949e;text-align:center">0/8</td>
         <td style="color:#484f58;font-size:.85em;white-space:nowrap">⏳ 대기</td>
       </tr>
       <tr>
@@ -683,7 +725,7 @@
       </tr>
       <tr>
         <td style="font-weight:600;white-space:nowrap">🤖 AGENT-LIVE</td>
-        <td style="color:#8b949e;font-size:.88em">에이전트 작동</td>
+        <td style="color:#8b949e;font-size:.88em">에이전트 Live 루프</td>
         <td><div class="line-bar"><div style="height:100%;width:0px;background:#484f58;border-radius:3px"></div></div></td>
         <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
         <td style="color:#8b949e;text-align:center">0/5</td>
@@ -763,28 +805,43 @@
       <div class="timeline">
         <div class="tl-item completed">
           <div class="tl-status">완료</div>
-          <div class="tl-id">DF-008</div>
-          <div class="tl-desc">Feature 파이프라인 (219개 지표 × 46종목)</div>
+          <div class="tl-id">DC-003~006</div>
+          <div class="tl-desc">파이프라인/활용/모니터링/DAS스캔 탭 완성</div>
         </div>
         <div class="tl-item completed">
           <div class="tl-status">완료</div>
-          <div class="tl-id">DF-009</div>
-          <div class="tl-desc">뉴스/감성 수집 (6,712건)</div>
+          <div class="tl-id">DC-004 재구성</div>
+          <div class="tl-desc">탭3 데이터 활용 현황 전면 교체 (4섹션)</div>
         </div>
         <div class="tl-item completed">
           <div class="tl-status">완료</div>
-          <div class="tl-id">DF-010</div>
-          <div class="tl-desc">데이터 무결성 PASS 146/146</div>
+          <div class="tl-id">COM-001~004</div>
+          <div class="tl-desc">lumi.db 11테이블 + launchd + Kill Switch + 텔레그램</div>
         </div>
         <div class="tl-item completed">
           <div class="tl-status">완료</div>
-          <div class="tl-id">dashboard_watcher</div>
-          <div class="tl-desc">CLAUDE.md 변경 감지 데몬 설치</div>
+          <div class="tl-id">TA-001~003</div>
+          <div class="tl-desc">실행루프 단일화 + 레짐→전략 체인 + 키움 Paper 주문</div>
+        </div>
+        <div class="tl-item completed">
+          <div class="tl-status">완료</div>
+          <div class="tl-id">TB-001~005</div>
+          <div class="tl-desc">Qwen 실연결 + 재무/뉴스/기술/매크로 서브 에이전트</div>
+        </div>
+        <div class="tl-item completed">
+          <div class="tl-status">완료</div>
+          <div class="tl-id">CLAUDE.md v3.9</div>
+          <div class="tl-desc">DC 6탭 확정 · DF-011~018 · LEARN-001~008 · 7등급</div>
         </div>
         <div class="tl-item in-progress">
           <div class="tl-status">진행 중</div>
-          <div class="tl-id">DP-001</div>
-          <div class="tl-desc">DL → Feature 파이프라인 자동 실행</div>
+          <div class="tl-id">TB-006</div>
+          <div class="tl-desc">최종 전략 에이전트 (4개 서브 종합 판단)</div>
+        </div>
+        <div class="tl-item pending">
+          <div class="tl-status">대기</div>
+          <div class="tl-id">DC-007~010</div>
+          <div class="tl-desc">주식현황판 · 관심종목 · 수집관리 · 파이프라인 검증</div>
         </div>
       </div>
     </div>
@@ -804,32 +861,32 @@
       <tr>
         <td class="queue-prio">🔴</td>
         <td style="color:#f85149;font-weight:600;font-size:.88em">1순위</td>
-        <td style="font-weight:600;color:#79c0ff">DC-003</td>
-        <td style="color:#c9d1d9">탭2 파이프라인 & 활용 (DP 파이프라인 시각화)</td>
+        <td style="font-weight:600;color:#79c0ff">TB-006</td>
+        <td style="color:#c9d1d9">최종 전략 에이전트 — 재무/뉴스/기술/매크로 4개 종합 판단 (Team B)</td>
       </tr>
       <tr>
         <td class="queue-prio">🔴</td>
         <td style="color:#f85149;font-weight:600;font-size:.88em">2순위</td>
-        <td style="font-weight:600;color:#79c0ff">DP-002</td>
-        <td style="color:#c9d1d9">Feature→CR 연결</td>
+        <td style="font-weight:600;color:#79c0ff">DC-007</td>
+        <td style="color:#c9d1d9">BlogApp → 주식 현황판 11,250종목 (트레이더 스타일 · 7등급)</td>
       </tr>
       <tr>
         <td class="queue-prio">🟡</td>
         <td style="color:#f0883e;font-weight:600;font-size:.88em">3순위</td>
-        <td style="font-weight:600;color:#79c0ff">ST-001</td>
-        <td style="color:#c9d1d9">LumiRegimeDetector 구현</td>
+        <td style="font-weight:600;color:#79c0ff">TA-004</td>
+        <td style="color:#c9d1d9">텔레그램 이벤트 연결 (notifier_bridge → TELEGRAM_BOT_TOKEN)</td>
       </tr>
       <tr>
         <td class="queue-prio">🟡</td>
         <td style="color:#f0883e;font-weight:600;font-size:.88em">4순위</td>
-        <td style="font-weight:600;color:#79c0ff">AL-001</td>
-        <td style="color:#c9d1d9">에이전트 Heartbeat</td>
+        <td style="font-weight:600;color:#79c0ff">DP-002</td>
+        <td style="color:#c9d1d9">Feature → CR (위기 Replay 연결)</td>
       </tr>
       <tr>
-        <td class="queue-prio">🟡</td>
-        <td style="color:#f0883e;font-weight:600;font-size:.88em">5순위</td>
-        <td style="font-weight:600;color:#79c0ff">AI-ROUTE-001</td>
-        <td style="color:#c9d1d9">서버 자동실행 설정</td>
+        <td class="queue-prio">🟢</td>
+        <td style="color:#3fb950;font-weight:600;font-size:.88em">5순위</td>
+        <td style="font-weight:600;color:#79c0ff">DC-008</td>
+        <td style="color:#c9d1d9">탭1 관심종목 관리 구현 (DC-007 연동)</td>
       </tr>
       </tbody>
     </table>
@@ -841,53 +898,53 @@
       <div class="hist-list">
       <div class="hist-row">
         <span class="hist-date">2026-06-18</span>
-        <span class="hist-id">KIS-LIVE-014</span>
-        <span class="hist-desc">미체결 주문 추적 완료</span>
+        <span class="hist-id">CLAUDE.md v3.9</span>
+        <span class="hist-desc">DC 6탭 확정 · DF-011~018 · LEARN-001~008 · 데이터 7등급 · 11,250종목 목표</span>
       </div>
       <div class="hist-row">
         <span class="hist-date">2026-06-18</span>
-        <span class="hist-id">KIS-LIVE-015</span>
-        <span class="hist-desc">부분체결 BR-008 연결 완료</span>
+        <span class="hist-id">TB-005</span>
+        <span class="hist-desc">산업/매크로 서브 에이전트 완료 (score=65/중립, /raw/MACRO/ 연동)</span>
       </div>
       <div class="hist-row">
         <span class="hist-date">2026-06-18</span>
-        <span class="hist-id">KIS-LIVE-016</span>
-        <span class="hist-desc">실현/평가손익 정밀화 완료</span>
+        <span class="hist-id">TB-004</span>
+        <span class="hist-desc">기술적 분석 서브 에이전트 완료 (삼성전자 score=42/관망)</span>
       </div>
       <div class="hist-row">
         <span class="hist-date">2026-06-18</span>
-        <span class="hist-id">KIS-LIVE-017</span>
-        <span class="hist-desc">read-only 2h 안정화 완료</span>
+        <span class="hist-id">TB-003</span>
+        <span class="hist-desc">뉴스/감성 서브 에이전트 완료 (DAS 실뉴스 6/6 PASS)</span>
       </div>
       <div class="hist-row">
         <span class="hist-date">2026-06-18</span>
-        <span class="hist-id">KIS-LIVE-018</span>
-        <span class="hist-desc">KIS 최종 점검 + 마감 리포트 완료</span>
+        <span class="hist-id">TB-002</span>
+        <span class="hist-desc">재무분석 서브 에이전트 완료 (pytest 20 PASS, 삼성전자 score=75)</span>
       </div>
       <div class="hist-row">
         <span class="hist-date">2026-06-18</span>
-        <span class="hist-id">DF-001</span>
-        <span class="hist-desc">KR 주식 30종목 10년 OHLCV → DAS 저장</span>
+        <span class="hist-id">TB-001</span>
+        <span class="hist-desc">Agent/llm.py Qwen2.5:72b 실연결 완료 (simulate 제거)</span>
       </div>
       <div class="hist-row">
         <span class="hist-date">2026-06-18</span>
-        <span class="hist-id">DF-002</span>
-        <span class="hist-desc">US 주식 6종목 10년 OHLCV → DAS 저장 (yfinance)</span>
+        <span class="hist-id">TA-003</span>
+        <span class="hist-desc">키움 Paper 주문 자동 실행 (pipeline→BUY→PAPER_FILLED)</span>
       </div>
       <div class="hist-row">
         <span class="hist-date">2026-06-18</span>
-        <span class="hist-id">DF-003</span>
-        <span class="hist-desc">FRED 거시경제 7지표 → DAS 저장</span>
+        <span class="hist-id">TA-002</span>
+        <span class="hist-desc">레짐→알파→전략 체인 연결 (trend_bull→buy→RULE_MOMENTUM_A)</span>
       </div>
       <div class="hist-row">
         <span class="hist-date">2026-06-18</span>
-        <span class="hist-id">DF-004</span>
-        <span class="hist-desc">KOSPI 추가 24종목 10년 → DAS 저장</span>
+        <span class="hist-id">TA-001</span>
+        <span class="hist-desc">실행 루프 단일화 — PaperTradingOperationLoop 확정</span>
       </div>
       <div class="hist-row">
         <span class="hist-date">2026-06-18</span>
-        <span class="hist-id">DF-005</span>
-        <span class="hist-desc">업비트 코인 10종 10년 OHLCV → DAS 저장 (25,182행, BTC/ETH/SOL/XRP/DOGE/ADA/AVAX/LINK/DOT/TRX)</span>
+        <span class="hist-id">DC-004 재구성</span>
+        <span class="hist-desc">탭3 데이터 활용 현황 전면 교체 — DAS→AI 매핑 + 활용빈도 + 에이전트별 + 파이프라인 상태</span>
       </div>
       </div>
     </div>
@@ -993,77 +1050,65 @@
       </details>
 
       <details open>
-        <summary>🔄 진행 중</summary>
-        <div class="sched-list">
-        <div class="sched-row in-progress">
-          <span class="sched-id">DC-003</span>
-          <span class="sched-desc">탭2 파이프라인 & 활용 구현</span>
-          <div class="sched-pb"><div style="width:0%;background:#58a6ff;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        </div>
-      </details>
-
-      <details open>
-        <summary>📊 데이터센터 UI 라인 (DC-001~010)</summary>
+        <summary>💾 데이터관리센터 UI 라인 (DC-001~010) — 6탭 확정 v3.9</summary>
         <div class="sched-list">
         <div class="sched-row completed">
           <span class="sched-id">DC-001</span>
-          <span class="sched-desc">AI BROADCASTING → 데이터센터 메뉴 교체</span>
+          <span class="sched-desc">AI BROADCASTING → 데이터관리센터 💾 메뉴명 변경</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
           <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">DC-002</span>
-          <span class="sched-desc">탭1 데이터 현황 구현 (KR/US/CRYPTO 서브탭 + 품질차트)</span>
+          <span class="sched-desc">탭1 데이터 현황 구현 → DC-008에서 관심종목 관리로 교체 예정</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">DC-003</span>
+          <span class="sched-desc">탭2 파이프라인 & 활용 — 6노드 흐름도 + DP단계표 + 피처빈도 + 스케줄</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">DC-004</span>
+          <span class="sched-desc">탭3 데이터 활용 현황 재구성 — DAS→AI매핑 + 활용빈도 + 에이전트별 + 파이프라인 상태</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">DC-005</span>
+          <span class="sched-desc">탭6 모니터링 & 알림 — 실시간 카드4 + 에러테이블 + 텔레그램상태 + 액션버튼4</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">DC-006</span>
+          <span class="sched-desc">DAS 실시간 스캔 연동 — Electron IPC 9개 핸들러</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
           <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row pending">
-          <span class="sched-id">DC-003</span>
-          <span class="sched-desc">탭2 파이프라인 & 활용 구현</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">DC-004</span>
-          <span class="sched-desc">탭3 AI 학습 현황 구현</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">DC-005</span>
-          <span class="sched-desc">탭4 모니터링 & 알림 구현</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">DC-006</span>
-          <span class="sched-desc">DAS 실시간 스캔 연동</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
           <span class="sched-id">DC-007</span>
-          <span class="sched-desc">AI 모델 배분 설정 (DeepSeek/Gemini Flash/Grok/GPT-4o-mini/로컬 Qwen)</span>
+          <span class="sched-desc">BlogApp → 📊 데이터센터 주식 현황판 — 11,250종목 · 트레이더 스타일 · 7등급 연동</span>
           <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
           <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">DC-008</span>
-          <span class="sched-desc">텔레그램 알림 연동</span>
+          <span class="sched-desc">탭1 관심종목 관리 — 수동+자동 / 이슈기반 / 상위3종목 / LUMI이력 / 연관관계도</span>
           <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
           <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">DC-009</span>
-          <span class="sched-desc">자동 수집 스케줄러 공식 등록</span>
+          <span class="sched-desc">탭4 데이터 수집 관리 — DF-011~018 스케줄 관리 / 수집 완료율 / DAS 용량</span>
           <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
           <span class="sched-pct">0%</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">DC-010</span>
-          <span class="sched-desc">전체 파이프라인 연결 검증</span>
+          <span class="sched-desc">탭5 파이프라인 검증 — DAS→features→AI 전체 E2E 검증 / 품질 리포트</span>
           <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
           <span class="sched-pct">0%</span>
         </div>
@@ -1101,23 +1146,23 @@
       </details>
 
       <details open>
-        <summary>📥 DATA-FETCH 라인 (DF-005~010)</summary>
+        <summary>📥 DATA-FETCH 라인 (DF-001~018) — 10/18 완료</summary>
         <div class="sched-list">
         <div class="sched-row completed">
+          <span class="sched-id">DF-001~004</span>
+          <span class="sched-desc">KR 30종목 + US 6종목 + FRED 7지표 + KOSPI 24종목 10년 OHLCV</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row completed">
           <span class="sched-id">DF-005</span>
-          <span class="sched-desc">코인 10년 (업비트 BTC/ETH/SOL/XRP/DOGE 10종)</span>
+          <span class="sched-desc">코인 10종 10년 OHLCV (BTC/ETH/SOL/XRP/DOGE/ADA/AVAX/LINK/DOT/TRX, 25,182행)</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
           <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
-          <span class="sched-id">DF-006</span>
-          <span class="sched-desc">KR 분봉 (10종목 1m×7d + 5m×60d, 67,318행)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DF-007</span>
-          <span class="sched-desc">US 분봉 (6종목 1m×7d + 5m×60d, 44,460행)</span>
+          <span class="sched-id">DF-006~007</span>
+          <span class="sched-desc">KR/US 분봉 (1m×7d + 5m×60d, 총 111,778행)</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
           <span class="sched-pct">100%</span>
         </div>
@@ -1129,15 +1174,183 @@
         </div>
         <div class="sched-row completed">
           <span class="sched-id">DF-009</span>
-          <span class="sched-desc">뉴스/감성 (Naver+NewsAPI, 6,712건)</span>
+          <span class="sched-desc">뉴스/감성 (KR 5,900건 + US 812건 = 6,712건, 22파일)</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
           <span class="sched-pct">100%</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">DF-010</span>
-          <span class="sched-desc">데이터 무결성 감시 스케줄러 (PASS 146/146)</span>
+          <span class="sched-desc">데이터 무결성 감시 스케줄러 (PASS 146/146, 6시간 주기)</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
           <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DF-011</span>
+          <span class="sched-desc">🇰🇷 KR 전체 2,650종목 일봉 수집 (DC-009 연동)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DF-012</span>
+          <span class="sched-desc">🇺🇸 US 전체 5,900종목 일봉 수집 (DC-009 연동)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DF-013</span>
+          <span class="sched-desc">🪙 코인 전체 2,700종목 수집 (DC-009 연동)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DF-014~015</span>
+          <span class="sched-desc">KR/US 재무제표 전체 수집 (DART/SEC EDGAR)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">DF-016~018</span>
+          <span class="sched-desc">분봉 확대 / 공시PDF / 틱 / 데이터 품질 검증 + 등급 자동 산정</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>🔀 하이브리드 두 팀 — Team A (키움) / Team B (KIS+업비트)</summary>
+        <div class="sched-list">
+        <div class="sched-row completed">
+          <span class="sched-id">TA-001</span>
+          <span class="sched-desc">실행 루프 단일화 — PaperTradingOperationLoop 확정 (3갈래→1개)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">TA-002</span>
+          <span class="sched-desc">레짐→알파→전략 체인 연결 (pipeline_connector.py)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">TA-003</span>
+          <span class="sched-desc">키움 Paper 주문 자동 실행 (orders.id=1, PAPER_FILLED)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row in-progress">
+          <span class="sched-id">TA-004</span>
+          <span class="sched-desc">텔레그램 이벤트 연결 (TELEGRAM_BOT_TOKEN 설정 필요)</span>
+          <div class="sched-pb"><div style="width:50%;background:#58a6ff;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">50%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">TA-005</span>
+          <span class="sched-desc">보고서 자동 생성 launchd 등록 (8종 보고서)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">TB-001</span>
+          <span class="sched-desc">Agent/llm.py Qwen2.5:72b 실연결 (simulate 제거, 테스트 3개 PASS)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">TB-002</span>
+          <span class="sched-desc">재무분석 서브 에이전트 (pytest 20 PASS, 삼성전자 score=75)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">TB-003</span>
+          <span class="sched-desc">뉴스/감성 서브 에이전트 (DAS /raw/NEWS/ 실연동, 6/6 PASS)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">TB-004</span>
+          <span class="sched-desc">기술적 분석 서브 에이전트 (DAS features 실데이터, score=42/관망)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row completed">
+          <span class="sched-id">TB-005</span>
+          <span class="sched-desc">산업/매크로 서브 에이전트 (DAS /raw/MACRO/ 실데이터, score=65/중립)</span>
+          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">100%</span>
+        </div>
+        <div class="sched-row in-progress">
+          <span class="sched-id">TB-006</span>
+          <span class="sched-desc">최종 전략 에이전트 — 4개 서브 종합 판단 (Team B 팀장)</span>
+          <div class="sched-pb"><div style="width:0%;background:#58a6ff;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">TB-007</span>
+          <span class="sched-desc">KIS Paper 주문 AI 실행 연결</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">TB-008</span>
+          <span class="sched-desc">업비트 24H AI 운영 구조</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>📚 LEARN 라인 (LEARN-001~008) — 신규 v3.9</summary>
+        <div class="sched-list">
+        <div class="sched-row pending">
+          <span class="sched-id">LEARN-001</span>
+          <span class="sched-desc">거래 기록 학습 데이터 추출 (lumi.db → 승/패 레이블 CSV)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">LEARN-002</span>
+          <span class="sched-desc">보고서 → 학습자료 자동 변환 (HTML → 구조화 JSON)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">LEARN-003</span>
+          <span class="sched-desc">레짐별 학습 데이터셋 구성 (레짐 탐지 모델용)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">LEARN-004</span>
+          <span class="sched-desc">뉴스 → 감성 레이블 학습셋 (다음날 수익률 레이블 부착)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">LEARN-005</span>
+          <span class="sched-desc">재무제표 → 밸류에이션 학습셋 (PER/PBR/ROE + 수익률 레이블)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">LEARN-006</span>
+          <span class="sched-desc">백테스트 결과 강화학습 피드백 루프 (EVO-001 준비)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">LEARN-007</span>
+          <span class="sched-desc">에이전트 주간 레포트 학습 데이터화 (판단 근거 + 결과 쌍)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
+        </div>
+        <div class="sched-row pending">
+          <span class="sched-id">LEARN-008</span>
+          <span class="sched-desc">Windows GPU 학습 파이프라인 구성 (AI_ELumi_SHARE → PyTorch)</span>
+          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct">0%</span>
         </div>
         </div>
       </details>
@@ -1257,9 +1470,74 @@
       </details>
     </div>
 
+    <!-- 섹션 13: 데이터 7등급 시스템 -->
+    <div id="sec-13" class="section">
+      <div class="sec-title">⭐ 데이터 7등급 시스템 (v3.9 확정) — 목표: 11,250종목</div>
+      <table class="phase-table">
+        <thead><tr>
+          <th style="text-align:left;color:#8b949e;padding:6px 10px;font-size:.8em">등급</th>
+          <th style="text-align:left;color:#8b949e;padding:6px 10px;font-size:.8em">조건</th>
+          <th style="text-align:left;color:#8b949e;padding:6px 10px;font-size:.8em">보관 기간</th>
+          <th style="text-align:left;color:#8b949e;padding:6px 10px;font-size:.8em">데이터 범위</th>
+        </tr></thead>
+        <tbody>
+        <tr>
+          <td style="color:#f0d060;font-weight:700">SS⭐ 특등급</td>
+          <td style="font-size:.88em">LUMI 실수익이력 (승률70%+ 또는 수익500만+)</td>
+          <td style="color:#3fb950;font-size:.88em">15년+</td>
+          <td style="color:#8b949e;font-size:.85em">1분봉~월봉 + 기업정보 전체 + LUMI 수익이력</td>
+        </tr>
+        <tr>
+          <td style="color:#f0d060;font-weight:700">S🏆 1등급</td>
+          <td style="font-size:.88em">핵심 우량주</td>
+          <td style="color:#3fb950;font-size:.88em">10년</td>
+          <td style="color:#8b949e;font-size:.85em">1분봉~월봉 + 핵심기업정보 + PER/PBR/ROE</td>
+        </tr>
+        <tr>
+          <td style="color:#58a6ff;font-weight:700">A 2등급</td>
+          <td style="font-size:.88em">관심 종목</td>
+          <td style="color:#58a6ff;font-size:.88em">5년</td>
+          <td style="color:#8b949e;font-size:.85em">5분봉~ + 핵심재무</td>
+        </tr>
+        <tr>
+          <td style="color:#8b949e;font-weight:700">B 3등급</td>
+          <td style="font-size:.88em">일반 종목</td>
+          <td style="color:#8b949e;font-size:.88em">3년</td>
+          <td style="color:#8b949e;font-size:.85em">30분봉~ + 요약재무</td>
+        </tr>
+        <tr>
+          <td style="color:#484f58;font-weight:700">C 4등급</td>
+          <td style="font-size:.88em">저관심 종목</td>
+          <td style="color:#484f58;font-size:.88em">1년</td>
+          <td style="color:#8b949e;font-size:.85em">일봉~ + 최소정보</td>
+        </tr>
+        <tr>
+          <td style="color:#484f58;font-weight:700">D 5등급</td>
+          <td style="font-size:.88em">관심 밖 종목</td>
+          <td style="color:#484f58;font-size:.88em">6개월</td>
+          <td style="color:#8b949e;font-size:.85em">주봉~ + 식별정보만</td>
+        </tr>
+        <tr>
+          <td style="color:#f85149;font-weight:700">X⚠️ 등외</td>
+          <td style="font-size:.88em">상장폐지/불량</td>
+          <td style="color:#f85149;font-size:.88em">목록만</td>
+          <td style="color:#8b949e;font-size:.85em">데이터 폐기 — 매매금지 경고 자동 발동</td>
+        </tr>
+        <tr style="border-top:2px solid #30363d;background:#0d1117">
+          <td colspan="4" style="font-size:.82em;color:#8b949e;padding:8px 10px">
+            수집 목표: 한국 2,650 + 미국 5,900 + 코인 2,700 = <strong style="color:#c9d1d9">11,250종목</strong> &nbsp;|&nbsp;
+            전체 수집 시 약 <strong style="color:#f0883e">280GB</strong> (DAS 32TB의 0.9%) &nbsp;|&nbsp;
+            등급별 선별 시 약 <strong style="color:#58a6ff">47GB</strong> &nbsp;|&nbsp;
+            현재 DAS 사용: <strong style="color:#3fb950">389MB</strong>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
     <footer>
-      <p>자동 생성 <span class="update-time">2026-06-18 02:19:12</span></p>
-      <p style="margin-top:4px">LUMI Quant Runtime OS — v5.20260618.02 — 실주문 PAPER MODE 유지</p>
+      <p>자동 생성 <span class="update-time">2026-06-18 03:00:00</span></p>
+      <p style="margin-top:4px">LUMI Quant Runtime OS — v6.20260618.01 — 실주문 PAPER MODE 유지</p>
     </footer>
   </div>
 </body>
