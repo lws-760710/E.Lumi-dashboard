@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-20T01:55:40",
-  "version": "v5.20260620.01",
+  "updated_at": "2026-06-20T02:26:01",
+  "version": "v5.20260620.02",
   "claude_md_version": "v3.34",
   "paper_mode": true,
   "system": {
@@ -10,8 +10,8 @@
   },
   "das": {
     "mounted": true,
-    "total_mb": 0.0,
-    "total_files": 0
+    "total_mb": 390.7,
+    "total_files": 153
   },
   "progress": {
     "phase_completed": 14,
