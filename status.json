@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-06-20T00:33:52",
+  "updated_at": "2026-06-20T00:38:45",
   "version": "v5.20260620.00",
-  "claude_md_version": "v3.31",
+  "claude_md_version": "v3.32",
   "paper_mode": true,
   "system": {
     "ai_route_up": true,
@@ -10,8 +10,8 @@
   },
   "das": {
     "mounted": true,
-    "total_mb": 390.7,
-    "total_files": 153
+    "total_mb": 0.0,
+    "total_files": 0
   },
   "progress": {
     "phase_completed": 14,
@@ -45,9 +45,9 @@
   "pending_count": 91,
   "defect_count": 5,
   "launchagents": {
-    "com.lumi.telegram": false,
-    "com.lumi.collector": false,
-    "com.lumi.ai_route": false
+    "com.lumi.telegram": true,
+    "com.lumi.collector": true,
+    "com.lumi.ai_route": true
   },
   "next_tasks": [
     "MARK-001: 마크 에이전트 구현",
