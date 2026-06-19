@@ -1,0 +1,59 @@
+{
+  "updated_at": "2026-06-19T23:38:02",
+  "version": "v5.20260619.23",
+  "claude_md_version": "v3.26",
+  "paper_mode": true,
+  "system": {
+    "ai_route_up": true,
+    "quant_engine_ok": true,
+    "telegram_ok": true
+  },
+  "das": {
+    "mounted": true,
+    "total_mb": 390.7,
+    "total_files": 153
+  },
+  "progress": {
+    "phase_completed": 14,
+    "phase_total": 22,
+    "phase_pct": 63,
+    "real_completion_pct": 40,
+    "code_completion_pct": 80
+  },
+  "today_completed_count": 19,
+  "today_completed": [
+    "KIS-LIVE-014: 미체결 주문 추적 완료",
+    "KIS-LIVE-015: 부분체결 BR-008 연결 완료",
+    "KIS-LIVE-016: 실현/평가손익 정밀화 완료",
+    "KIS-LIVE-017: read-only 2h 안정화 완료",
+    "KIS-LIVE-018: KIS 최종 점검 + 마감 리포트 완료",
+    "DF-001: KR 주식 30종목 10년 OHLCV → DAS 저장",
+    "DF-002: US 주식 6종목 10년 OHLCV → DAS 저장 (yfinance)",
+    "DF-003: FRED 거시경제 7지표 → DAS 저장",
+    "DF-004: KOSPI 추가 24종목 10년 → DAS 저장",
+    "DF-005: 업비트 코인 10종 10년 OHLCV → DAS 저장 (25,182행, BTC/ETH/SOL/XRP/DOGE/ADA/AVAX/LINK/DOT/TRX)",
+    "DF-006: KR 분봉 데이터 → DAS 저장 (10종목 1분봉×7일 + 5분봉×60일, 총 67,318행)",
+    "DF-007: US 분봉 데이터 → DAS 저장 (6종목 1분봉×7일 + 5분봉×60일, 총 44,460행)",
+    "DF-008: Feature 파이프라인 완료 (KR30+US6+CRYPTO10 = 46종목, 219개 지표, 115,375행, 375.7MB)",
+    "DF-009: 뉴스/감성 데이터 수집 완료 (KR 5,900건 + US 812건 = 6,712건, 22개 파일)",
+    "DF-010: 데이터 무결성 감시 스케줄러 완료 (146개 파일 감시, PASS 146/146)"
+  ],
+  "in_progress": [
+    "Team A: TA-004 텔레그램 연결",
+    "Team B: TB-007 KIS Paper 주문 AI 실행 연결"
+  ],
+  "pending_count": 91,
+  "defect_count": 5,
+  "launchagents": {
+    "com.lumi.telegram": true,
+    "com.lumi.collector": true,
+    "com.lumi.ai_route": true
+  },
+  "next_tasks": [
+    "MARK-001: 마크 에이전트 구현",
+    "TB-007: KIS Paper 주문 AI 실행 연결",
+    "DP-002: Feature → CR 연결",
+    "AL-001: 에이전트 Heartbeat (5개 × 5초)",
+    "AI-ROUTE-001: 서버 자동실행 설정"
+  ]
+}
