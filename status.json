@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-20T05:20:49",
+  "updated_at": "2026-06-20T05:21:05",
   "version": "v5.20260620.05",
   "claude_md_version": "v3.38",
   "paper_mode": true,
@@ -42,7 +42,7 @@
     "Team A: TA-004 텔레그램 연결",
     "Team B: TB-007 KIS Paper 주문 AI 실행 연결"
   ],
-  "pending_count": 91,
+  "pending_count": 93,
   "defect_count": 5,
   "launchagents": {
     "com.lumi.telegram": true,
