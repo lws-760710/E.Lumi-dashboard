@@ -137,6 +137,7 @@
     .sched-row.completed{ border-left-color:#2ea043; color:#8b949e; }
     .sched-row.in-progress{ border-left-color:#58a6ff; background:rgba(88,166,255,.05); }
     .sched-row.pending{ border-left-color:#8b949e; }
+    .sched-row.partial{ border-left-color:#f0883e; background:rgba(240,136,62,.05); }
     .sched-id{ font-weight:600; color:#58a6ff; min-width:110px; font-size:.85em; }
     .sched-desc{ flex:1; }
     .sched-pb{ width:88px; height:5px; background:#30363d; border-radius:3px; overflow:hidden; flex-shrink:0; }
@@ -1242,27 +1243,27 @@
         <div class="sched-list">
         <div class="sched-row completed">
           <span class="sched-id">AL-001</span>
-          <span class="sched-desc">에이전트 Heartbeat (5개 × 5초 + lumi.db + API)</span>
+          <span class="sched-desc">에이전트 Heartbeat (5초 주기, lumi_api thread)</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">100%</span>
+          <span class="sched-pct" style="color:#2ea043">✅ 완료</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">AL-002</span>
-          <span class="sched-desc">마크 실제 판단 루프 (MarkJudgmentLoop 30초 + mark_judgments DB)</span>
+          <span class="sched-desc">마크 판단 루프 (30초 주기, mark_api thread)</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">100%</span>
+          <span class="sched-pct" style="color:#2ea043">✅ 완료</span>
         </div>
-        <div class="sched-row completed">
+        <div class="sched-row partial">
           <span class="sched-id">AL-003</span>
-          <span class="sched-desc">에이전트 간 통신 허브 (AgentCommsHub 싱글톤 + API 5개)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">100%</span>
+          <span class="sched-desc">에이전트 간 통신 허브 (인메모리 싱글톤 — 프로세스 간 통신 불가)</span>
+          <div class="sched-pb"><div style="width:60%;background:#f0883e;height:100%;border-radius:2px"></div></div>
+          <span class="sched-pct" style="color:#f0883e">⚠️ 부분완성</span>
         </div>
         <div class="sched-row completed">
           <span class="sched-id">AL-004</span>
-          <span class="sched-desc">Paper 매매 루프 (PaperTradingLoop 60초 + 3중 실거래 차단)</span>
+          <span class="sched-desc">Paper 매매 루프 (60초 주기, lumi_api thread)</span>
           <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">100%</span>
+          <span class="sched-pct" style="color:#2ea043">✅ 완료</span>
         </div>
         <div class="sched-row pending">
           <span class="sched-id">AL-005</span>
@@ -1273,6 +1274,89 @@
         </div>
       </details>
     </div>
+
+    <div class="section" style="margin-top:24px">
+      <div class="sec-title">📋 개발 우선순위 (설계서 v3.0 기준)</div>
+      <table style="width:100%;border-collapse:collapse;font-size:.88em">
+        <thead>
+          <tr style="color:#8b949e;border-bottom:1px solid #30363d">
+            <th style="padding:8px 12px;text-align:left;width:60px">등급</th>
+            <th style="padding:8px 12px;text-align:left">항목</th>
+            <th style="padding:8px 12px;text-align:left;width:100px">라인 코드</th>
+            <th style="padding:8px 12px;text-align:left;width:110px">상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(248,81,73,.08);border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#f85149">P0</td>
+            <td style="padding:7px 12px">Constitutional Engine (14개 관문)</td>
+            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">SEC-NEW</td>
+            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+          </tr>
+          <tr style="background:rgba(248,81,73,.08);border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#f85149">P0</td>
+            <td style="padding:7px 12px">에이전트 7개 독립 프로세스</td>
+            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">AL-005</td>
+            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+          </tr>
+          <tr style="background:rgba(248,81,73,.08);border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#f85149">P0</td>
+            <td style="padding:7px 12px">KIS WebSocket 장중 검증</td>
+            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">BR-001</td>
+            <td style="padding:7px 12px;color:#d29922">❓ 검증필요</td>
+          </tr>
+          <tr style="background:rgba(210,153,34,.06);border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#d29922">P1</td>
+            <td style="padding:7px 12px">Data Quality Gate</td>
+            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">DP-007</td>
+            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+          </tr>
+          <tr style="background:rgba(210,153,34,.06);border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#d29922">P1</td>
+            <td style="padding:7px 12px">전략 검증 3단계 (PH-04)</td>
+            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">ST-NEW</td>
+            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+          </tr>
+          <tr style="background:rgba(210,153,34,.06);border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#d29922">P1</td>
+            <td style="padding:7px 12px">AI JSON Contract</td>
+            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">AL-006</td>
+            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+          </tr>
+          <tr style="background:rgba(210,153,34,.06);border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#d29922">P1</td>
+            <td style="padding:7px 12px">키움 Windows 브릿지</td>
+            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">BR-002</td>
+            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+          </tr>
+          <tr style="background:rgba(187,128,9,.04);border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#bb8009">P2</td>
+            <td style="padding:7px 12px;color:#c9d1d9">뉴스·매크로 파이프라인</td>
+            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">DP-008</td>
+            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+          </tr>
+          <tr style="background:rgba(187,128,9,.04);border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#bb8009">P2</td>
+            <td style="padding:7px 12px;color:#c9d1d9">AI Audit 로그</td>
+            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">AL-007</td>
+            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+          </tr>
+          <tr style="border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#8b949e">P3</td>
+            <td style="padding:7px 12px;color:#8b949e">경제 캘린더 연동</td>
+            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">DP-009</td>
+            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+          </tr>
+          <tr>
+            <td style="padding:7px 12px;font-weight:700;color:#8b949e">P3</td>
+            <td style="padding:7px 12px;color:#8b949e">수익률 목표 수치화</td>
+            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">SEC-002</td>
+            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
 
     <footer>
       <p>자동 생성 <span class="update-time">2026-06-21 08:00:46</span></p>
