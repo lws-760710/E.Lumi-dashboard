@@ -164,7 +164,7 @@
     <div class="sitem"><span class="sdot" style="background:#2ea043"></span><span>정상</span><span>퀀트엔진</span></div>
     <div class="sitem"><span class="sdot" style="background:#2ea043"></span><span>정상</span><span>텔레그램 봇</span></div>
     <div class="paper-badge">🔴 모의 거래 중 (PAPER MODE)</div>
-    <span class="sbar-time" style="margin-left:12px">2026-06-21 08:40:30</span>
+    <span class="sbar-time" style="margin-left:12px">2026-06-21 08:45:06</span>
   </div>
 
   <div class="container">
@@ -440,9 +440,9 @@
       </tr>
       <tr>
         <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 17</td>
-        <td>P0: Constitution + Agent + Data</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:64px;background:#58a6ff"></div></div></td>
-        <td style="color:#58a6ff;font-weight:600;text-align:right">32%</td>
+        <td>P0: Constitution ✅ + Agent ✅ + KIS WebSocket 🟡</td>
+        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:76px;background:#58a6ff"></div></div></td>
+        <td style="color:#58a6ff;font-weight:600;text-align:right">38%</td>
         <td style="text-align:center">🔄</td>
       </tr>
       <tr>
@@ -475,8 +475,8 @@
       </tr>
         <tr style="border-top:2px solid #30363d">
           <td colspan="2" style="font-weight:700;color:#c9d1d9">전체 평균</td>
-          <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:152px;background:#58a6ff"></div></div></td>
-          <td style="color:#58a6ff;font-weight:700;text-align:right">76%</td>
+          <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:154px;background:#58a6ff"></div></div></td>
+          <td style="color:#58a6ff;font-weight:700;text-align:right">77%</td>
           <td style="text-align:center">📊</td>
         </tr>
       </tbody>
@@ -803,22 +803,22 @@
       </tr></thead>
       <tbody>
       <tr>
-        <td class="queue-prio">🔴</td>
-        <td style="color:#f85149;font-weight:600;font-size:.88em">P0-001</td>
+        <td class="queue-prio">✅</td>
+        <td style="color:#2ea043;font-weight:600;font-size:.88em">P0-001</td>
         <td style="font-weight:600;color:#79c0ff">lumi_api 재기동</td>
-        <td style="color:#c9d1d9">포트 8001 재기동 — FastAPI 프로세스 중단 상태</td>
+        <td style="color:#c9d1d9">포트 8001 정상 — PID 확인 완료</td>
       </tr>
       <tr>
-        <td class="queue-prio">🔴</td>
-        <td style="color:#f85149;font-weight:600;font-size:.88em">P0-002</td>
+        <td class="queue-prio">✅</td>
+        <td style="color:#2ea043;font-weight:600;font-size:.88em">P0-002</td>
         <td style="font-weight:600;color:#79c0ff">constitution/engine.py</td>
-        <td style="color:#c9d1d9">14개 관문 Constitutional Engine (폴더 없음 → 신규 구현)</td>
+        <td style="color:#c9d1d9">14개 관문 구현 완료 — /constitution/check 엔드포인트</td>
       </tr>
       <tr>
-        <td class="queue-prio">🔴</td>
-        <td style="color:#f85149;font-weight:600;font-size:.88em">P0-003</td>
+        <td class="queue-prio">✅</td>
+        <td style="color:#2ea043;font-weight:600;font-size:.88em">P0-003</td>
         <td style="font-weight:600;color:#79c0ff">agents/base_agent.py</td>
-        <td style="color:#c9d1d9">7개 에이전트 독립 프로세스 전환 (현재 인라인)</td>
+        <td style="color:#c9d1d9">7개 에이전트 독립 프로세스 전환 완료 (run.py × 7)</td>
       </tr>
       <tr>
         <td class="queue-prio">🟡</td>
@@ -1287,17 +1287,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr style="background:rgba(248,81,73,.08);border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#f85149">P0</td>
-            <td style="padding:7px 12px">Constitutional Engine (14개 관문)</td>
+          <tr style="background:rgba(46,160,67,.06);border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#2ea043">P0</td>
+            <td style="padding:7px 12px;color:#8b949e">Constitutional Engine (14개 관문)</td>
             <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">SEC-NEW</td>
-            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+            <td style="padding:7px 12px;color:#2ea043">✅ 완료</td>
           </tr>
-          <tr style="background:rgba(248,81,73,.08);border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#f85149">P0</td>
-            <td style="padding:7px 12px">에이전트 7개 독립 프로세스</td>
+          <tr style="background:rgba(46,160,67,.06);border-bottom:1px solid #21262d">
+            <td style="padding:7px 12px;font-weight:700;color:#2ea043">P0</td>
+            <td style="padding:7px 12px;color:#8b949e">에이전트 7개 독립 프로세스</td>
             <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">AL-005</td>
-            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
+            <td style="padding:7px 12px;color:#2ea043">✅ 완료</td>
           </tr>
           <tr style="background:rgba(248,81,73,.08);border-bottom:1px solid #21262d">
             <td style="padding:7px 12px;font-weight:700;color:#f85149">P0</td>
@@ -1358,7 +1358,7 @@
     </div>
 
     <footer>
-      <p>자동 생성 <span class="update-time">2026-06-21 08:40:30</span></p>
+      <p>자동 생성 <span class="update-time">2026-06-21 08:45:06</span></p>
       <p style="margin-top:4px">LUMI Quant Runtime OS — v5.20260621.08 — 실주문 PAPER MODE 유지</p>
     </footer>
   </div>
