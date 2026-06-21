@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LUMI 대시보드 v4.0 | v4.20260621.2218</title>
+  <title>LUMI 대시보드 v4.0 | v4.20260621.2222</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -96,15 +96,15 @@
 <body>
   <div class="sbar">
     <div class="si"><span class="dot" style="background:#3fb950"></span>lumi_api 8001</div>
-    <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 15.0MB (실시간)</div>
+    <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 0.0MB (실시간)</div>
     <div class="paper">🔴 PAPER MODE</div>
-    <span class="sbar-time">2026-06-21 22:18:51</span>
+    <span class="sbar-time">2026-06-21 22:22:59</span>
   </div>
 
   <div class="container">
     <header>
       <h1>LUMI 개발 대시보드 v4.0</h1>
-      <p class="sub">v4.20260621.2218 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 21일</p>
+      <p class="sub">v4.20260621.2222 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 21일</p>
     </header>
 
     <!-- 섹션 1: 전체 개발 현황 -->
@@ -305,7 +305,7 @@
               <td class="tc seq">19</td>
               <td class="tc code" style="color:#3fb950;font-weight:600">AG-002</td>
               <td class="tc step">루미 에이전트</td>
-              <td class="tc desc">agents/lumi/run.py 독립프로세스</td>
+              <td class="tc desc">com.lumi.lumi launchd · run.py 8001</td>
               <td class="tc dev">Mac</td>
               <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">AG-003</td>
@@ -478,7 +478,7 @@
       <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
         <span class="lid" style="color:#388bfd">[SEC]</span>
         <span class="lname">보안 · Audit</span>
-        <span class="lcnt" style="color:#8b949e">✅3 ❌6 / 9개</span>
+        <span class="lcnt" style="color:#8b949e">✅3 ⚠️1 ❌5 / 9개</span>
         <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
       </summary>
       <div class="line-body">
@@ -527,13 +527,13 @@
               <td class="tc dev">Mac</td>
               <td class="tc st" style="color:#484f58">❌ 대기</td>
               <td class="tc nxt" style="color:#8b949e">SEC-006</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(240,136,62,.08)">
               <td class="tc seq">43</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">SEC-006</td>
+              <td class="tc code" style="color:#f0883e;font-weight:600">SEC-006</td>
               <td class="tc step">텔레그램 에스컬레이션</td>
-              <td class="tc desc">닥터→텔레그램 긴급알림</td>
+              <td class="tc desc">KeepAlive=false · 닥터→텔레그램 알림</td>
               <td class="tc dev">Mac</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#f0883e">⚠️ 진행중</td>
               <td class="tc nxt" style="color:#8b949e">SEC-007</td>
             </tr><tr style="background:rgba(36,41,47,.6)">
               <td class="tc seq">44</td>
@@ -1467,11 +1467,11 @@
 
     <div class="s3-top">
       <div class="s3-card"><div class="s3-num" style="color:#3fb950">45</div><div class="s3-lab">완료 ✅</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#f0883e">4</div><div class="s3-lab">진행중 ⚠️</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#484f58">78</div><div class="s3-lab">대기 ❌</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">37.0%</div><div class="s3-lab">전체 진행률</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#f0883e">5</div><div class="s3-lab">진행중 ⚠️</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#484f58">77</div><div class="s3-lab">대기 ❌</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">37.4%</div><div class="s3-lab">전체 진행률</div></div>
     </div>
-    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:37.0%"></div></div>
+    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:37.4%"></div></div>
     <div style="margin-top:20px">
 <div class="lb-row">
           <span class="lb-id" style="color:#388bfd">INF</span>
@@ -1496,8 +1496,8 @@
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">SEC</span>
           <span class="lb-name">보안 · Audit</span>
-          <div class="lb-bg"><div class="lb-fill" style="width:33%;background:#388bfd"></div></div>
-          <span class="lb-pct" style="color:#388bfd">33%</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:39%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">39%</span>
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">DP</span>
           <span class="lb-name">데이터 파이프라인</span>
@@ -1547,7 +1547,7 @@
     </div>
 
     <footer>
-      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-21 22:18:51 생성</p>
+      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-21 22:22:59 생성</p>
       <p style="margin-top:3px;color:#1e2d40">실주문 절대 금지 · 마스터 확인 후만 진행</p>
     </footer>
   </div>
