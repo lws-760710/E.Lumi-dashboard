@@ -3,395 +3,1322 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LUMI 대시보드 v3.0 | v3.20260621.1837</title>
+  <title>LUMI 대시보드 v4.0 | v4.20260621.1915</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-          background:#0d1117;color:#c9d1d9;line-height:1.6}
+          background:#0a0e1a;color:#eef6ff;line-height:1.6;font-size:14px}
 
     /* 상태바 */
-    .sbar{position:fixed;top:0;left:0;right:0;height:44px;background:#161b22;
-           border-bottom:1px solid #30363d;display:flex;align-items:center;
-           padding:0 20px;gap:24px;z-index:9999}
-    .si{display:flex;align-items:center;gap:6px;font-size:.82em}
-    .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+    .sbar{position:fixed;top:0;left:0;right:0;height:44px;
+           background:rgba(14,20,36,.97);border-bottom:1px solid #1e2d40;
+           display:flex;align-items:center;padding:0 20px;gap:20px;z-index:9999}
+    .si{display:flex;align-items:center;gap:6px;font-size:.8em;color:#8bb8d4}
+    .dot{width:7px;height:7px;border-radius:50%;display:inline-block}
     .paper{margin-left:auto;background:#da3633;color:#fff;padding:3px 10px;
-            border-radius:4px;font-size:.75em;font-weight:700;letter-spacing:.5px}
-    .sbar-time{font-size:.75em;color:#8b949e}
+            border-radius:4px;font-size:.72em;font-weight:700;letter-spacing:.5px}
+    .sbar-time{font-size:.72em;color:#4a6680}
 
     /* 컨테이너 */
-    .container{max-width:960px;margin:0 auto;padding:60px 20px 60px}
-    header{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #30363d}
-    h1{font-size:1.8em;font-weight:700;color:#c9d1d9}
-    .sub{color:#8b949e;font-size:.85em;margin-top:4px}
+    .container{max-width:1100px;margin:0 auto;padding:58px 16px 60px}
+    header{margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid #1e2d40}
+    h1{font-size:1.7em;font-weight:700;color:#eef6ff}
+    .sub{color:#4a6680;font-size:.82em;margin-top:3px}
 
-    /* 요약 카드 */
-    .sum-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-    @media(max-width:700px){.sum-grid{grid-template-columns:repeat(2,1fr)}}
-    .sum-card{border:1px solid;border-radius:8px;padding:14px;text-align:center}
-    .sum-phase{font-size:.75em;color:#8b949e;margin-bottom:2px}
-    .sum-name{font-size:.82em;font-weight:600;margin-bottom:8px}
-    .sum-bar-wrap{background:#30363d;border-radius:3px;height:6px;overflow:hidden;margin-bottom:6px}
-    .sum-bar{height:100%;border-radius:3px}
-    .sum-pct{font-size:1.4em;font-weight:700;line-height:1}
-    .sum-status{font-size:.75em;margin-top:4px}
+    /* 섹션 제목 */
+    .sec-title{font-size:1em;font-weight:700;color:#8bb8d4;
+                margin:28px 0 12px;padding-bottom:8px;
+                border-bottom:1px solid #1e2d40;letter-spacing:.5px}
 
-    /* 전체 진행률 바 */
-    .total-wrap{background:#161b22;border:1px solid #30363d;border-radius:8px;
-                 padding:16px;margin-bottom:24px}
-    .total-bar-bg{background:#30363d;border-radius:4px;height:10px;overflow:hidden}
-    .total-bar-fill{height:100%;background:linear-gradient(90deg,#388bfd,#3fb950);
-                     border-radius:4px;transition:width .5s}
+    /* 라인 폴딩 블록 */
+    .line-block{border-radius:7px;overflow:hidden;margin-bottom:8px}
+    .line-sum{list-style:none;padding:10px 16px;cursor:pointer;
+               display:flex;align-items:center;gap:10px;user-select:none}
+    .line-sum::-webkit-details-marker{display:none}
+    .lid{font-weight:700;font-size:.85em;min-width:46px}
+    .lname{font-weight:600;font-size:.9em;flex:1}
+    .lcnt{font-size:.78em}
+    .larr{font-size:1em;transition:transform .2s}
+    details.line-block[open] .larr{transform:rotate(0)}
+    .line-body{background:rgba(10,14,26,.8);border:1px solid #1e2d40;
+                border-top:none;border-radius:0 0 7px 7px;overflow-x:auto}
 
-    /* Phase 블록 */
-    .phase-block{border-radius:8px;overflow:hidden;margin-bottom:14px}
-    .phase-sum{list-style:none;padding:14px 18px;cursor:pointer;
-                display:flex;align-items:center;justify-content:space-between;
-                gap:12px;user-select:none}
-    .phase-sum::-webkit-details-marker{display:none}
-    .phase-sum::before{content:'▶';font-size:.65em;color:#8b949e;
-                        transition:transform .2s;flex-shrink:0}
-    details[open]>.phase-sum::before{transform:rotate(90deg)}
-    .ph-left{display:flex;align-items:center;gap:10px}
-    .ph-badge{padding:3px 9px;border-radius:4px;font-size:.78em;font-weight:700}
-    .ph-name{font-size:1em;font-weight:600}
-    .ph-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
-    .ph-bar-wrap{width:120px;background:rgba(255,255,255,.1);border-radius:3px;
-                  height:6px;overflow:hidden}
-    .ph-bar{height:100%;border-radius:3px}
-    .ph-pct{font-size:.9em;font-weight:700;min-width:38px;text-align:right}
-    .ph-status{font-size:.8em;min-width:72px;text-align:right}
+    /* 테이블 */
+    .lt{width:100%;border-collapse:collapse;min-width:760px}
+    .lt thead tr{background:rgba(30,45,64,.6)}
+    .lt th{padding:7px 10px;text-align:left;font-size:.75em;color:#4a6680;
+            font-weight:600;border-bottom:1px solid #1e2d40;white-space:nowrap}
+    .tc{padding:6px 10px;border-bottom:1px solid rgba(30,45,64,.5);font-size:.82em}
+    .tc.seq{color:#4a6680;min-width:30px}
+    .tc.code{min-width:90px;white-space:nowrap}
+    .tc.step{min-width:140px}
+    .tc.desc{color:#8bb8d4;flex:1}
+    .tc.dev{min-width:80px;color:#4a6680;font-size:.78em}
+    .tc.st{min-width:80px;font-weight:600;font-size:.8em;white-space:nowrap}
+    .tc.nxt{min-width:80px;font-size:.78em}
 
-    /* Phase 내부 */
-    .phase-body{padding:12px 16px;background:#0d1117;
-                 border:1px solid #30363d;border-top:none;
-                 border-radius:0 0 8px 8px}
+    /* 파이프라인 */
+    .pipe-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    @media(max-width:700px){.pipe-wrap{grid-template-columns:1fr}}
+    .pipe-col{background:rgba(14,20,36,.94);border:1px solid #1e2d40;
+               border-radius:8px;padding:16px}
+    .pipe-title{font-size:.9em;font-weight:700;color:#8bb8d4;
+                 margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid #1e2d40}
+    .pnode{border-radius:6px;padding:10px 14px;margin-bottom:0;
+            display:flex;align-items:center;gap:8px}
+    .picon{font-size:1em;flex-shrink:0}
+    .ptitle{font-weight:600;font-size:.88em;flex:1}
+    .psub{font-size:.75em;color:#4a6680;flex-shrink:0}
+    .parrow{text-align:center;color:#1e2d40;font-size:1.1em;
+             padding:2px 0;line-height:1}
 
-    /* 섹션 */
-    .sec{margin-bottom:8px;border-radius:6px;overflow:hidden}
-    .sec-sum{list-style:none;padding:10px 14px;cursor:pointer;
-              background:#161b22;border:1px solid #30363d;
-              border-radius:6px;display:flex;align-items:center;gap:10px;
-              user-select:none}
-    .sec-sum::-webkit-details-marker{display:none}
-    .sec-sum::before{content:'▸';font-size:.7em;color:#8b949e;
-                      transition:transform .2s}
-    details.sec[open]>.sec-sum::before{transform:rotate(90deg)}
-    .sec-id{font-size:.78em;color:#8b949e;min-width:30px}
-    .sec-name{font-weight:600;font-size:.9em;flex:1}
-    .sec-badge{padding:2px 8px;border-radius:3px;font-size:.72em;font-weight:600}
+    /* 진행률 */
+    .s3-top{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+    @media(max-width:600px){.s3-top{grid-template-columns:repeat(2,1fr)}}
+    .s3-card{background:rgba(14,20,36,.94);border:1px solid #1e2d40;
+              border-radius:8px;padding:16px;text-align:center}
+    .s3-num{font-size:2em;font-weight:700;line-height:1.1}
+    .s3-lab{font-size:.78em;color:#4a6680;margin-top:4px}
+    .tot-bar-bg{background:#1e2d40;border-radius:4px;height:10px;overflow:hidden}
+    .tot-bar-fill{height:100%;background:linear-gradient(90deg,#388bfd,#3fb950);border-radius:4px}
+    .lb-row{display:flex;align-items:center;gap:10px;padding:5px 0;
+             border-bottom:1px solid rgba(30,45,64,.4);font-size:.83em}
+    .lb-id{min-width:46px;font-weight:700}
+    .lb-name{min-width:150px;color:#8bb8d4}
+    .lb-bg{flex:1;background:#1e2d40;border-radius:3px;height:6px;overflow:hidden}
+    .lb-fill{height:100%;border-radius:3px}
+    .lb-pct{min-width:40px;text-align:right;font-weight:700}
 
-    /* 아이템 */
-    .item-list{list-style:none;padding:8px 14px 10px 28px;
-                background:#0d1117;border:1px solid #30363d;
-                border-top:none;border-radius:0 0 6px 6px}
-    .it{padding:4px 0;font-size:.86em;color:#c9d1d9;display:flex;
-         align-items:baseline;gap:6px}
-    .it span{flex-shrink:0}
-
-    footer{text-align:center;margin-top:40px;padding-top:20px;
-            border-top:1px solid #30363d;color:#8b949e;font-size:.8em}
+    footer{text-align:center;margin-top:40px;padding-top:18px;
+            border-top:1px solid #1e2d40;color:#4a6680;font-size:.78em}
   </style>
 </head>
 <body>
-
   <div class="sbar">
-    <div class="si"><span class="dot" style="background:#2ea043"></span>lumi_api 8001</div>
-    <div class="si"><span class="dot" style="background:#2ea043"></span>DAS 15.0MB (실시간)</div>
+    <div class="si"><span class="dot" style="background:#3fb950"></span>lumi_api 8001</div>
+    <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 15.0MB (실시간)</div>
     <div class="paper">🔴 PAPER MODE</div>
-    <span class="sbar-time">2026-06-21 18:37:30</span>
+    <span class="sbar-time">2026-06-21 19:15:31</span>
   </div>
+
   <div class="container">
     <header>
-      <h1>LUMI 개발 대시보드 v3.0</h1>
-      <p class="sub">v3.20260621.1837 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 21일</p>
+      <h1>LUMI 개발 대시보드 v4.0</h1>
+      <p class="sub">v4.20260621.1915 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 21일</p>
     </header>
 
-    <!-- 요약 카드 -->
-    <div class="sum-grid">
+    <!-- 섹션 1: 전체 개발 현황 -->
+    <div class="sec-title">📋 섹션 1 — 전체 개발 현황 (101개 항목)</div>
 
-    <div class="sum-card" style="background:#0d2137;border-color:#58a6ff">
-      <div class="sum-phase">Phase 1</div>
-      <div class="sum-name">기반 + 보안</div>
-      <div class="sum-bar-wrap"><div class="sum-bar" style="width:75%;background:#388bfd"></div></div>
-      <div class="sum-pct" style="color:#388bfd">75%</div>
-      <div class="sum-status" style="color:#388bfd">진행중 🔄</div>
-    </div>
-    <div class="sum-card" style="background:#0d2137;border-color:#58a6ff">
-      <div class="sum-phase">Phase 2</div>
-      <div class="sum-name">전략 / 에이전트</div>
-      <div class="sum-bar-wrap"><div class="sum-bar" style="width:15%;background:#388bfd"></div></div>
-      <div class="sum-pct" style="color:#388bfd">15%</div>
-      <div class="sum-status" style="color:#388bfd">진행중 🔄</div>
-    </div>
-    <div class="sum-card" style="background:#161b22;border-color:#484f58">
-      <div class="sum-phase">Phase 3</div>
-      <div class="sum-name">Paper 검증</div>
-      <div class="sum-bar-wrap"><div class="sum-bar" style="width:0%;background:#8b949e"></div></div>
-      <div class="sum-pct" style="color:#8b949e">0%</div>
-      <div class="sum-status" style="color:#8b949e">대기 ⏳</div>
-    </div>
-    <div class="sum-card" style="background:#161b22;border-color:#484f58">
-      <div class="sum-phase">Phase 4</div>
-      <div class="sum-name">실전 투입</div>
-      <div class="sum-bar-wrap"><div class="sum-bar" style="width:0%;background:#8b949e"></div></div>
-      <div class="sum-pct" style="color:#8b949e">0%</div>
-      <div class="sum-status" style="color:#8b949e">대기 ⏳</div>
-    </div>
-    </div>
-
-    <!-- 전체 진행률 -->
-
-    <div class="total-wrap">
-      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-        <span style="color:#8b949e;font-size:.85em">전체 진행률</span>
-        <span style="color:#58a6ff;font-weight:700">22.5%</span>
-      </div>
-      <div class="total-bar-bg">
-        <div class="total-bar-fill" style="width:22.5%"></div>
-      </div>
-    </div>
-
-    <!-- Phase 블록 -->
-
-    <details class="phase-block" open>
-      <summary class="phase-sum" style="background:#0d2137;border:1px solid #58a6ff">
-        <div class="ph-left">
-          <span class="ph-badge" style="background:#388bfd;color:#0d1117">Phase 1</span>
-          <span class="ph-name">기반 + 보안</span>
-        </div>
-        <div class="ph-right">
-          <div class="ph-bar-wrap"><div class="ph-bar" style="width:75%;background:#388bfd"></div></div>
-          <span class="ph-pct" style="color:#388bfd">75%</span>
-          <span class="ph-status" style="color:#388bfd">진행중 🔄</span>
-        </div>
+    <details class="line-block" open>
+      <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
+        <span class="lid" style="color:#388bfd">[INF]</span>
+        <span class="lname">인프라</span>
+        <span class="lcnt" style="color:#8b949e">✅7 ❌2 / 9개</span>
+        <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
       </summary>
-      <div class="phase-body">
-
-        <details class="sec">
-          <summary class="sec-sum" style="border-left:3px solid #3fb950">
-            <span class="sec-id">1-1</span>
-            <span class="sec-name">인프라</span>
-            <span class="sec-badge" style="background:#1a4731;color:#2ea043;border:1px solid #3fb950">완료 ✅</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#3fb950">✅</span> Mac Studio M4 Max 128GB</li>
-<li class="it"><span style="color:#3fb950">✅</span> Windows 10G 연결 (192.168.0.101:8791)</li>
-<li class="it"><span style="color:#3fb950">✅</span> DAS 32TB 썬더볼트 직결 + 5.1GB 실데이터</li>
-<li class="it"><span style="color:#3fb950">✅</span> Windows Worker 자동 부팅</li>
-<li class="it"><span style="color:#3fb950">✅</span> Ollama 5개 모델 (qwen2.5-coder 외)</li>
-          </ul>
-        </details>
-        <details class="sec">
-          <summary class="sec-sum" style="border-left:3px solid #3fb950">
-            <span class="sec-id">1-2</span>
-            <span class="sec-name">Constitutional Engine</span>
-            <span class="sec-badge" style="background:#1a4731;color:#2ea043;border:1px solid #3fb950">완료 ✅</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#3fb950">✅</span> system/constitution/engine.py — 14개 관문</li>
-<li class="it"><span style="color:#3fb950">✅</span> /constitution/check FastAPI 엔드포인트</li>
-<li class="it"><span style="color:#3fb950">✅</span> gate_01 DataQuality 연동</li>
-<li class="it"><span style="color:#3fb950">✅</span> PAPER MODE 3중 잠금</li>
-          </ul>
-        </details>
-        <details class="sec">
-          <summary class="sec-sum" style="border-left:3px solid #3fb950">
-            <span class="sec-id">1-3</span>
-            <span class="sec-name">에이전트 시스템</span>
-            <span class="sec-badge" style="background:#1a4731;color:#2ea043;border:1px solid #3fb950">완료 ✅</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#3fb950">✅</span> agents/base_agent.py 공통 베이스</li>
-<li class="it"><span style="color:#3fb950">✅</span> 7개 독립 프로세스 run.py (lumi/mark/ris/cog/doctor/strategy/signal)</li>
-<li class="it"><span style="color:#3fb950">✅</span> agent_status heartbeat 5초</li>
-<li class="it"><span style="color:#3fb950">✅</span> doctor 자동 재시작</li>
-          </ul>
-        </details>
-        <details class="sec" open>
-          <summary class="sec-sum" style="border-left:3px solid #58a6ff">
-            <span class="sec-id">1-4</span>
-            <span class="sec-name">브로커 연결</span>
-            <span class="sec-badge" style="background:#0d2137;color:#388bfd;border:1px solid #58a6ff">진행중 🔄</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#3fb950">✅</span> KIS WebSocket 상태머신 5-state (장중 실검증 필요)</li>
-<li class="it"><span style="color:#3fb950">✅</span> KIS REST 폴백 — DEGRADED 시 자동 전환</li>
-<li class="it"><span style="color:#f85149">❌</span> 키움 Windows 브릿지 미구현</li>
-<li class="it"><span style="color:#f85149">❌</span> 업비트 WebSocket 미구현</li>
-          </ul>
-        </details>
-        <details class="sec" open>
-          <summary class="sec-sum" style="border-left:3px solid #58a6ff">
-            <span class="sec-id">1-5</span>
-            <span class="sec-name">데이터 파이프라인</span>
-            <span class="sec-badge" style="background:#0d2137;color:#388bfd;border:1px solid #58a6ff">진행중 🔄</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#3fb950">✅</span> DAS 실데이터 로더 — KR 30 / US 6 / COIN 10종목</li>
-<li class="it"><span style="color:#3fb950">✅</span> Data Quality Gate 5중 검증</li>
-<li class="it"><span style="color:#3fb950">✅</span> P1-001~004 전체 완료 (WS / DQ / 전략검증 / AI계약)</li>
-<li class="it"><span style="color:#f85149">❌</span> 뉴스·매크로 실시간 파이프라인 미구현</li>
-          </ul>
-        </details>
-        <details class="sec">
-          <summary class="sec-sum" style="border-left:3px solid #484f58">
-            <span class="sec-id">1-6</span>
-            <span class="sec-name">보안 기반 (SEC)</span>
-            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#f85149">❌</span> AES-256 암호화 (SEC-001)</li>
-<li class="it"><span style="color:#f85149">❌</span> SQLCipher DB 암호화 (SEC-002)</li>
-<li class="it"><span style="color:#f85149">❌</span> HMAC 서명 키움브릿지용 (SEC-003)</li>
-<li class="it"><span style="color:#f85149">❌</span> TLS 에이전트 통신 (SEC-004)</li>
-          </ul>
-        </details>
-        <details class="sec">
-          <summary class="sec-sum" style="border-left:3px solid #3fb950">
-            <span class="sec-id">1-7</span>
-            <span class="sec-name">AI JSON Contract + Audit</span>
-            <span class="sec-badge" style="background:#1a4731;color:#2ea043;border:1px solid #3fb950">완료 ✅</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#3fb950">✅</span> schemas/ai_decision.py — 계약 검증</li>
-<li class="it"><span style="color:#3fb950">✅</span> runtime/ai/audit.py — 감사 로그</li>
-<li class="it"><span style="color:#3fb950">✅</span> /ai/decision, /ai/audit 엔드포인트</li>
-          </ul>
-        </details>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">1</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">INF-001</td>
+              <td class="tc step">lumi_api 기동</td>
+              <td class="tc desc">포트 8001 FastAPI</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">INF-002</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">2</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">INF-002</td>
+              <td class="tc step">Windows 연결</td>
+              <td class="tc desc">10G + worker 8791</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">INF-003</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">3</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">INF-003</td>
+              <td class="tc step">Windows 자동부팅</td>
+              <td class="tc desc">작업스케줄러 등록</td>
+              <td class="tc dev">Win</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">INF-004</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">4</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">INF-004</td>
+              <td class="tc step">DAS 연결</td>
+              <td class="tc desc">32TB 썬더볼트 + 로더</td>
+              <td class="tc dev">Mac+DAS</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">INF-005</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">5</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">INF-005</td>
+              <td class="tc step">Ollama Mac</td>
+              <td class="tc desc">로컬LLM 5개 모델</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">INF-006</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">6</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">INF-006</td>
+              <td class="tc step">Ollama Windows</td>
+              <td class="tc desc">Smart App Control 해제</td>
+              <td class="tc dev">Win</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">INF-007</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">7</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">INF-007</td>
+              <td class="tc step">디바이스 네트워크</td>
+              <td class="tc desc">Streamlit 6개 노드</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">INF-008</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">8</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">INF-008</td>
+              <td class="tc step">UPS 설치</td>
+              <td class="tc desc">APC Back-UPS Pro 1500VA</td>
+              <td class="tc dev">하드웨어</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">INF-009</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">9</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">INF-009</td>
+              <td class="tc step">핫스팟 이중화</td>
+              <td class="tc desc">유선끊김→핫스팟 자동전환</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">CE-001</td>
+            </tr></tbody>
+        </table>
       </div>
     </details>
-    <details class="phase-block" open>
-      <summary class="phase-sum" style="background:#0d2137;border:1px solid #58a6ff">
-        <div class="ph-left">
-          <span class="ph-badge" style="background:#388bfd;color:#0d1117">Phase 2</span>
-          <span class="ph-name">전략 / 에이전트</span>
-        </div>
-        <div class="ph-right">
-          <div class="ph-bar-wrap"><div class="ph-bar" style="width:15%;background:#388bfd"></div></div>
-          <span class="ph-pct" style="color:#388bfd">15%</span>
-          <span class="ph-status" style="color:#388bfd">진행중 🔄</span>
-        </div>
+    <details class="line-block" open>
+      <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
+        <span class="lid" style="color:#388bfd">[CE]</span>
+        <span class="lname">Constitutional Engine</span>
+        <span class="lcnt" style="color:#8b949e">✅5 ❌2 / 7개</span>
+        <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
       </summary>
-      <div class="phase-body">
-
-        <details class="sec" open>
-          <summary class="sec-sum" style="border-left:3px solid #58a6ff">
-            <span class="sec-id">2-1</span>
-            <span class="sec-name">전략 시스템</span>
-            <span class="sec-badge" style="background:#0d2137;color:#388bfd;border:1px solid #58a6ff">진행중 🔄</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#3fb950">✅</span> BaseStrategy + Registry (@register 데코레이터)</li>
-<li class="it"><span style="color:#3fb950">✅</span> 씨앗 전략 5개 (KR MA크로스·RSI / COIN BTC모멘텀 / US SPY / KR 거래량)</li>
-<li class="it"><span style="color:#3fb950">✅</span> DAS 실데이터 백테스트 연결 (das_loader.py)</li>
-<li class="it"><span style="color:#3fb950">✅</span> 코그 자동 생성기 cog_strategy_generator.py (미가동)</li>
-<li class="it"><span style="color:#f0883e">⚠️</span> validated 전략 0개 — Sharpe 0.44~0.70 / 기준 1.2 미달</li>
-<li class="it"><span style="color:#f85149">❌</span> 전략 50개 목표 — 파라미터 튜닝 필요</li>
-          </ul>
-        </details>
-        <details class="sec">
-          <summary class="sec-sum" style="border-left:3px solid #484f58">
-            <span class="sec-id">2-2</span>
-            <span class="sec-name">에이전트 고도화</span>
-            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#f85149">❌</span> 전략 에이전트 판단 루프 구현</li>
-<li class="it"><span style="color:#f85149">❌</span> 신호 에이전트 실시간 필터</li>
-<li class="it"><span style="color:#f85149">❌</span> 코그 야간 자동 생성 가동</li>
-<li class="it"><span style="color:#f85149">❌</span> 레짐별 균등 학습 체계</li>
-          </ul>
-        </details>
-        <details class="sec">
-          <summary class="sec-sum" style="border-left:3px solid #484f58">
-            <span class="sec-id">2-3</span>
-            <span class="sec-name">HTS UI 고도화</span>
-            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#f85149">❌</span> 메시지 중요도 필터</li>
-<li class="it"><span style="color:#f85149">❌</span> 동적 카드 레이아웃</li>
-<li class="it"><span style="color:#f85149">❌</span> 전략 성과 실시간 대시보드</li>
-          </ul>
-        </details>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">10</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">CE-001</td>
+              <td class="tc step">CE 기본구조</td>
+              <td class="tc desc">system/constitution/engine.py</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">CE-002</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">11</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">CE-002</td>
+              <td class="tc step">gate_01~05</td>
+              <td class="tc desc">종목필터/주가범위/종목수/섹터/충돌</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">CE-003</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">12</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">CE-003</td>
+              <td class="tc step">gate_06~10</td>
+              <td class="tc desc">Kelly/슬리피지/헤지/손절/타임박스</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">CE-004</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">13</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">CE-004</td>
+              <td class="tc step">gate_11~14</td>
+              <td class="tc desc">자금3분할/리스크/실거래잠금/비공개</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">CE-005</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">14</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">CE-005</td>
+              <td class="tc step">CE API</td>
+              <td class="tc desc">/constitution/check 엔드포인트</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">CE-006</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">15</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">CE-006</td>
+              <td class="tc step">CE 이중화</td>
+              <td class="tc desc">Primary(8003)+Backup(8004/Win)</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">CE-007</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">16</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">CE-007</td>
+              <td class="tc step">브레이커 패턴</td>
+              <td class="tc desc">연속손실 자동차단+냉각기간</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">AG-001</td>
+            </tr></tbody>
+        </table>
       </div>
     </details>
-    <details class="phase-block">
-      <summary class="phase-sum" style="background:#161b22;border:1px solid #484f58">
-        <div class="ph-left">
-          <span class="ph-badge" style="background:#8b949e;color:#0d1117">Phase 3</span>
-          <span class="ph-name">Paper 검증</span>
-        </div>
-        <div class="ph-right">
-          <div class="ph-bar-wrap"><div class="ph-bar" style="width:0%;background:#8b949e"></div></div>
-          <span class="ph-pct" style="color:#8b949e">0%</span>
-          <span class="ph-status" style="color:#8b949e">대기 ⏳</span>
-        </div>
+    <details class="line-block" open>
+      <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
+        <span class="lid" style="color:#388bfd">[AG]</span>
+        <span class="lname">에이전트 시스템</span>
+        <span class="lcnt" style="color:#8b949e">✅7 ❌2 / 9개</span>
+        <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
       </summary>
-      <div class="phase-body">
-
-        <details class="sec">
-          <summary class="sec-sum" style="border-left:3px solid #484f58">
-            <span class="sec-id">3-1</span>
-            <span class="sec-name">시스템 검증</span>
-            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#f85149">❌</span> UPS 정전 테스트</li>
-<li class="it"><span style="color:#f85149">❌</span> 핫스팟 전환 테스트</li>
-<li class="it"><span style="color:#f85149">❌</span> CE 브레이커 작동 테스트</li>
-<li class="it"><span style="color:#f85149">❌</span> WebSocket 상태머신 장중 실검증</li>
-          </ul>
-        </details>
-        <details class="sec">
-          <summary class="sec-sum" style="border-left:3px solid #484f58">
-            <span class="sec-id">3-2</span>
-            <span class="sec-name">전략 검증</span>
-            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#f85149">❌</span> 동적 Kelly 효과 검증</li>
-<li class="it"><span style="color:#f85149">❌</span> ATR 손절 효과 검증</li>
-<li class="it"><span style="color:#f85149">❌</span> 청산 타임박스 검증</li>
-<li class="it"><span style="color:#f85149">❌</span> 30일 무중단 Paper 운영</li>
-          </ul>
-        </details>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">17</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">AG-001</td>
+              <td class="tc step">BaseAgent</td>
+              <td class="tc desc">base_agent.py heartbeat/PID/SIGTERM</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">AG-002</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">18</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">AG-002</td>
+              <td class="tc step">루미 에이전트</td>
+              <td class="tc desc">agents/lumi/run.py 독립프로세스</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">AG-003</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">19</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">AG-003</td>
+              <td class="tc step">마크 에이전트</td>
+              <td class="tc desc">agents/mark/run.py 30초 판단루프</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">AG-004</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">20</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">AG-004</td>
+              <td class="tc step">리스 에이전트</td>
+              <td class="tc desc">agents/ris/run.py 리스크관리</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">AG-005</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">21</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">AG-005</td>
+              <td class="tc step">코그 에이전트</td>
+              <td class="tc desc">agents/cog/run.py 야간학습</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">AG-006</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">22</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">AG-006</td>
+              <td class="tc step">닥터 에이전트</td>
+              <td class="tc desc">agents/doctor/run.py 자동재시작</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">AG-007</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">23</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">AG-007</td>
+              <td class="tc step">전략/신호 에이전트</td>
+              <td class="tc desc">strategy+signal/run.py (stub)</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">AG-008</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">24</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">AG-008</td>
+              <td class="tc step">LLM 메모리 스케줄링</td>
+              <td class="tc desc">마크→전략 순차실행 동시금지</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">AG-009</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">25</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">AG-009</td>
+              <td class="tc step">LLM 응답 검증</td>
+              <td class="tc desc">JSON검증+3회재질의+Sonnet폴백</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">BR-001</td>
+            </tr></tbody>
+        </table>
       </div>
     </details>
-    <details class="phase-block">
-      <summary class="phase-sum" style="background:#161b22;border:1px solid #484f58">
-        <div class="ph-left">
-          <span class="ph-badge" style="background:#8b949e;color:#0d1117">Phase 4</span>
-          <span class="ph-name">실전 투입</span>
-        </div>
-        <div class="ph-right">
-          <div class="ph-bar-wrap"><div class="ph-bar" style="width:0%;background:#8b949e"></div></div>
-          <span class="ph-pct" style="color:#8b949e">0%</span>
-          <span class="ph-status" style="color:#8b949e">대기 ⏳</span>
-        </div>
+    <details class="line-block" open>
+      <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
+        <span class="lid" style="color:#388bfd">[BR]</span>
+        <span class="lname">브로커 연결</span>
+        <span class="lcnt" style="color:#8b949e">✅1 ⚠️1 ❌3 / 5개</span>
+        <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
       </summary>
-      <div class="phase-body">
-
-        <details class="sec">
-          <summary class="sec-sum" style="border-left:3px solid #484f58">
-            <span class="sec-id">4-1</span>
-            <span class="sec-name">실전 준비</span>
-            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
-          </summary>
-          <ul class="item-list">
-<li class="it"><span style="color:#f85149">❌</span> 마스터 최종 승인</li>
-<li class="it"><span style="color:#f85149">❌</span> 2단계 인증 실전 전환</li>
-<li class="it"><span style="color:#f85149">❌</span> 소액 실전 (100만원)</li>
-<li class="it"><span style="color:#f85149">❌</span> CRY-010 코인 24H 자율운영</li>
-          </ul>
-        </details>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">26</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">BR-001</td>
+              <td class="tc step">KIS WebSocket</td>
+              <td class="tc desc">brokers/kis/websocket.py 5-state</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">BR-002</td>
+            </tr><tr style="background:rgba(240,136,62,.08)">
+              <td class="tc seq">27</td>
+              <td class="tc code" style="color:#f0883e;font-weight:600">BR-002</td>
+              <td class="tc step">KIS WS 장중검증</td>
+              <td class="tc desc">실제 tick 수신 확인 (마스터직접)</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#f0883e">⚠️ 진행중</td>
+              <td class="tc nxt" style="color:#8b949e">BR-003</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">28</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">BR-003</td>
+              <td class="tc step">업비트 WebSocket</td>
+              <td class="tc desc">WebSocket 3개 연결 상태머신</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">BR-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">29</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">BR-004</td>
+              <td class="tc step">키움 Windows 브릿지</td>
+              <td class="tc desc">windows_bridge/ HMAC 브릿지</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">BR-005</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">30</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">BR-005</td>
+              <td class="tc step">멀티 브로커 라우터</td>
+              <td class="tc desc">KIS/키움/업비트 통합라우팅</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">SEC-001</td>
+            </tr></tbody>
+        </table>
       </div>
     </details>
+    <details class="line-block" open>
+      <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
+        <span class="lid" style="color:#388bfd">[SEC]</span>
+        <span class="lname">보안 · Audit</span>
+        <span class="lcnt" style="color:#8b949e">✅3 ❌4 / 7개</span>
+        <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">31</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">SEC-001</td>
+              <td class="tc step">Data Quality Gate</td>
+              <td class="tc desc">quality_gate.py 5중검증</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">SEC-002</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">32</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">SEC-002</td>
+              <td class="tc step">AI JSON Contract</td>
+              <td class="tc desc">ai_decision.py 계약서검증</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">SEC-003</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">33</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">SEC-003</td>
+              <td class="tc step">AI Audit 로그</td>
+              <td class="tc desc">audit.py append-only 감사</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">SEC-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">34</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">SEC-004</td>
+              <td class="tc step">AES-256 암호화</td>
+              <td class="tc desc">API키/민감정보 암호화</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">SEC-005</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">35</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">SEC-005</td>
+              <td class="tc step">SQLCipher DB</td>
+              <td class="tc desc">lumi.db 암호화 전환</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">SEC-006</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">36</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">SEC-006</td>
+              <td class="tc step">텔레그램 에스컬레이션</td>
+              <td class="tc desc">닥터→텔레그램 긴급알림</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">SEC-007</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">37</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">SEC-007</td>
+              <td class="tc step">append-only 체크섬</td>
+              <td class="tc desc">모든 로그 무결성 검증</td>
+              <td class="tc dev">Mac+DAS</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">DP-001</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+    <details class="line-block" open>
+      <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
+        <span class="lid" style="color:#388bfd">[DP]</span>
+        <span class="lname">데이터 파이프라인</span>
+        <span class="lcnt" style="color:#8b949e">✅1 ❌4 / 5개</span>
+        <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">38</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">DP-001</td>
+              <td class="tc step">DAS 실데이터 로더</td>
+              <td class="tc desc">das_loader.py KR/US/COIN</td>
+              <td class="tc dev">Mac+DAS</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">DP-002</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">39</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">DP-002</td>
+              <td class="tc step">뉴스 파이프라인</td>
+              <td class="tc desc">네이버/Yahoo RSS+감성분석</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">DP-003</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">40</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">DP-003</td>
+              <td class="tc step">매크로 파이프라인</td>
+              <td class="tc desc">한국은행API+공포탐욕지수</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">DP-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">41</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">DP-004</td>
+              <td class="tc step">Replay 데이터셋</td>
+              <td class="tc desc">주문시점 스냅샷 저장</td>
+              <td class="tc dev">Mac+DAS</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">DP-005</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">42</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">DP-005</td>
+              <td class="tc step">경제 캘린더</td>
+              <td class="tc desc">FOMC/CPI/실적 자동감지</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">ST-001</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+    <details class="line-block" open>
+      <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
+        <span class="lid" style="color:#388bfd">[ST]</span>
+        <span class="lname">전략 시스템</span>
+        <span class="lcnt" style="color:#8b949e">✅3 ⚠️1 ❌6 / 10개</span>
+        <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">43</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">ST-001</td>
+              <td class="tc step">BaseStrategy</td>
+              <td class="tc desc">base_strategy.py+registry.py</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">ST-002</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">44</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">ST-002</td>
+              <td class="tc step">전략검증 파이프라인</td>
+              <td class="tc desc">PH-04-01~06 백테스트/WF/MC/레짐</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">ST-003</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">45</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">ST-003</td>
+              <td class="tc step">DAS 실데이터 백테스트</td>
+              <td class="tc desc">씨앗전략 5개 실데이터 검증</td>
+              <td class="tc dev">Mac+DAS</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">ST-004</td>
+            </tr><tr style="background:rgba(240,136,62,.08)">
+              <td class="tc seq">46</td>
+              <td class="tc code" style="color:#f0883e;font-weight:600">ST-004</td>
+              <td class="tc step">코그 전략 생성기</td>
+              <td class="tc desc">cog_strategy_generator.py 야간자동생성</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#f0883e">⚠️ 진행중</td>
+              <td class="tc nxt" style="color:#8b949e">ST-005</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">47</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">ST-005</td>
+              <td class="tc step">KR 데이트레이딩 전략</td>
+              <td class="tc desc">A카테고리 10개 MA/RSI/볼린저</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">ST-006</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">48</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">ST-006</td>
+              <td class="tc step">KR 스윙 전략</td>
+              <td class="tc desc">B카테고리 10개</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">ST-007</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">49</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">ST-007</td>
+              <td class="tc step">COIN 전략</td>
+              <td class="tc desc">A/B카테고리 10개</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">ST-008</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">50</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">ST-008</td>
+              <td class="tc step">US 전략</td>
+              <td class="tc desc">B카테고리 10개</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">ST-009</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">51</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">ST-009</td>
+              <td class="tc step">validated 전략 10개</td>
+              <td class="tc desc">Sharpe1.2+ MDD8%이하 10개</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">ST-010</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">52</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">ST-010</td>
+              <td class="tc step">전략 50개 목표</td>
+              <td class="tc desc">코그자동생성+마스터추가</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">MK-001</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+    <details class="line-block">
+      <summary class="line-sum" style="background:#161b22;border-left:4px solid #484f58">
+        <span class="lid" style="color:#484f58">[MK]</span>
+        <span class="lname">레짐 · 신호 · 리스크</span>
+        <span class="lcnt" style="color:#8b949e">✅0 ❌5 / 5개</span>
+        <span class="larr" style="color:#484f58;margin-left:auto">▸</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">53</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">MK-001</td>
+              <td class="tc step">레짐 감지기</td>
+              <td class="tc desc">5개 레짐 상승/하락/횡보/위기/저변동</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">MK-002</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">54</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">MK-002</td>
+              <td class="tc step">감성점수 연동</td>
+              <td class="tc desc">뉴스+매크로 sentiment→레짐반영</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">MK-003</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">55</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">MK-003</td>
+              <td class="tc step">동적 Half Kelly</td>
+              <td class="tc desc">최근승률 기반 포지션 자동조정</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">MK-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">56</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">MK-004</td>
+              <td class="tc step">ATR 손절</td>
+              <td class="tc desc">코인 ATR×1.5 자동손절</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">MK-005</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">57</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">MK-005</td>
+              <td class="tc step">청산 타임박스</td>
+              <td class="tc desc">14:50순차→15:00강제→15:15완료</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">EL-001</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+    <details class="line-block" open>
+      <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
+        <span class="lid" style="color:#388bfd">[EL]</span>
+        <span class="lname">Electron UI</span>
+        <span class="lcnt" style="color:#8b949e">✅6 ⚠️1 ❌6 / 13개</span>
+        <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">58</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">EL-001</td>
+              <td class="tc step">OrchestratorOS 기반</td>
+              <td class="tc desc">Electron 앱구조+appRegistry.js</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">EL-002</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">59</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">EL-002</td>
+              <td class="tc step">오케스트레이터 페이지</td>
+              <td class="tc desc">메인 관제화면 (톤앤디자인 기준)</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">EL-003</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">60</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">EL-003</td>
+              <td class="tc step">AI 에이전트 사무실</td>
+              <td class="tc desc">7개 에이전트 상태 카드</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">EL-004</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">61</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">EL-004</td>
+              <td class="tc step">LUMI CORE 페이지</td>
+              <td class="tc desc">시스템상태+Constitutional Engine</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">EL-005</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">62</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">EL-005</td>
+              <td class="tc step">AI ASSET MANAGEMENT</td>
+              <td class="tc desc">포트폴리오 관제화면</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">EL-006</td>
+            </tr><tr style="background:rgba(240,136,62,.08)">
+              <td class="tc seq">63</td>
+              <td class="tc code" style="color:#f0883e;font-weight:600">EL-006</td>
+              <td class="tc step">한국투자증권 HTS</td>
+              <td class="tc desc">KIS 차트/주문/체결/계좌 화면</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#f0883e">⚠️ 진행중</td>
+              <td class="tc nxt" style="color:#8b949e">EL-007</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">64</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">EL-007</td>
+              <td class="tc step">키움증권 HTS</td>
+              <td class="tc desc">키움 차트/조건검색/주문 화면</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">EL-008</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">65</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">EL-008</td>
+              <td class="tc step">업비트 HTS</td>
+              <td class="tc desc">업비트 차트/호가/체결/주문 화면</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">EL-009</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">66</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">EL-009</td>
+              <td class="tc step">통합 관제 센터</td>
+              <td class="tc desc">전체자산/수익률/리스크 한눈에</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">EL-010</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">67</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">EL-010</td>
+              <td class="tc step">통합 트레이딩 터미널</td>
+              <td class="tc desc">멀티차트/호가/주문/AI신호 통합</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">EL-011</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">68</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">EL-011</td>
+              <td class="tc step">루미 채팅</td>
+              <td class="tc desc">마스터↔루미 AI 파트너 대화</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">EL-012</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">69</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">EL-012</td>
+              <td class="tc step">에이전트 채팅방</td>
+              <td class="tc desc">에이전트간 메시지+마스터 관람</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">EL-013</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">70</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">EL-013</td>
+              <td class="tc step">성과 비교 페이지</td>
+              <td class="tc desc">AI팀 vs 시스템팀 수익률 비교</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">CN-001</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+    <details class="line-block" open>
+      <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
+        <span class="lid" style="color:#388bfd">[CN]</span>
+        <span class="lname">백엔드↔Electron 연결</span>
+        <span class="lcnt" style="color:#8b949e">✅2 ⚠️1 ❌6 / 9개</span>
+        <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">71</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">CN-001</td>
+              <td class="tc step">lumi_api↔Electron</td>
+              <td class="tc desc">포트 8001 REST API 연결</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">CN-002</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">72</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">CN-002</td>
+              <td class="tc step">실시간 WebSocket push</td>
+              <td class="tc desc">에이전트 상태 실시간 push</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">CN-003</td>
+            </tr><tr style="background:rgba(240,136,62,.08)">
+              <td class="tc seq">73</td>
+              <td class="tc code" style="color:#f0883e;font-weight:600">CN-003</td>
+              <td class="tc step">KIS 실데이터→HTS</td>
+              <td class="tc desc">REST/WS 시세→Electron 차트</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#f0883e">⚠️ 진행중</td>
+              <td class="tc nxt" style="color:#8b949e">CN-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">74</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">CN-004</td>
+              <td class="tc step">Paper 주문→UI</td>
+              <td class="tc desc">paper_orders→Electron 반영</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">CN-005</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">75</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">CN-005</td>
+              <td class="tc step">에이전트 상태→UI</td>
+              <td class="tc desc">agent_status→에이전트 카드</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">CN-006</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">76</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">CN-006</td>
+              <td class="tc step">CE 결과→UI</td>
+              <td class="tc desc">constitution_violations→UI</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">CN-007</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">77</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">CN-007</td>
+              <td class="tc step">전략 결과→UI</td>
+              <td class="tc desc">strategies→성과 차트</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">CN-008</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">78</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">CN-008</td>
+              <td class="tc step">Windows Worker→UI</td>
+              <td class="tc desc">8791 상태→디바이스 카드</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">CN-009</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">79</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">CN-009</td>
+              <td class="tc step">Ollama 상태→UI</td>
+              <td class="tc desc">로컬LLM 상태→에이전트 화면</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">SL-001</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+    <details class="line-block" open>
+      <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
+        <span class="lid" style="color:#388bfd">[SL]</span>
+        <span class="lname">Streamlit 모니터링</span>
+        <span class="lcnt" style="color:#8b949e">✅2 ❌5 / 7개</span>
+        <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">80</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">SL-001</td>
+              <td class="tc step">디바이스 네트워크 앱</td>
+              <td class="tc desc">6개 노드 온라인 상태 모니터링</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">SL-002</td>
+            </tr><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">81</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">SL-002</td>
+              <td class="tc step">heartbeat 실시간</td>
+              <td class="tc desc">5초마다 노드 상태 갱신</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">SL-003</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">82</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">SL-003</td>
+              <td class="tc step">Windows GPU 상태</td>
+              <td class="tc desc">RTX4060 연산 현황 모니터링</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">SL-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">83</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">SL-004</td>
+              <td class="tc step">DAS 저장 현황</td>
+              <td class="tc desc">32TB 사용량+데이터 현황</td>
+              <td class="tc dev">Mac+DAS</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">SL-005</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">84</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">SL-005</td>
+              <td class="tc step">에이전트 로그 스트림</td>
+              <td class="tc desc">실시간 에이전트 로그 표시</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">SL-006</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">85</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">SL-006</td>
+              <td class="tc step">브로커 연결 상태</td>
+              <td class="tc desc">KIS/키움/업비트 API 상태</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">SL-007</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">86</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">SL-007</td>
+              <td class="tc step">iPad 관제 연결</td>
+              <td class="tc desc">Tailscale→iPad 대시보드 접속</td>
+              <td class="tc dev">Mac+iPad</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">RL-001</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+    <details class="line-block" open>
+      <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
+        <span class="lid" style="color:#388bfd">[RL]</span>
+        <span class="lname">Paper 검증 운영</span>
+        <span class="lcnt" style="color:#8b949e">✅1 ❌7 / 8개</span>
+        <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(63,185,80,.08)">
+              <td class="tc seq">87</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">RL-001</td>
+              <td class="tc step">Paper 엔진</td>
+              <td class="tc desc">system/paper_trading.py 60초루프</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
+              <td class="tc nxt" style="color:#8b949e">RL-002</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">88</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">RL-002</td>
+              <td class="tc step">Paper 7일 운영</td>
+              <td class="tc desc">무중단 7일 Paper 운영 검증</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">RL-003</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">89</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">RL-003</td>
+              <td class="tc step">손절 자동화 검증</td>
+              <td class="tc desc">실제 손절 트리거 확인</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">RL-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">90</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">RL-004</td>
+              <td class="tc step">청산 타임박스 검증</td>
+              <td class="tc desc">14:50~15:15 강제청산 확인</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">RL-005</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">91</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">RL-005</td>
+              <td class="tc step">CE 브레이커 검증</td>
+              <td class="tc desc">연속손실 자동차단 확인</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">RL-006</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">92</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">RL-006</td>
+              <td class="tc step">WebSocket 안정성</td>
+              <td class="tc desc">KIS/업비트 WS끊김→REST폴백</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">RL-007</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">93</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">RL-007</td>
+              <td class="tc step">Paper 30일 운영</td>
+              <td class="tc desc">30일 무중단+수익률 양수 확인</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">RL-008</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">94</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">RL-008</td>
+              <td class="tc step">마스터 결과 검토</td>
+              <td class="tc desc">Paper 결과분석+실전투입 승인</td>
+              <td class="tc dev">마스터</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">LIVE-001</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+    <details class="line-block">
+      <summary class="line-sum" style="background:#161b22;border-left:4px solid #484f58">
+        <span class="lid" style="color:#484f58">[LIVE]</span>
+        <span class="lname">실전 투입 · 진화</span>
+        <span class="lcnt" style="color:#8b949e">✅0 ❌7 / 7개</span>
+        <span class="larr" style="color:#484f58;margin-left:auto">▸</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">95</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">LIVE-001</td>
+              <td class="tc step">실전 잠금해제</td>
+              <td class="tc desc">마스터 2단계인증+CE 게이트해제</td>
+              <td class="tc dev">마스터</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">LIVE-002</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">96</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">LIVE-002</td>
+              <td class="tc step">소액실전 100만원</td>
+              <td class="tc desc">KIS 1~2종목 집중 소액실전</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">LIVE-003</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">97</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">LIVE-003</td>
+              <td class="tc step">실전 1개월 검증</td>
+              <td class="tc desc">수익률/손절/청산 실전확인</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">LIVE-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">98</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">LIVE-004</td>
+              <td class="tc step">자금 확대</td>
+              <td class="tc desc">수익배분(재투자50/예비20/수익30)</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">LIVE-005</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">99</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">LIVE-005</td>
+              <td class="tc step">완전 자율운영</td>
+              <td class="tc desc">에이전트 24시간 무인운영</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">CRY-001</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">100</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">CRY-001</td>
+              <td class="tc step">코인 24H 자율운영</td>
+              <td class="tc desc">업비트 00~06제외 24시간 코인운영</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">EVO-001</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">101</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">EVO-001</td>
+              <td class="tc step">자가진화 가동</td>
+              <td class="tc desc">코그 딥러닝 자가진화 시작</td>
+              <td class="tc dev">Mac+Win</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">—</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+
+    <!-- 섹션 2: AI팀 파이프라인 -->
+    <div class="sec-title">🔄 섹션 2 — AI팀 파이프라인 현황</div>
+
+    <div class="pipe-wrap">
+      <div class="pipe-col">
+        <div class="pipe-title">🤖 AI 에이전트팀 (KIS + 업비트)</div>
+<div class="pnode" style="background:rgba(63,185,80,.08);border:1px solid #3fb95020">
+      <span class="picon" style="color:#3fb950">✅</span>
+      <span class="ptitle" style="color:#3fb950">마크 에이전트</span>
+      <span class="psub">레짐판단 30초</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
+      <span class="picon" style="color:#484f58">❌</span>
+      <span class="ptitle" style="color:#eef6ff">전략 에이전트</span>
+      <span class="psub">전략선택 5분</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
+      <span class="picon" style="color:#484f58">❌</span>
+      <span class="ptitle" style="color:#eef6ff">신호 에이전트</span>
+      <span class="psub">종목스크리닝 1초</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
+      <span class="picon" style="color:#484f58">❌</span>
+      <span class="ptitle" style="color:#eef6ff">동적 Half Kelly</span>
+      <span class="psub">포지션 자동배분</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(63,185,80,.08);border:1px solid #3fb95020">
+      <span class="picon" style="color:#3fb950">✅</span>
+      <span class="ptitle" style="color:#3fb950">Constitutional Engine</span>
+      <span class="psub">14개 관문 검증</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(63,185,80,.08);border:1px solid #3fb95020">
+      <span class="picon" style="color:#3fb950">✅</span>
+      <span class="ptitle" style="color:#3fb950">리스 에이전트</span>
+      <span class="psub">최종 리스크 검증</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(240,136,62,.08);border:1px solid #f0883e20">
+      <span class="picon" style="color:#f0883e">⚠️</span>
+      <span class="ptitle" style="color:#eef6ff">주문실행 KIS/업비트</span>
+      <span class="psub">PAPER MODE</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
+      <span class="picon" style="color:#484f58">❌</span>
+      <span class="ptitle" style="color:#eef6ff">손절감시 + 타임박스</span>
+      <span class="psub">ATR손절/14:50청산</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(240,136,62,.08);border:1px solid #f0883e20">
+      <span class="picon" style="color:#f0883e">⚠️</span>
+      <span class="ptitle" style="color:#eef6ff">코그 야간진화</span>
+      <span class="psub">롤링검증 구현/미가동</span>
+    </div>
+      </div>
+      <div class="pipe-col">
+        <div class="pipe-title">🏗️ 시스템팀 (키움 Windows)</div>
+<div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
+      <span class="picon" style="color:#484f58">❌</span>
+      <span class="ptitle" style="color:#eef6ff">키움 WebSocket</span>
+      <span class="psub">데이터 수신</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
+      <span class="picon" style="color:#484f58">❌</span>
+      <span class="ptitle" style="color:#eef6ff">레이어1 데이터 인프라</span>
+      <span class="psub">시세·호가·체결</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(63,185,80,.08);border:1px solid #3fb95020">
+      <span class="picon" style="color:#3fb950">✅</span>
+      <span class="ptitle" style="color:#3fb950">레이어2 종목필터 엔진</span>
+      <span class="psub">CE 14개 관문</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(240,136,62,.08);border:1px solid #f0883e20">
+      <span class="picon" style="color:#f0883e">⚠️</span>
+      <span class="ptitle" style="color:#eef6ff">레이어3 전략 엔진</span>
+      <span class="psub">전략 5개/목표 1000개+</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
+      <span class="picon" style="color:#484f58">❌</span>
+      <span class="ptitle" style="color:#eef6ff">레이어4 키움 Windows 브릿지</span>
+      <span class="psub">HMAC 인증</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(63,185,80,.08);border:1px solid #3fb95020">
+      <span class="picon" style="color:#3fb950">✅</span>
+      <span class="ptitle" style="color:#3fb950">레이어5 리스크 관리</span>
+      <span class="psub">리스 에이전트</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
+      <span class="picon" style="color:#484f58">❌</span>
+      <span class="ptitle" style="color:#eef6ff">레이어6 체결·정산</span>
+      <span class="psub">주문집행 루프</span>
+    </div>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(63,185,80,.08);border:1px solid #3fb95020">
+      <span class="picon" style="color:#3fb950">✅</span>
+      <span class="ptitle" style="color:#3fb950">레이어7 감사·리포트</span>
+      <span class="psub">Audit 로그</span>
+    </div>
+      </div>
+    </div>
+
+    <!-- 섹션 3: 전체 진행률 -->
+    <div class="sec-title">📊 섹션 3 — 전체 진행률 요약</div>
+
+    <div class="s3-top">
+      <div class="s3-card"><div class="s3-num" style="color:#3fb950">38</div><div class="s3-lab">완료 ✅</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#f0883e">4</div><div class="s3-lab">진행중 ⚠️</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#484f58">59</div><div class="s3-lab">대기 ❌</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">39.6%</div><div class="s3-lab">전체 진행률</div></div>
+    </div>
+    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:39.6%"></div></div>
+    <div style="margin-top:20px">
+<div class="lb-row">
+          <span class="lb-id" style="color:#388bfd">INF</span>
+          <span class="lb-name">인프라</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:78%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">78%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#388bfd">CE</span>
+          <span class="lb-name">Constitutional Engine</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:71%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">71%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#388bfd">AG</span>
+          <span class="lb-name">에이전트 시스템</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:78%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">78%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#388bfd">BR</span>
+          <span class="lb-name">브로커 연결</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:30%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">30%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#388bfd">SEC</span>
+          <span class="lb-name">보안 · Audit</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:43%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">43%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#388bfd">DP</span>
+          <span class="lb-name">데이터 파이프라인</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:20%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">20%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#388bfd">ST</span>
+          <span class="lb-name">전략 시스템</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:35%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">35%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#484f58">MK</span>
+          <span class="lb-name">레짐 · 신호 · 리스크</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:0%;background:#484f58"></div></div>
+          <span class="lb-pct" style="color:#484f58">0%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#388bfd">EL</span>
+          <span class="lb-name">Electron UI</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:50%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">50%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#388bfd">CN</span>
+          <span class="lb-name">백엔드↔Electron 연결</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:28%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">28%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#388bfd">SL</span>
+          <span class="lb-name">Streamlit 모니터링</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:29%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">29%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#388bfd">RL</span>
+          <span class="lb-name">Paper 검증 운영</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:12%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">12%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#484f58">LIVE</span>
+          <span class="lb-name">실전 투입 · 진화</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:0%;background:#484f58"></div></div>
+          <span class="lb-pct" style="color:#484f58">0%</span>
+        </div>
+    </div>
 
     <footer>
-      <p>LUMI Quant Runtime OS — PAPER MODE 전용 &nbsp;|&nbsp; 2026-06-21 18:37:30 생성</p>
-      <p style="margin-top:4px;color:#484f58">실주문 절대 금지 · 마스터 확인 후만 진행</p>
+      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-21 19:15:31 생성</p>
+      <p style="margin-top:3px;color:#1e2d40">실주문 절대 금지 · 마스터 확인 후만 진행</p>
     </footer>
   </div>
 </body>

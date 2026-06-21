@@ -1,34 +1,11 @@
 {
-  "updated_at": "2026-06-21T18:37:30",
-  "version": "v3.20260621.1837",
+  "updated_at": "2026-06-21T19:15:31",
+  "version": "v4.20260621.1915",
   "paper_mode": true,
-  "overall_pct": 22.5,
-  "phases": [
-    {
-      "id": 1,
-      "name": "기반 + 보안",
-      "pct": 75,
-      "status": "in-progress"
-    },
-    {
-      "id": 2,
-      "name": "전략 / 에이전트",
-      "pct": 15,
-      "status": "in-progress"
-    },
-    {
-      "id": 3,
-      "name": "Paper 검증",
-      "pct": 0,
-      "status": "waiting"
-    },
-    {
-      "id": 4,
-      "name": "실전 투입",
-      "pct": 0,
-      "status": "waiting"
-    }
-  ],
+  "overall_pct": 39.6,
+  "done": 38,
+  "warn": 4,
+  "no": 59,
   "system": {
     "lumi_api": true,
     "das_mounted": true
