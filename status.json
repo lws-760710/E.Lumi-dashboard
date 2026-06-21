@@ -1,40 +1,41 @@
 {
-  "updated_at": "2026-06-21T18:18:06",
-  "version": "v5.20260621.18",
-  "claude_md_version": "v4.0",
+  "updated_at": "2026-06-21T18:36:58",
+  "version": "v3.20260621.1836",
   "paper_mode": true,
+  "overall_pct": 22.5,
+  "phases": [
+    {
+      "id": 1,
+      "name": "기반 + 보안",
+      "pct": 75,
+      "status": "in-progress"
+    },
+    {
+      "id": 2,
+      "name": "전략 / 에이전트",
+      "pct": 15,
+      "status": "in-progress"
+    },
+    {
+      "id": 3,
+      "name": "Paper 검증",
+      "pct": 0,
+      "status": "waiting"
+    },
+    {
+      "id": 4,
+      "name": "실전 투입",
+      "pct": 0,
+      "status": "waiting"
+    }
+  ],
   "system": {
-    "ai_route_up": true,
-    "quant_engine_ok": true,
-    "telegram_ok": true
+    "lumi_api": true,
+    "das_mounted": true
   },
   "das": {
     "mounted": true,
-    "total_mb": 390.7,
-    "total_files": 153
-  },
-  "progress": {
-    "phase_completed": 0,
-    "phase_total": 22,
-    "phase_pct": 0,
-    "real_completion_pct": 40,
-    "code_completion_pct": 80
-  },
-  "today_completed_count": 0,
-  "today_completed": [],
-  "in_progress": [],
-  "pending_count": 0,
-  "defect_count": 0,
-  "launchagents": {
-    "com.lumi.telegram": true,
-    "com.lumi.collector": true,
-    "com.lumi.ai_route": true
-  },
-  "next_tasks": [
-    "MARK-001: 마크 에이전트 구현",
-    "TB-007: KIS Paper 주문 AI 실행 연결",
-    "DP-002: Feature → CR 연결",
-    "AL-001: 에이전트 Heartbeat (5개 × 5초)",
-    "AI-ROUTE-001: 서버 자동실행 설정"
-  ]
+    "total_mb": 15.0,
+    "total_files": 107
+  }
 }

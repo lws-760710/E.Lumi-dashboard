@@ -2,1400 +2,396 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUMI 대시보드 v2.0 | v5.20260621.18</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LUMI 대시보드 v3.0 | v3.20260621.1836</title>
   <style>
-    *{ margin:0; padding:0; box-sizing:border-box; }
-    body{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#0d1117; color:#c9d1d9; line-height:1.6; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+          background:#0d1117;color:#c9d1d9;line-height:1.6}
 
-    /* 상단 상태바 */
-    .sbar{ position:fixed; top:0; left:0; right:0; height:44px; background:#161b22; border-bottom:1px solid #30363d;
-      display:flex; align-items:center; padding:0 20px; gap:28px; z-index:9999; box-shadow:0 2px 6px rgba(0,0,0,.4); }
-    .sitem{ display:flex; align-items:center; gap:6px; font-size:.82em; }
-    .sdot{ width:8px; height:8px; border-radius:50%; display:inline-block; }
-    .paper-badge{ margin-left:auto; background:#da3633; color:#fff; padding:3px 10px; border-radius:4px;
-      font-size:.75em; font-weight:700; letter-spacing:.5px; }
-    .sbar-time{ font-size:.75em; color:#8b949e; }
+    /* 상태바 */
+    .sbar{position:fixed;top:0;left:0;right:0;height:44px;background:#161b22;
+           border-bottom:1px solid #30363d;display:flex;align-items:center;
+           padding:0 20px;gap:24px;z-index:9999}
+    .si{display:flex;align-items:center;gap:6px;font-size:.82em}
+    .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+    .paper{margin-left:auto;background:#da3633;color:#fff;padding:3px 10px;
+            border-radius:4px;font-size:.75em;font-weight:700;letter-spacing:.5px}
+    .sbar-time{font-size:.75em;color:#8b949e}
 
     /* 컨테이너 */
-    .container{ max-width:1200px; margin:0 auto; padding:68px 20px 40px; }
-    header{ margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #30363d; }
-    h1{ font-size:2em; font-weight:700; color:#c9d1d9; margin-bottom:4px; }
-    .subtitle{ color:#8b949e; font-size:.9em; }
+    .container{max-width:960px;margin:0 auto;padding:60px 20px 60px}
+    header{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid #30363d}
+    h1{font-size:1.8em;font-weight:700;color:#c9d1d9}
+    .sub{color:#8b949e;font-size:.85em;margin-top:4px}
 
-    /* 섹션 공통 */
-    .section{ margin-bottom:32px; }
-    .sec-title{ font-size:1.05em; font-weight:600; margin-bottom:14px; padding-bottom:8px;
-      border-bottom:1px solid #30363d; color:#c9d1d9; }
+    /* 요약 카드 */
+    .sum-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+    @media(max-width:700px){.sum-grid{grid-template-columns:repeat(2,1fr)}}
+    .sum-card{border:1px solid;border-radius:8px;padding:14px;text-align:center}
+    .sum-phase{font-size:.75em;color:#8b949e;margin-bottom:2px}
+    .sum-name{font-size:.82em;font-weight:600;margin-bottom:8px}
+    .sum-bar-wrap{background:#30363d;border-radius:3px;height:6px;overflow:hidden;margin-bottom:6px}
+    .sum-bar{height:100%;border-radius:3px}
+    .sum-pct{font-size:1.4em;font-weight:700;line-height:1}
+    .sum-status{font-size:.75em;margin-top:4px}
 
-    /* 핵심 지표 카드 */
-    .metric-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:28px; }
-    .metric-card{ background:#161b22; border:1px solid #30363d; border-radius:8px; padding:20px; text-align:center; }
-    .metric-num{ font-size:2.4em; font-weight:700; line-height:1.1; }
-    .metric-label{ font-size:.82em; color:#8b949e; margin-top:6px; font-weight:600; }
-    .metric-sub{ font-size:.75em; color:#484f58; margin-top:2px; }
-    @media(max-width:768px){ .metric-grid{ grid-template-columns:repeat(2,1fr); } }
+    /* 전체 진행률 바 */
+    .total-wrap{background:#161b22;border:1px solid #30363d;border-radius:8px;
+                 padding:16px;margin-bottom:24px}
+    .total-bar-bg{background:#30363d;border-radius:4px;height:10px;overflow:hidden}
+    .total-bar-fill{height:100%;background:linear-gradient(90deg,#388bfd,#3fb950);
+                     border-radius:4px;transition:width .5s}
 
-    /* SVG 파이프라인 */
-    .pipeline-svg-wrap{ overflow-x:auto; background:#0d1117; border:1px solid #30363d; border-radius:8px; padding:16px; }
+    /* Phase 블록 */
+    .phase-block{border-radius:8px;overflow:hidden;margin-bottom:14px}
+    .phase-sum{list-style:none;padding:14px 18px;cursor:pointer;
+                display:flex;align-items:center;justify-content:space-between;
+                gap:12px;user-select:none}
+    .phase-sum::-webkit-details-marker{display:none}
+    .phase-sum::before{content:'▶';font-size:.65em;color:#8b949e;
+                        transition:transform .2s;flex-shrink:0}
+    details[open]>.phase-sum::before{transform:rotate(90deg)}
+    .ph-left{display:flex;align-items:center;gap:10px}
+    .ph-badge{padding:3px 9px;border-radius:4px;font-size:.78em;font-weight:700}
+    .ph-name{font-size:1em;font-weight:600}
+    .ph-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .ph-bar-wrap{width:120px;background:rgba(255,255,255,.1);border-radius:3px;
+                  height:6px;overflow:hidden}
+    .ph-bar{height:100%;border-radius:3px}
+    .ph-pct{font-size:.9em;font-weight:700;min-width:38px;text-align:right}
+    .ph-status{font-size:.8em;min-width:72px;text-align:right}
 
-    /* Phase 로드맵 */
-    .phase-table{ width:100%; border-collapse:collapse; background:#161b22; border:1px solid #30363d; border-radius:8px; overflow:hidden; }
-    .phase-table td{ padding:6px 10px; border-bottom:1px solid #21262d; font-size:.88em; }
-    .phase-table tr:last-child td{ border-bottom:none; }
-    .phase-bar-wrap{ width:200px; background:#21262d; border-radius:3px; height:8px; overflow:hidden; display:inline-block; }
-    .phase-bar-fill{ height:100%; border-radius:3px; }
+    /* Phase 내부 */
+    .phase-body{padding:12px 16px;background:#0d1117;
+                 border:1px solid #30363d;border-top:none;
+                 border-radius:0 0 8px 8px}
 
-    /* 메트릭 테이블 */
-    .metrics-table{ width:100%; border-collapse:collapse; }
-    .metrics-table td{ padding:10px 14px; border-bottom:1px solid #21262d; }
-    .metrics-table tr:last-child td{ border-bottom:none; }
-    .m-pct{ font-size:1.3em; font-weight:700; min-width:60px; }
-    .m-label{ color:#8b949e; min-width:160px; }
-    .mini-bar{ display:inline-block; height:6px; border-radius:3px; vertical-align:middle; margin:0 8px; }
+    /* 섹션 */
+    .sec{margin-bottom:8px;border-radius:6px;overflow:hidden}
+    .sec-sum{list-style:none;padding:10px 14px;cursor:pointer;
+              background:#161b22;border:1px solid #30363d;
+              border-radius:6px;display:flex;align-items:center;gap:10px;
+              user-select:none}
+    .sec-sum::-webkit-details-marker{display:none}
+    .sec-sum::before{content:'▸';font-size:.7em;color:#8b949e;
+                      transition:transform .2s}
+    details.sec[open]>.sec-sum::before{transform:rotate(90deg)}
+    .sec-id{font-size:.78em;color:#8b949e;min-width:30px}
+    .sec-name{font-weight:600;font-size:.9em;flex:1}
+    .sec-badge{padding:2px 8px;border-radius:3px;font-size:.72em;font-weight:600}
 
-    /* 시스템 완성률 위젯 */
-    .completion-widget{ background:#161b22; border:1px solid #30363d; border-radius:8px; padding:24px; }
-    .cw-title{ font-size:1.05em; font-weight:600; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid #30363d; }
-    .cw-rows{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-    @media(max-width:600px){ .cw-rows{ grid-template-columns:1fr; } }
-    .cw-row{ padding:18px; background:#0d1117; border:1px solid #30363d; border-radius:6px; }
-    .cw-row.highlight{ border-color:#3fb950; background:rgba(63,185,80,.06); box-shadow:0 0 0 1px #3fb950; }
-    .cw-label{ font-size:.85em; color:#8b949e; margin-bottom:8px; }
-    .cw-row.highlight .cw-label{ color:#3fb950; font-weight:600; }
-    .cw-pct{ font-size:3em; font-weight:700; color:#58a6ff; line-height:1; margin-bottom:10px; }
-    .cw-row.highlight .cw-pct{ color:#3fb950; font-size:3.6em; }
-    .cw-bar-wrap{ background:#30363d; border-radius:4px; height:8px; overflow:hidden; margin-bottom:8px; }
-    .cw-bar-fill{ height:100%; border-radius:4px; }
-    .cw-note{ font-size:.78em; color:#8b949e; }
-    .cw-badge{ display:inline-block; margin-top:8px; padding:2px 8px; border-radius:3px; font-size:.75em; font-weight:700; }
-    .cw-badge.dim{ background:rgba(139,148,158,.15); color:#8b949e; }
-    .cw-badge.live{ background:rgba(63,185,80,.2); color:#3fb950; border:1px solid #3fb950; }
+    /* 아이템 */
+    .item-list{list-style:none;padding:8px 14px 10px 28px;
+                background:#0d1117;border:1px solid #30363d;
+                border-top:none;border-radius:0 0 6px 6px}
+    .it{padding:4px 0;font-size:.86em;color:#c9d1d9;display:flex;
+         align-items:baseline;gap:6px}
+    .it span{flex-shrink:0}
 
-    /* 5대 결함 */
-    .defects-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
-    .defect-card{ background:#161b22; border:1px solid #30363d; border-left:3px solid #f85149; border-radius:6px; padding:16px; }
-    .dc-title{ font-weight:600; font-size:.92em; margin-bottom:4px; }
-    .dc-desc{ font-size:.8em; color:#8b949e; margin-bottom:10px; }
-    .pb-wrap{ background:#21262d; border-radius:3px; height:8px; overflow:hidden; margin-bottom:8px; }
-    .pb-fill{ height:100%; border-radius:3px; }
-    .pb-meta{ display:flex; align-items:center; gap:10px; font-size:.8em; color:#8b949e; }
-    .badge{ padding:2px 8px; border-radius:3px; font-size:.75em; font-weight:700; }
-    .badge-done{ background:rgba(46,160,67,.2); color:#2ea043; }
-    .badge-progress{ background:rgba(88,166,255,.2); color:#58a6ff; }
-    .badge-pending{ background:rgba(139,148,158,.15); color:#8b949e; }
-
-    /* 라인별 */
-    .line-table{ width:100%; border-collapse:collapse; background:#161b22; border:1px solid #30363d; border-radius:8px; overflow:hidden; }
-    .line-table td{ padding:10px 12px; border-bottom:1px solid #21262d; }
-    .line-table tr:last-child td{ border-bottom:none; }
-    .line-bar{ width:150px; background:#21262d; border-radius:3px; height:8px; overflow:hidden; display:inline-block; vertical-align:middle; }
-
-    /* DAS */
-    .das-row{ display:flex; align-items:center; padding:10px 0; border-bottom:1px solid #21262d; gap:12px; font-size:.88em; }
-    .das-row:last-child{ border-bottom:none; }
-    .das-bar-wrap{ width:200px; background:#21262d; border-radius:3px; height:6px; overflow:hidden; flex-shrink:0; }
-
-    /* 타임라인 */
-    .timeline{ display:flex; gap:12px; overflow-x:auto; padding-bottom:8px; }
-    .tl-item{ min-width:160px; background:#161b22; border:1px solid #30363d; border-radius:6px; padding:12px; flex-shrink:0; }
-    .tl-item.completed{ border-left:3px solid #2ea043; }
-    .tl-item.in-progress{ border-left:3px solid #58a6ff; background:rgba(88,166,255,.05); }
-    .tl-item.pending{ border-left:3px solid #484f58; }
-    .tl-status{ font-size:.72em; color:#8b949e; margin-bottom:4px; }
-    .tl-item.completed .tl-status{ color:#2ea043; }
-    .tl-item.in-progress .tl-status{ color:#58a6ff; }
-    .tl-id{ font-weight:600; font-size:.88em; color:#79c0ff; margin-bottom:4px; }
-    .tl-desc{ font-size:.78em; color:#8b949e; }
-
-    /* 큐 */
-    .queue-table{ width:100%; border-collapse:collapse; background:#161b22; border:1px solid #30363d; border-radius:8px; overflow:hidden; }
-    .queue-table td{ padding:10px 14px; border-bottom:1px solid #21262d; }
-    .queue-table tr:last-child td{ border-bottom:none; }
-    .queue-prio{ font-size:1.1em; min-width:40px; }
-
-    /* 히스토리 */
-    .hist-list{ background:#161b22; border:1px solid #30363d; border-radius:8px; overflow:hidden; }
-    .hist-row{ display:flex; align-items:baseline; gap:12px; padding:8px 16px; border-bottom:1px solid #21262d; font-size:.85em; }
-    .hist-row:last-child{ border-bottom:none; }
-    .hist-date{ color:#484f58; min-width:90px; font-size:.9em; }
-    .hist-id{ color:#79c0ff; font-weight:600; min-width:130px; }
-    .hist-desc{ color:#8b949e; flex:1; }
-
-    /* 스케줄 */
-    details{ margin-bottom:8px; }
-    summary{ background:#161b22; border:1px solid #30363d; border-radius:5px; padding:10px 14px;
-      cursor:pointer; font-size:.92em; font-weight:600; list-style:none; display:flex; align-items:center; gap:8px; }
-    summary::-webkit-details-marker{ display:none; }
-    summary::before{ content:'▶'; font-size:.7em; color:#58a6ff; transition:transform .2s; }
-    details[open] summary::before{ transform:rotate(90deg); }
-    summary:hover{ background:#1c2128; }
-    details[open] summary{ border-bottom-left-radius:0; border-bottom-right-radius:0; border-bottom:none; }
-    .sched-list{ background:#0d1117; border:1px solid #30363d; border-top:none; border-radius:0 0 5px 5px; padding:10px 12px; }
-    .sched-row{ display:flex; align-items:center; padding:7px 8px; border-left:3px solid #30363d; margin-bottom:7px; font-size:.88em; gap:10px; }
-    .sched-row:last-child{ margin-bottom:0; }
-    .sched-row.completed{ border-left-color:#2ea043; color:#8b949e; }
-    .sched-row.in-progress{ border-left-color:#58a6ff; background:rgba(88,166,255,.05); }
-    .sched-row.pending{ border-left-color:#8b949e; }
-    .sched-row.partial{ border-left-color:#f0883e; background:rgba(240,136,62,.05); }
-    .sched-id{ font-weight:600; color:#58a6ff; min-width:110px; font-size:.85em; }
-    .sched-desc{ flex:1; }
-    .sched-pb{ width:88px; height:5px; background:#30363d; border-radius:3px; overflow:hidden; flex-shrink:0; }
-    .sched-pct{ min-width:36px; text-align:right; font-size:.75em; color:#8b949e; flex-shrink:0; }
-
-    footer{ text-align:center; margin-top:40px; padding-top:24px; border-top:1px solid #30363d; color:#8b949e; font-size:.82em; }
-    .update-time{ color:#79c0ff; }
-
-    @media(max-width:768px){
-      .sbar{ flex-wrap:wrap; height:auto; padding:10px; gap:10px; }
-      .container{ padding:90px 12px 12px; }
-      h1{ font-size:1.6em; }
-      .tl-item{ width:150px; }
-      .hist-row{ flex-wrap:wrap; }
-      .phase-bar-wrap{ width:120px; }
-    }
+    footer{text-align:center;margin-top:40px;padding-top:20px;
+            border-top:1px solid #30363d;color:#8b949e;font-size:.8em}
   </style>
 </head>
 <body>
 
-  <!-- 상단 상태바 -->
   <div class="sbar">
-    <div class="sitem"><span class="sdot" style="background:#2ea043"></span><span>정상</span><span>ai_route 서버</span></div>
-    <div class="sitem"><span class="sdot" style="background:#2ea043"></span><span>정상</span><span>퀀트엔진</span></div>
-    <div class="sitem"><span class="sdot" style="background:#2ea043"></span><span>정상</span><span>텔레그램 봇</span></div>
-    <div class="paper-badge">🔴 모의 거래 중 (PAPER MODE)</div>
-    <span class="sbar-time" style="margin-left:12px">2026-06-21 18:18:06</span>
+    <div class="si"><span class="dot" style="background:#2ea043"></span>lumi_api 8001</div>
+    <div class="si"><span class="dot" style="background:#2ea043"></span>DAS 15.0MB (실시간)</div>
+    <div class="paper">🔴 PAPER MODE</div>
+    <span class="sbar-time">2026-06-21 18:36:58</span>
   </div>
-
   <div class="container">
     <header>
-      <h1>LUMI 개발 대시보드 v2.0</h1>
-      <p class="subtitle">v5.20260621.18 &nbsp;|&nbsp; Mac Studio M4 Max 128GB</p>
-      <p class="subtitle" style="margin-top:4px">2026년 06월 21일 업데이트</p>
+      <h1>LUMI 개발 대시보드 v3.0</h1>
+      <p class="sub">v3.20260621.1836 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 21일</p>
     </header>
 
-    <!-- 섹션 1: 핵심 지표 카드 -->
-    <div id="sec-1" class="section">
+    <!-- 요약 카드 -->
+    <div class="sum-grid">
 
-    <div class="metric-grid">
-      <div class="metric-card">
-        <div class="metric-num" style="color:#58a6ff">32%</div>
-        <div class="metric-label">실전 준비도 (자동계산)</div>
-        <div class="metric-sub">데이터20+파이프30+전략20+에이전트15+라우터15</div>
+    <div class="sum-card" style="background:#0d2137;border-color:#58a6ff">
+      <div class="sum-phase">Phase 1</div>
+      <div class="sum-name">기반 + 보안</div>
+      <div class="sum-bar-wrap"><div class="sum-bar" style="width:75%;background:#388bfd"></div></div>
+      <div class="sum-pct" style="color:#388bfd">75%</div>
+      <div class="sum-status" style="color:#388bfd">진행중 🔄</div>
+    </div>
+    <div class="sum-card" style="background:#0d2137;border-color:#58a6ff">
+      <div class="sum-phase">Phase 2</div>
+      <div class="sum-name">전략 / 에이전트</div>
+      <div class="sum-bar-wrap"><div class="sum-bar" style="width:15%;background:#388bfd"></div></div>
+      <div class="sum-pct" style="color:#388bfd">15%</div>
+      <div class="sum-status" style="color:#388bfd">진행중 🔄</div>
+    </div>
+    <div class="sum-card" style="background:#161b22;border-color:#484f58">
+      <div class="sum-phase">Phase 3</div>
+      <div class="sum-name">Paper 검증</div>
+      <div class="sum-bar-wrap"><div class="sum-bar" style="width:0%;background:#8b949e"></div></div>
+      <div class="sum-pct" style="color:#8b949e">0%</div>
+      <div class="sum-status" style="color:#8b949e">대기 ⏳</div>
+    </div>
+    <div class="sum-card" style="background:#161b22;border-color:#484f58">
+      <div class="sum-phase">Phase 4</div>
+      <div class="sum-name">실전 투입</div>
+      <div class="sum-bar-wrap"><div class="sum-bar" style="width:0%;background:#8b949e"></div></div>
+      <div class="sum-pct" style="color:#8b949e">0%</div>
+      <div class="sum-status" style="color:#8b949e">대기 ⏳</div>
+    </div>
+    </div>
+
+    <!-- 전체 진행률 -->
+
+    <div class="total-wrap">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <span style="color:#8b949e;font-size:.85em">전체 진행률</span>
+        <span style="color:#58a6ff;font-weight:700">22.5%</span>
       </div>
-      <div class="metric-card">
-        <div class="metric-num" style="color:#3fb950">0</div>
-        <div class="metric-label">오늘 완료 항목</div>
-        <div class="metric-sub">2026-06-21</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-num" style="color:#f0883e">390.7MB</div>
-        <div class="metric-label">DAS 데이터 용량 ✅</div>
-        <div class="metric-sub">153개 파일 · 무결성 PASS</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-num" style="color:#a371f7">0/22</div>
-        <div class="metric-label">Phase 완료</div>
-        <div class="metric-sub">전체 진행률 0%</div>
-      </div>
-    </div>
-    </div>
-
-    <!-- 섹션 2: 시스템 파이프라인 다이어그램 -->
-    <div id="sec-2" class="section">
-      <div class="sec-title">🔗 전체 시스템 파이프라인 (실제 코드 기반)</div>
-
-    <div class="pipeline-svg-wrap">
-      <svg viewBox="0 0 920 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:860px;font-family:-apple-system,sans-serif">
-        <defs>
-          <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#484f58"/>
-          </marker>
-          <marker id="arr-g" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#3fb950"/>
-          </marker>
-          <marker id="arr-o" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L8,3 z" fill="#f0883e"/>
-          </marker>
-        </defs>
-
-        <!-- 행1: DAS → Feature → Regime → Signal -->
-        <rect x="10"  y="20" width="140" height="60" rx="6" fill="#0d2137" stroke="#58a6ff" stroke-width="1.5"/>
-        <text x="80"  y="44" text-anchor="middle" fill="#58a6ff" font-size="12" font-weight="600">DAS 데이터</text>
-        <text x="80"  y="62" text-anchor="middle" fill="#8b949e" font-size="10">390.7MB · 153파일</text>
-
-        <rect x="190" y="20" width="150" height="60" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
-        <text x="265" y="44" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Feature Engine</text>
-        <text x="265" y="62" text-anchor="middle" fill="#8b949e" font-size="10">219개 지표 · 46종목</text>
-
-        <rect x="370" y="20" width="150" height="60" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
-        <text x="445" y="44" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Regime Classifier</text>
-        <text x="445" y="62" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증</text>
-
-        <rect x="550" y="20" width="150" height="60" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
-        <text x="625" y="44" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Signal Runtime</text>
-        <text x="625" y="62" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증</text>
-
-        <!-- 행1 화살표 -->
-        <line x1="150" y1="50" x2="188" y2="50" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arr-g)"/>
-        <line x1="340" y1="50" x2="368" y2="50" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
-        <line x1="520" y1="50" x2="548" y2="50" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
-
-        <!-- Signal → Strategy (아래로) -->
-        <line x1="625" y1="80" x2="625" y2="148" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
-
-        <!-- 행2: Strategy → Risk → Governance → AI Federation -->
-        <rect x="550" y="150" width="150" height="60" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
-        <text x="625" y="174" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Strategy Runtime</text>
-        <text x="625" y="192" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증</text>
-
-        <rect x="370" y="150" width="150" height="60" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
-        <text x="445" y="174" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Risk Runtime</text>
-        <text x="445" y="192" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증</text>
-
-        <!-- Governance: always done -->
-        <rect x="190" y="150" width="150" height="60" rx="6" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
-        <text x="265" y="174" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">Governance</text>
-        <text x="265" y="192" text-anchor="middle" fill="#8b949e" font-size="10">금융헌법 · 사법 ✅</text>
-
-        <rect x="10"  y="150" width="150" height="60" rx="6" fill="#0d2137" stroke="#58a6ff" stroke-width="1.5"/>
-        <text x="85"  y="174" text-anchor="middle" fill="#58a6ff" font-size="12" font-weight="600">AI Federation</text>
-        <text x="85"  y="192" text-anchor="middle" fill="#8b949e" font-size="10">ai_route UP · 미연결</text>
-
-        <!-- 행2 화살표 (←방향) -->
-        <line x1="548" y1="180" x2="522" y2="180" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
-        <line x1="368" y1="180" x2="342" y2="180" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
-        <line x1="188" y1="180" x2="162" y2="180" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arr-g)"/>
-
-        <!-- 행3: BrokerGateway / ExecutionEngine (always done) -->
-        <rect x="730" y="20"  width="140" height="60" rx="6" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
-        <text x="800" y="44"  text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">Broker Gateway</text>
-        <text x="800" y="62"  text-anchor="middle" fill="#8b949e" font-size="10">KIS·키움·업비트 ✅</text>
-
-        <rect x="730" y="150" width="140" height="60" rx="6" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
-        <text x="800" y="174" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">Execution Engine</text>
-        <text x="800" y="192" text-anchor="middle" fill="#8b949e" font-size="10">PAPER MODE ✅</text>
-
-        <line x1="800" y1="80"  x2="800" y2="148" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arr-g)"/>
-        <line x1="700" y1="180" x2="728" y2="180" stroke="#f0883e" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-o)"/>
-
-        <!-- 행4: Audit → EVO / Portfolio (always done) -->
-        <rect x="190" y="270" width="150" height="55" rx="6" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
-        <text x="265" y="292" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">Audit &amp; Replay</text>
-        <text x="265" y="310" text-anchor="middle" fill="#8b949e" font-size="10">코드있음 · 미검증</text>
-
-        <rect x="370" y="270" width="150" height="55" rx="6" fill="#161b22" stroke="#484f58" stroke-width="1.5"/>
-        <text x="445" y="292" text-anchor="middle" fill="#8b949e" font-size="12" font-weight="600">EVO 자가학습</text>
-        <text x="445" y="310" text-anchor="middle" fill="#8b949e" font-size="10">미착수</text>
-
-        <rect x="550" y="270" width="150" height="55" rx="6" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
-        <text x="625" y="292" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">Portfolio Recon</text>
-        <text x="625" y="310" text-anchor="middle" fill="#8b949e" font-size="10">PnL 추적 ✅</text>
-
-        <line x1="340" y1="297" x2="368" y2="297" stroke="#f0883e" stroke-width="1.5" marker-end="url(#arr-o)"/>
-        <line x1="520" y1="297" x2="548" y2="297" stroke="#484f58" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr)"/>
-
-        <line x1="800" y1="210" x2="800" y2="250" stroke="#3fb950" stroke-width="1.5"/>
-        <line x1="800" y1="250" x2="625" y2="250" stroke="#3fb950" stroke-width="1.5"/>
-        <line x1="625" y1="250" x2="625" y2="268" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arr-g)"/>
-        <line x1="265" y1="210" x2="265" y2="268" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arr-g)"/>
-
-        <!-- 범례 -->
-        <rect x="10"  y="275" width="14" height="14" rx="3" fill="#1a4731" stroke="#3fb950" stroke-width="1.5"/>
-        <text x="28"  y="287" fill="#8b949e" font-size="10">✅ 완료+작동</text>
-        <rect x="95"  y="275" width="14" height="14" rx="3" fill="#2d1f0a" stroke="#f0883e" stroke-width="1.5"/>
-        <text x="113" y="287" fill="#8b949e" font-size="10">⚠️ 코드있음·미검증</text>
-        <rect x="10"  y="297" width="14" height="14" rx="3" fill="#161b22" stroke="#484f58" stroke-width="1.5"/>
-        <text x="28"  y="309" fill="#8b949e" font-size="10">⏳ 미착수</text>
-        <line x1="95"  y1="304" x2="140" y2="304" stroke="#484f58" stroke-dasharray="4,2" stroke-width="1.5"/>
-        <text x="145" y="309" fill="#8b949e" font-size="10">미연결</text>
-      </svg>
-    </div>
-    </div>
-
-    <!-- 섹션 3: 전체 Phase 로드맵 -->
-    <div id="sec-3" class="section">
-      <div class="sec-title">🗺️ 전체 Phase 로드맵 (Phase 0 ~ 21)</div>
-
-    <table class="phase-table">
-      <thead><tr>
-        <th style="text-align:left;color:#8b949e;padding:6px 10px;font-size:.8em">Phase</th>
-        <th style="text-align:left;color:#8b949e;padding:6px 10px;font-size:.8em">이름</th>
-        <th style="text-align:left;color:#8b949e;padding:6px 10px;font-size:.8em">진행도</th>
-        <th style="text-align:right;color:#8b949e;padding:6px 10px;font-size:.8em">%</th>
-        <th style="text-align:center;color:#8b949e;padding:6px 10px;font-size:.8em">상태</th>
-      </tr></thead>
-      <tbody>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 0</td>
-        <td>Governance + 금융헌법</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 1</td>
-        <td>Runtime Core Layer</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 2</td>
-        <td>Infrastructure Federation</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 3~4</td>
-        <td>Device + Operations</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 5</td>
-        <td>API Federation</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 6</td>
-        <td>Data Lake 구조</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 7</td>
-        <td>Crisis Intelligence</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 8</td>
-        <td>Senior Quant Intelligence</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 9</td>
-        <td>Quant Runtime Main</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 10</td>
-        <td>Broker/Multi-Market</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 11~12</td>
-        <td>Windows + Agent Governance</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 13~14</td>
-        <td>OPSX + Real Live Trading</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 15</td>
-        <td>Reality Audit</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:196px;background:#f0883e"></div></div></td>
-        <td style="color:#f0883e;font-weight:600;text-align:right">98%</td>
-        <td style="text-align:center">⚠️</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 16</td>
-        <td>VIS/HTS 백엔드</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 16b</td>
-        <td>KIS 실데이터 연동</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:200px;background:#2ea043"></div></div></td>
-        <td style="color:#2ea043;font-weight:600;text-align:right">100%</td>
-        <td style="text-align:center">✅</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 16c</td>
-        <td>HTS 독립 시각화</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:150px;background:#f0883e"></div></div></td>
-        <td style="color:#f0883e;font-weight:600;text-align:right">75%</td>
-        <td style="text-align:center">⚠️</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 17</td>
-        <td>P0 완료 ✅ + P1-001~004 ✅ + ST-001 ✅ + ST-002 ✅ (DAS 실데이터 연결)</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:134px;background:#58a6ff"></div></div></td>
-        <td style="color:#58a6ff;font-weight:600;text-align:right">67%</td>
-        <td style="text-align:center">🔄</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 18</td>
-        <td>AUTO 자율운영</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:0px;background:#484f58"></div></div></td>
-        <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
-        <td style="text-align:center">⏳</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 19</td>
-        <td>EVO 자가진화</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:0px;background:#484f58"></div></div></td>
-        <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
-        <td style="text-align:center">⏳</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 20</td>
-        <td>코인 24H 자율운영</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:0px;background:#484f58"></div></div></td>
-        <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
-        <td style="text-align:center">⏳</td>
-      </tr>
-      <tr>
-        <td style="color:#79c0ff;font-weight:600;white-space:nowrap">Phase 21</td>
-        <td>블로그·유튜브·SaaS</td>
-        <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:0px;background:#484f58"></div></div></td>
-        <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
-        <td style="text-align:center">⏳</td>
-      </tr>
-        <tr style="border-top:2px solid #30363d">
-          <td colspan="2" style="font-weight:700;color:#c9d1d9">전체 평균</td>
-          <td><div class="phase-bar-wrap"><div class="phase-bar-fill" style="width:156px;background:#58a6ff"></div></div></td>
-          <td style="color:#58a6ff;font-weight:700;text-align:right">78%</td>
-          <td style="text-align:center">📊</td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
-
-    <!-- 섹션 4: 종합 완성도 수치판 -->
-    <div id="sec-4" class="section">
-      <div class="sec-title">📊 종합 완성도 수치판</div>
-
-    <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:20px">
-      <table class="metrics-table">
-        <thead><tr>
-          <th style="text-align:left;color:#8b949e;padding:6px 14px;font-size:.8em">지표</th>
-          <th style="text-align:left;color:#8b949e;padding:6px 14px;font-size:.8em">수치</th>
-          <th style="text-align:left;color:#8b949e;padding:6px 14px;font-size:.8em">시각화</th>
-          <th style="text-align:left;color:#8b949e;padding:6px 14px;font-size:.8em">비고</th>
-        </tr></thead>
-        <tbody>
-      <tr>
-        <td class="m-label">Phase 완료율</td>
-        <td class="m-pct" style="color:#a371f7">0%</td>
-        <td><span class="mini-bar" style="width:0px;background:#a371f7"></span></td>
-        <td style="color:#8b949e;font-size:.88em">0/22</td>
-      </tr>
-      <tr>
-        <td class="m-label">코드 존재 기준</td>
-        <td class="m-pct" style="color:#58a6ff">80%</td>
-        <td><span class="mini-bar" style="width:120px;background:#58a6ff"></span></td>
-        <td style="color:#8b949e;font-size:.88em">참고용</td>
-      </tr>
-      <tr>
-        <td class="m-label">실제 작동 기준</td>
-        <td class="m-pct" style="color:#3fb950">35%</td>
-        <td><span class="mini-bar" style="width:52px;background:#3fb950"></span></td>
-        <td style="color:#8b949e;font-size:.88em">← 진짜 완성률</td>
-      </tr>
-      <tr>
-        <td class="m-label">데이터 수집</td>
-        <td class="m-pct" style="color:#2ea043">0%</td>
-        <td><span class="mini-bar" style="width:0px;background:#2ea043"></span></td>
-        <td style="color:#8b949e;font-size:.88em">0/10 ⏳</td>
-      </tr>
-      <tr>
-        <td class="m-label">파이프라인 연결</td>
-        <td class="m-pct" style="color:#f85149">0%</td>
-        <td><span class="mini-bar" style="width:0px;background:#f85149"></span></td>
-        <td style="color:#8b949e;font-size:.88em">0/6 ⏳</td>
-      </tr>
-      <tr>
-        <td class="m-label">전략 구현</td>
-        <td class="m-pct" style="color:#f85149">0%</td>
-        <td><span class="mini-bar" style="width:0px;background:#f85149"></span></td>
-        <td style="color:#8b949e;font-size:.88em">0/5 ⏳</td>
-      </tr>
-      <tr>
-        <td class="m-label">에이전트 작동</td>
-        <td class="m-pct" style="color:#f85149">0%</td>
-        <td><span class="mini-bar" style="width:0px;background:#f85149"></span></td>
-        <td style="color:#8b949e;font-size:.88em">0/5 ⏳</td>
-      </tr>
-      <tr>
-        <td class="m-label">실전 준비도</td>
-        <td class="m-pct" style="color:#f0883e">32%</td>
-        <td><span class="mini-bar" style="width:48px;background:#f0883e"></span></td>
-        <td style="color:#8b949e;font-size:.88em">자동계산</td>
-      </tr>
-        </tbody>
-      </table>
-    </div>
-    </div>
-
-    <!-- 섹션 5: 시스템 완성률 위젯 -->
-    <div id="sec-5" class="section">
-      <div class="sec-title">⚡ 시스템 완성률</div>
-
-    <div class="completion-widget">
-      <div class="cw-title">📊 시스템 완성률 — 두 기준의 차이를 직시하라</div>
-      <div class="cw-rows">
-        <div class="cw-row">
-          <div class="cw-label">코드 존재 기준</div>
-          <div class="cw-pct">80%</div>
-          <div class="cw-bar-wrap"><div class="cw-bar-fill" style="width:80%;background:#58a6ff"></div></div>
-          <div class="cw-note">Phase 0~17 완료 기준 (파일/모듈 존재)</div>
-          <span class="cw-badge dim">참고용 — 작동 보장 아님</span>
-        </div>
-        <div class="cw-row highlight">
-          <div class="cw-label">실제 작동 기준</div>
-          <div class="cw-pct">32%</div>
-          <div class="cw-bar-wrap"><div class="cw-bar-fill" style="width:32%;background:#3fb950"></div></div>
-          <div class="cw-note">설계 완성, 핵심 구현 시작 단계 (P0)</div>
-          <span class="cw-badge live">← 진짜 완성률</span>
-        </div>
-      </div>
-    </div>
-    </div>
-
-    <!-- 섹션 6: 5대 핵심 결함 -->
-    <div id="sec-6" class="section">
-      <div class="sec-title">🚨 5대 핵심 결함 해결 진행률</div>
-      <div class="defects-grid">
-
-        <div class="defect-card" style="border-left-color:#f85149">
-          <div class="dc-title">결함1: 데이터 파이프라인 단절</div>
-          <div class="dc-desc">DL→CR→SQ→Q 체인 (DP-001~006)</div>
-          <div class="pb-wrap"><div class="pb-fill" style="width:0%;background:#f85149"></div></div>
-          <div class="pb-meta">
-            <span>0 / 6 완료</span>
-            <span style="font-weight:bold">0%</span>
-            <span class="badge badge-pending">예정</span>
-          </div>
-        </div>
-
-        <div class="defect-card" style="border-left-color:#f85149">
-          <div class="dc-title">결함2: 에이전트 미작동</div>
-          <div class="dc-desc">판단 루프 미연결 (AL-001~005)</div>
-          <div class="pb-wrap"><div class="pb-fill" style="width:0%;background:#f85149"></div></div>
-          <div class="pb-meta">
-            <span>0 / 5 완료</span>
-            <span style="font-weight:bold">0%</span>
-            <span class="badge badge-pending">예정</span>
-          </div>
-        </div>
-
-        <div class="defect-card" style="border-left-color:#f85149">
-          <div class="dc-title">결함3: 전략 코드 없음</div>
-          <div class="dc-desc">알고리즘 미구현 (ST-001~005)</div>
-          <div class="pb-wrap"><div class="pb-fill" style="width:0%;background:#f85149"></div></div>
-          <div class="pb-meta">
-            <span>0 / 5 완료</span>
-            <span style="font-weight:bold">0%</span>
-            <span class="badge badge-pending">예정</span>
-          </div>
-        </div>
-
-        <div class="defect-card" style="border-left-color:#58a6ff">
-          <div class="dc-title">결함4: 데이터베이스 부족</div>
-          <div class="dc-desc">DAS 데이터 수집 (DF-001~010)</div>
-          <div class="pb-wrap"><div class="pb-fill" style="width:0%;background:#f85149"></div></div>
-          <div class="pb-meta">
-            <span>0 / 10 완료</span>
-            <span style="font-weight:bold">0%</span>
-            <span class="badge badge-progress">진행 중</span>
-          </div>
-        </div>
-
-        <div class="defect-card" style="border-left-color:#f85149">
-          <div class="dc-title">결함5: 레짐 탐지기 미구현</div>
-          <div class="dc-desc">RSI+MACD+VIX+볼린저+ATR (ST-001)</div>
-          <div class="pb-wrap"><div class="pb-fill" style="width:0%;background:#f85149"></div></div>
-          <div class="pb-meta">
-            <span>0 / 1 완료</span>
-            <span style="font-weight:bold">0%</span>
-            <span class="badge badge-pending">예정</span>
-          </div>
-        </div>
+      <div class="total-bar-bg">
+        <div class="total-bar-fill" style="width:22.5%"></div>
       </div>
     </div>
 
-    <!-- 섹션 7: 개발 라인별 완성도 -->
-    <div id="sec-7" class="section">
-      <div class="sec-title">📈 개발 라인별 완성도</div>
+    <!-- Phase 블록 -->
 
-    <table class="line-table">
-      <thead><tr>
-        <th style="text-align:left;color:#8b949e;padding:6px 12px;font-size:.8em">라인</th>
-        <th style="text-align:left;color:#8b949e;padding:6px 12px;font-size:.8em">설명</th>
-        <th style="text-align:left;color:#8b949e;padding:6px 12px;font-size:.8em">진행도 (150px)</th>
-        <th style="text-align:right;color:#8b949e;padding:6px 12px;font-size:.8em">%</th>
-        <th style="text-align:center;color:#8b949e;padding:6px 12px;font-size:.8em">완료/전체</th>
-        <th style="text-align:left;color:#8b949e;padding:6px 12px;font-size:.8em">상태</th>
-      </tr></thead>
-      <tbody>
-      <tr>
-        <td style="font-weight:600;white-space:nowrap">📥 DATA-FETCH</td>
-        <td style="color:#8b949e;font-size:.88em">데이터 수집</td>
-        <td><div class="line-bar"><div style="height:100%;width:0px;background:#484f58;border-radius:3px"></div></div></td>
-        <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
-        <td style="color:#8b949e;text-align:center">0/10</td>
-        <td style="color:#484f58;font-size:.85em;white-space:nowrap">⏳ 대기</td>
-      </tr>
-      <tr>
-        <td style="font-weight:600;white-space:nowrap">🔗 DATA-PIPE</td>
-        <td style="color:#8b949e;font-size:.88em">파이프라인 연결</td>
-        <td><div class="line-bar"><div style="height:100%;width:0px;background:#484f58;border-radius:3px"></div></div></td>
-        <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
-        <td style="color:#8b949e;text-align:center">0/6</td>
-        <td style="color:#484f58;font-size:.85em;white-space:nowrap">⏳ 대기</td>
-      </tr>
-      <tr>
-        <td style="font-weight:600;white-space:nowrap">📊 DC-UI</td>
-        <td style="color:#8b949e;font-size:.88em">데이터센터 UI</td>
-        <td><div class="line-bar"><div style="height:100%;width:0px;background:#484f58;border-radius:3px"></div></div></td>
-        <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
-        <td style="color:#8b949e;text-align:center">0/10</td>
-        <td style="color:#484f58;font-size:.85em;white-space:nowrap">⏳ 대기</td>
-      </tr>
-      <tr>
-        <td style="font-weight:600;white-space:nowrap">🎯 STRAT</td>
-        <td style="color:#8b949e;font-size:.88em">전략 구현</td>
-        <td><div class="line-bar"><div style="height:100%;width:0px;background:#484f58;border-radius:3px"></div></div></td>
-        <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
-        <td style="color:#8b949e;text-align:center">0/5</td>
-        <td style="color:#484f58;font-size:.85em;white-space:nowrap">⏳ 대기</td>
-      </tr>
-      <tr>
-        <td style="font-weight:600;white-space:nowrap">🤖 AGENT-LIVE</td>
-        <td style="color:#8b949e;font-size:.88em">에이전트 작동</td>
-        <td><div class="line-bar"><div style="height:100%;width:0px;background:#484f58;border-radius:3px"></div></div></td>
-        <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
-        <td style="color:#8b949e;text-align:center">0/5</td>
-        <td style="color:#484f58;font-size:.85em;white-space:nowrap">⏳ 대기</td>
-      </tr>
-      <tr>
-        <td style="font-weight:600;white-space:nowrap">🔀 AI-ROUTE</td>
-        <td style="color:#8b949e;font-size:.88em">라우터 연결</td>
-        <td><div class="line-bar"><div style="height:100%;width:0px;background:#484f58;border-radius:3px"></div></div></td>
-        <td style="color:#484f58;font-weight:600;text-align:right">0%</td>
-        <td style="color:#8b949e;text-align:center">0/4</td>
-        <td style="color:#484f58;font-size:.85em;white-space:nowrap">⏳ 대기</td>
-      </tr>
-      </tbody>
-    </table>
-    </div>
+    <details class="phase-block" open>
+      <summary class="phase-sum" style="background:#0d2137;border:1px solid #58a6ff">
+        <div class="ph-left">
+          <span class="ph-badge" style="background:#388bfd;color:#0d1117">Phase 1</span>
+          <span class="ph-name">기반 + 보안</span>
+        </div>
+        <div class="ph-right">
+          <div class="ph-bar-wrap"><div class="ph-bar" style="width:75%;background:#388bfd"></div></div>
+          <span class="ph-pct" style="color:#388bfd">75%</span>
+          <span class="ph-status" style="color:#388bfd">진행중 🔄</span>
+        </div>
+      </summary>
+      <div class="phase-body">
 
-    <!-- 섹션 8: DAS 데이터센터 -->
-    <div id="sec-8" class="section">
-      <div class="sec-title">💾 DAS 데이터센터 현황 (32TB 외장창고)</div>
-
-    <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:20px">
-      <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #30363d">
-        <span>총 용량 <strong style="color:#f0883e">390.7MB</strong> <span style="color:#8b949e;font-size:.8em">(실시간)</span></span>
-        <span>파일 수 <strong style="color:#58a6ff">153개</strong></span>
-        <span>무결성 <strong style="color:#2ea043">PASS 146/146</strong></span>
-        <span>마지막 점검 <strong style="color:#c9d1d9">2026-06-16T22:11</strong></span>
+        <details class="sec">
+          <summary class="sec-sum" style="border-left:3px solid #3fb950">
+            <span class="sec-id">1-1</span>
+            <span class="sec-name">인프라</span>
+            <span class="sec-badge" style="background:#1a4731;color:#2ea043;border:1px solid #3fb950">완료 ✅</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#3fb950">✅</span> Mac Studio M4 Max 128GB</li>
+<li class="it"><span style="color:#3fb950">✅</span> Windows 10G 연결 (192.168.0.101:8791)</li>
+<li class="it"><span style="color:#3fb950">✅</span> DAS 32TB 썬더볼트 직결 + 5.1GB 실데이터</li>
+<li class="it"><span style="color:#3fb950">✅</span> Windows Worker 자동 부팅</li>
+<li class="it"><span style="color:#3fb950">✅</span> Ollama 5개 모델 (qwen2.5-coder 외)</li>
+          </ul>
+        </details>
+        <details class="sec">
+          <summary class="sec-sum" style="border-left:3px solid #3fb950">
+            <span class="sec-id">1-2</span>
+            <span class="sec-name">Constitutional Engine</span>
+            <span class="sec-badge" style="background:#1a4731;color:#2ea043;border:1px solid #3fb950">완료 ✅</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#3fb950">✅</span> system/constitution/engine.py — 14개 관문</li>
+<li class="it"><span style="color:#3fb950">✅</span> /constitution/check FastAPI 엔드포인트</li>
+<li class="it"><span style="color:#3fb950">✅</span> gate_01 DataQuality 연동</li>
+<li class="it"><span style="color:#3fb950">✅</span> PAPER MODE 3중 잠금</li>
+          </ul>
+        </details>
+        <details class="sec">
+          <summary class="sec-sum" style="border-left:3px solid #3fb950">
+            <span class="sec-id">1-3</span>
+            <span class="sec-name">에이전트 시스템</span>
+            <span class="sec-badge" style="background:#1a4731;color:#2ea043;border:1px solid #3fb950">완료 ✅</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#3fb950">✅</span> agents/base_agent.py 공통 베이스</li>
+<li class="it"><span style="color:#3fb950">✅</span> 7개 독립 프로세스 run.py (lumi/mark/ris/cog/doctor/strategy/signal)</li>
+<li class="it"><span style="color:#3fb950">✅</span> agent_status heartbeat 5초</li>
+<li class="it"><span style="color:#3fb950">✅</span> doctor 자동 재시작</li>
+          </ul>
+        </details>
+        <details class="sec" open>
+          <summary class="sec-sum" style="border-left:3px solid #58a6ff">
+            <span class="sec-id">1-4</span>
+            <span class="sec-name">브로커 연결</span>
+            <span class="sec-badge" style="background:#0d2137;color:#388bfd;border:1px solid #58a6ff">진행중 🔄</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#3fb950">✅</span> KIS WebSocket 상태머신 5-state (장중 실검증 필요)</li>
+<li class="it"><span style="color:#3fb950">✅</span> KIS REST 폴백 — DEGRADED 시 자동 전환</li>
+<li class="it"><span style="color:#f85149">❌</span> 키움 Windows 브릿지 미구현</li>
+<li class="it"><span style="color:#f85149">❌</span> 업비트 WebSocket 미구현</li>
+          </ul>
+        </details>
+        <details class="sec" open>
+          <summary class="sec-sum" style="border-left:3px solid #58a6ff">
+            <span class="sec-id">1-5</span>
+            <span class="sec-name">데이터 파이프라인</span>
+            <span class="sec-badge" style="background:#0d2137;color:#388bfd;border:1px solid #58a6ff">진행중 🔄</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#3fb950">✅</span> DAS 실데이터 로더 — KR 30 / US 6 / COIN 10종목</li>
+<li class="it"><span style="color:#3fb950">✅</span> Data Quality Gate 5중 검증</li>
+<li class="it"><span style="color:#3fb950">✅</span> P1-001~004 전체 완료 (WS / DQ / 전략검증 / AI계약)</li>
+<li class="it"><span style="color:#f85149">❌</span> 뉴스·매크로 실시간 파이프라인 미구현</li>
+          </ul>
+        </details>
+        <details class="sec">
+          <summary class="sec-sum" style="border-left:3px solid #484f58">
+            <span class="sec-id">1-6</span>
+            <span class="sec-name">보안 기반 (SEC)</span>
+            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#f85149">❌</span> AES-256 암호화 (SEC-001)</li>
+<li class="it"><span style="color:#f85149">❌</span> SQLCipher DB 암호화 (SEC-002)</li>
+<li class="it"><span style="color:#f85149">❌</span> HMAC 서명 키움브릿지용 (SEC-003)</li>
+<li class="it"><span style="color:#f85149">❌</span> TLS 에이전트 통신 (SEC-004)</li>
+          </ul>
+        </details>
+        <details class="sec">
+          <summary class="sec-sum" style="border-left:3px solid #3fb950">
+            <span class="sec-id">1-7</span>
+            <span class="sec-name">AI JSON Contract + Audit</span>
+            <span class="sec-badge" style="background:#1a4731;color:#2ea043;border:1px solid #3fb950">완료 ✅</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#3fb950">✅</span> schemas/ai_decision.py — 계약 검증</li>
+<li class="it"><span style="color:#3fb950">✅</span> runtime/ai/audit.py — 감사 로그</li>
+<li class="it"><span style="color:#3fb950">✅</span> /ai/decision, /ai/audit 엔드포인트</li>
+          </ul>
+        </details>
       </div>
-    <div class="das-row">
-      <span style="font-weight:600;min-width:80px">KR 주식</span>
-      <span style="color:#8b949e;min-width:50px">2875종목</span>
-      <span style="color:#8b949e;flex:1">KRX 전체 일봉 (LUMI_DATA/KR/)</span>
-      <div class="das-bar-wrap"><div style="height:100%;width:24px;background:#58a6ff;border-radius:3px"></div></div>
-      <span style="color:#f0883e;min-width:60px;text-align:right">314.0MB</span>
-    </div>
-    <div class="das-row">
-      <span style="font-weight:600;min-width:80px">US 주식</span>
-      <span style="color:#8b949e;min-width:50px">5900종목</span>
-      <span style="color:#8b949e;flex:1">전체 일봉+분봉 80% (LUMI_DATA/US/)</span>
-      <div class="das-bar-wrap"><div style="height:100%;width:200px;background:#58a6ff;border-radius:3px"></div></div>
-      <span style="color:#f0883e;min-width:60px;text-align:right">2600.0MB</span>
-    </div>
-    <div class="das-row">
-      <span style="font-weight:600;min-width:80px">코인</span>
-      <span style="color:#8b949e;min-width:50px">265종목</span>
-      <span style="color:#8b949e;flex:1">265마켓 일봉 (LUMI_DATA/CRYPTO/)</span>
-      <div class="das-bar-wrap"><div style="height:100%;width:161px;background:#58a6ff;border-radius:3px"></div></div>
-      <span style="color:#f0883e;min-width:60px;text-align:right">2100.0MB</span>
-    </div>
-    <div class="das-row">
-      <span style="font-weight:600;min-width:80px">피처/지표</span>
-      <span style="color:#8b949e;min-width:50px">46종목</span>
-      <span style="color:#8b949e;flex:1">219개 지표 × 46종목</span>
-      <div class="das-bar-wrap"><div style="height:100%;width:28px;background:#58a6ff;border-radius:3px"></div></div>
-      <span style="color:#f0883e;min-width:60px;text-align:right">376.0MB</span>
-    </div>
-    <div class="das-row">
-      <span style="font-weight:600;min-width:80px">뉴스/감성</span>
-      <span style="color:#8b949e;min-width:50px">22종목</span>
-      <span style="color:#8b949e;flex:1">6,712건 22파일</span>
-      <div class="das-bar-wrap"><div style="height:100%;width:4px;background:#58a6ff;border-radius:3px"></div></div>
-      <span style="color:#f0883e;min-width:60px;text-align:right">3.0MB</span>
-    </div>
-    <div class="das-row">
-      <span style="font-weight:600;min-width:80px">거시경제</span>
-      <span style="color:#8b949e;min-width:50px">7종목</span>
-      <span style="color:#8b949e;flex:1">FRED 7지표</span>
-      <div class="das-bar-wrap"><div style="height:100%;width:4px;background:#58a6ff;border-radius:3px"></div></div>
-      <span style="color:#f0883e;min-width:60px;text-align:right">0.18MB</span>
-    </div>
-    </div>
-    </div>
+    </details>
+    <details class="phase-block" open>
+      <summary class="phase-sum" style="background:#0d2137;border:1px solid #58a6ff">
+        <div class="ph-left">
+          <span class="ph-badge" style="background:#388bfd;color:#0d1117">Phase 2</span>
+          <span class="ph-name">전략 / 에이전트</span>
+        </div>
+        <div class="ph-right">
+          <div class="ph-bar-wrap"><div class="ph-bar" style="width:15%;background:#388bfd"></div></div>
+          <span class="ph-pct" style="color:#388bfd">15%</span>
+          <span class="ph-status" style="color:#388bfd">진행중 🔄</span>
+        </div>
+      </summary>
+      <div class="phase-body">
 
-    <!-- 섹션 9: 오늘 작업 타임라인 -->
-    <div id="sec-9" class="section">
-      <div class="sec-title">📅 오늘 작업 타임라인</div>
-      <div class="timeline">
-        <div class="tl-item completed">
-          <div class="tl-status">완료</div>
-          <div class="tl-id">CLAUDE.md v4.0</div>
-          <div class="tl-desc">전면 재설계 — 11개 절대 원칙 + P0/P1 우선순위 확정</div>
-        </div>
-        <div class="tl-item completed">
-          <div class="tl-status">완료</div>
-          <div class="tl-id">GOV/INF/OPS/VIS</div>
-          <div class="tl-desc">거버넌스·인프라·운영·시각화 전 영역 완료</div>
-        </div>
-        <div class="tl-item completed">
-          <div class="tl-status">완료</div>
-          <div class="tl-id">KIS-LIVE 완료</div>
-          <div class="tl-desc">KIS 실데이터 연동 + 미체결·부분체결·손익 정밀화</div>
-        </div>
-        <div class="tl-item in-progress">
-          <div class="tl-status">진행</div>
-          <div class="tl-id">HTS 시각화 75%</div>
-          <div class="tl-desc">독립 시각화 75% — CONTROL/TERM-VIS 대기</div>
-        </div>
-        <div class="tl-item in-progress">
-          <div class="tl-status">진행</div>
-          <div class="tl-id">P0 시작</div>
-          <div class="tl-desc">Constitutional Engine + base_agent + lumi_api 재기동</div>
-        </div>
+        <details class="sec" open>
+          <summary class="sec-sum" style="border-left:3px solid #58a6ff">
+            <span class="sec-id">2-1</span>
+            <span class="sec-name">전략 시스템</span>
+            <span class="sec-badge" style="background:#0d2137;color:#388bfd;border:1px solid #58a6ff">진행중 🔄</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#3fb950">✅</span> BaseStrategy + Registry (@register 데코레이터)</li>
+<li class="it"><span style="color:#3fb950">✅</span> 씨앗 전략 5개 (KR MA크로스·RSI / COIN BTC모멘텀 / US SPY / KR 거래량)</li>
+<li class="it"><span style="color:#3fb950">✅</span> DAS 실데이터 백테스트 연결 (das_loader.py)</li>
+<li class="it"><span style="color:#3fb950">✅</span> 코그 자동 생성기 cog_strategy_generator.py (미가동)</li>
+<li class="it"><span style="color:#f0883e">⚠️</span> validated 전략 0개 — Sharpe 0.44~0.70 / 기준 1.2 미달</li>
+<li class="it"><span style="color:#f85149">❌</span> 전략 50개 목표 — 파라미터 튜닝 필요</li>
+          </ul>
+        </details>
+        <details class="sec">
+          <summary class="sec-sum" style="border-left:3px solid #484f58">
+            <span class="sec-id">2-2</span>
+            <span class="sec-name">에이전트 고도화</span>
+            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#f85149">❌</span> 전략 에이전트 판단 루프 구현</li>
+<li class="it"><span style="color:#f85149">❌</span> 신호 에이전트 실시간 필터</li>
+<li class="it"><span style="color:#f85149">❌</span> 코그 야간 자동 생성 가동</li>
+<li class="it"><span style="color:#f85149">❌</span> 레짐별 균등 학습 체계</li>
+          </ul>
+        </details>
+        <details class="sec">
+          <summary class="sec-sum" style="border-left:3px solid #484f58">
+            <span class="sec-id">2-3</span>
+            <span class="sec-name">HTS UI 고도화</span>
+            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#f85149">❌</span> 메시지 중요도 필터</li>
+<li class="it"><span style="color:#f85149">❌</span> 동적 카드 레이아웃</li>
+<li class="it"><span style="color:#f85149">❌</span> 전략 성과 실시간 대시보드</li>
+          </ul>
+        </details>
       </div>
-    </div>
+    </details>
+    <details class="phase-block">
+      <summary class="phase-sum" style="background:#161b22;border:1px solid #484f58">
+        <div class="ph-left">
+          <span class="ph-badge" style="background:#8b949e;color:#0d1117">Phase 3</span>
+          <span class="ph-name">Paper 검증</span>
+        </div>
+        <div class="ph-right">
+          <div class="ph-bar-wrap"><div class="ph-bar" style="width:0%;background:#8b949e"></div></div>
+          <span class="ph-pct" style="color:#8b949e">0%</span>
+          <span class="ph-status" style="color:#8b949e">대기 ⏳</span>
+        </div>
+      </summary>
+      <div class="phase-body">
 
-    <!-- 섹션 10: 다음 작업 큐 -->
-    <div id="sec-10" class="section">
-      <div class="sec-title">🎯 다음 작업 큐 (우선순위)</div>
-
-    <table class="queue-table">
-      <thead><tr>
-        <th style="color:#8b949e;font-size:.8em;padding:6px 14px;text-align:left">우선도</th>
-        <th style="color:#8b949e;font-size:.8em;padding:6px 14px;text-align:left">순위</th>
-        <th style="color:#8b949e;font-size:.8em;padding:6px 14px;text-align:left">작업 코드</th>
-        <th style="color:#8b949e;font-size:.8em;padding:6px 14px;text-align:left">내용</th>
-      </tr></thead>
-      <tbody>
-      <tr>
-        <td class="queue-prio">✅</td>
-        <td style="color:#2ea043;font-weight:600;font-size:.88em">P0-001</td>
-        <td style="font-weight:600;color:#79c0ff">lumi_api 재기동</td>
-        <td style="color:#c9d1d9">포트 8001 정상 — PID 확인 완료</td>
-      </tr>
-      <tr>
-        <td class="queue-prio">✅</td>
-        <td style="color:#2ea043;font-weight:600;font-size:.88em">P0-002</td>
-        <td style="font-weight:600;color:#79c0ff">constitution/engine.py</td>
-        <td style="color:#c9d1d9">14개 관문 구현 완료 — /constitution/check 엔드포인트</td>
-      </tr>
-      <tr>
-        <td class="queue-prio">✅</td>
-        <td style="color:#2ea043;font-weight:600;font-size:.88em">P0-003</td>
-        <td style="font-weight:600;color:#79c0ff">agents/base_agent.py</td>
-        <td style="color:#c9d1d9">7개 에이전트 독립 프로세스 전환 완료 (run.py × 7)</td>
-      </tr>
-      <tr>
-        <td class="queue-prio">✅</td>
-        <td style="color:#2ea043;font-weight:600;font-size:.88em">P0-004</td>
-        <td style="font-weight:600;color:#79c0ff">KIS WebSocket</td>
-        <td style="color:#c9d1d9">상태머신 구현 완료 — 장중 tick 수신은 마스터 직접 검증</td>
-      </tr>
-      <tr>
-        <td class="queue-prio">✅</td>
-        <td style="color:#2ea043;font-weight:600;font-size:.88em">P1-001</td>
-        <td style="font-weight:600;color:#79c0ff">Data Quality Gate</td>
-        <td style="color:#c9d1d9">5중 검증 완료 — /data/quality, CE gate_01 연동</td>
-      </tr>
-      <tr>
-        <td class="queue-prio">✅</td>
-        <td style="color:#2ea043;font-weight:600;font-size:.88em">P1-002</td>
-        <td style="font-weight:600;color:#79c0ff">Strategy Validator</td>
-        <td style="color:#c9d1d9">PH-04-01~06 완료 — /strategy/validate, subprocess 격리</td>
-      </tr>
-      <tr>
-        <td class="queue-prio">✅</td>
-        <td style="color:#2ea043;font-weight:600;font-size:.88em">P1-003</td>
-        <td style="font-weight:600;color:#79c0ff">AI JSON Contract</td>
-        <td style="color:#c9d1d9">계약서검증+감사로그 완료 — /ai/decision, /ai/audit</td>
-      </tr>
-      <tr>
-        <td class="queue-prio">✅</td>
-        <td style="color:#2ea043;font-weight:600;font-size:.88em">P1-004</td>
-        <td style="font-weight:600;color:#79c0ff">디바이스 네트워크</td>
-        <td style="color:#c9d1d9">Streamlit 구현 완료 — 스트림릿 주도권 확립</td>
-      </tr>
-      <tr>
-        <td class="queue-prio">✅</td>
-        <td style="color:#2ea043;font-weight:600;font-size:.88em">Windows</td>
-        <td style="font-weight:600;color:#79c0ff">Windows Worker</td>
-        <td style="color:#c9d1d9">192.168.0.101:8791 연결 완료</td>
-      </tr>
-      <tr>
-        <td class="queue-prio">✅</td>
-        <td style="color:#2ea043;font-weight:600;font-size:.88em">ST-001</td>
-        <td style="font-weight:600;color:#79c0ff">전략 시스템 기반</td>
-        <td style="color:#c9d1d9">registry.py+validator.py+씨앗 5개+cog_generator+API 4종</td>
-      </tr>
-      <tr>
-        <td class="queue-prio">✅</td>
-        <td style="color:#2ea043;font-weight:600;font-size:.88em">ST-002</td>
-        <td style="font-weight:600;color:#79c0ff">DAS 실데이터 연결</td>
-        <td style="color:#c9d1d9">das_loader.py 30KR/6US/10COIN + /backtest-real 엔드포인트</td>
-      </tr>
-      </tbody>
-    </table>
-    </div>
-
-    <!-- 섹션 11: 최근 작업 히스토리 -->
-    <div id="sec-11" class="section">
-      <div class="sec-title">📜 최근 작업 히스토리 (최근 10개)</div>
-      <div class="hist-list">
-      <div class="hist-row">
-        <span class="hist-date">2026-06-21</span>
-        <span class="hist-id">DF-010</span>
-        <span class="hist-desc">데이터 무결성 감시 스케줄러 완료 (146개 파일 PASS)</span>
+        <details class="sec">
+          <summary class="sec-sum" style="border-left:3px solid #484f58">
+            <span class="sec-id">3-1</span>
+            <span class="sec-name">시스템 검증</span>
+            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#f85149">❌</span> UPS 정전 테스트</li>
+<li class="it"><span style="color:#f85149">❌</span> 핫스팟 전환 테스트</li>
+<li class="it"><span style="color:#f85149">❌</span> CE 브레이커 작동 테스트</li>
+<li class="it"><span style="color:#f85149">❌</span> WebSocket 상태머신 장중 실검증</li>
+          </ul>
+        </details>
+        <details class="sec">
+          <summary class="sec-sum" style="border-left:3px solid #484f58">
+            <span class="sec-id">3-2</span>
+            <span class="sec-name">전략 검증</span>
+            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#f85149">❌</span> 동적 Kelly 효과 검증</li>
+<li class="it"><span style="color:#f85149">❌</span> ATR 손절 효과 검증</li>
+<li class="it"><span style="color:#f85149">❌</span> 청산 타임박스 검증</li>
+<li class="it"><span style="color:#f85149">❌</span> 30일 무중단 Paper 운영</li>
+          </ul>
+        </details>
       </div>
-      <div class="hist-row">
-        <span class="hist-date">2026-06-21</span>
-        <span class="hist-id">DF-009</span>
-        <span class="hist-desc">뉴스/감성 데이터 수집 완료 (6,712건)</span>
+    </details>
+    <details class="phase-block">
+      <summary class="phase-sum" style="background:#161b22;border:1px solid #484f58">
+        <div class="ph-left">
+          <span class="ph-badge" style="background:#8b949e;color:#0d1117">Phase 4</span>
+          <span class="ph-name">실전 투입</span>
+        </div>
+        <div class="ph-right">
+          <div class="ph-bar-wrap"><div class="ph-bar" style="width:0%;background:#8b949e"></div></div>
+          <span class="ph-pct" style="color:#8b949e">0%</span>
+          <span class="ph-status" style="color:#8b949e">대기 ⏳</span>
+        </div>
+      </summary>
+      <div class="phase-body">
+
+        <details class="sec">
+          <summary class="sec-sum" style="border-left:3px solid #484f58">
+            <span class="sec-id">4-1</span>
+            <span class="sec-name">실전 준비</span>
+            <span class="sec-badge" style="background:#161b22;color:#8b949e;border:1px solid #484f58">대기 ⏳</span>
+          </summary>
+          <ul class="item-list">
+<li class="it"><span style="color:#f85149">❌</span> 마스터 최종 승인</li>
+<li class="it"><span style="color:#f85149">❌</span> 2단계 인증 실전 전환</li>
+<li class="it"><span style="color:#f85149">❌</span> 소액 실전 (100만원)</li>
+<li class="it"><span style="color:#f85149">❌</span> CRY-010 코인 24H 자율운영</li>
+          </ul>
+        </details>
       </div>
-      <div class="hist-row">
-        <span class="hist-date">2026-06-21</span>
-        <span class="hist-id">DF-008</span>
-        <span class="hist-desc">Feature 파이프라인 완료 (219개 지표)</span>
-      </div>
-      <div class="hist-row">
-        <span class="hist-date">2026-06-21</span>
-        <span class="hist-id">DF-007</span>
-        <span class="hist-desc">US 분봉 데이터 수집 완료</span>
-      </div>
-      <div class="hist-row">
-        <span class="hist-date">2026-06-21</span>
-        <span class="hist-id">DF-006</span>
-        <span class="hist-desc">KR 분봉 데이터 수집 완료</span>
-      </div>
-      </div>
-    </div>
-
-    <!-- 섹션 12: 전체 개발 스케줄 -->
-    <div id="sec-12" class="section">
-      <div class="sec-title">🗓️ 전체 개발 스케줄</div>
-
-      <details>
-        <summary>✅ 완료된 Phase (0 ~ 16b)</summary>
-        <div class="sched-list">
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 0</span>
-          <span class="sched-desc">Governance + Judicial + 금융헌법</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 1</span>
-          <span class="sched-desc">Runtime Core Layer</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 2</span>
-          <span class="sched-desc">Infrastructure Federation</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 3~4</span>
-          <span class="sched-desc">Device + Operations</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 5</span>
-          <span class="sched-desc">API Federation</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 6</span>
-          <span class="sched-desc">Data Lake 구조</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 7</span>
-          <span class="sched-desc">Crisis Intelligence</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 8</span>
-          <span class="sched-desc">Senior Quant Intelligence</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 9</span>
-          <span class="sched-desc">Quant Runtime Main</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 10</span>
-          <span class="sched-desc">Broker/Multi-Market</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 11~12</span>
-          <span class="sched-desc">Windows + Agent Governance</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 13~14</span>
-          <span class="sched-desc">OPSX + Real Live Trading</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 15</span>
-          <span class="sched-desc">Reality Audit</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 16</span>
-          <span class="sched-desc">VIS/HTS 백엔드</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">Phase 16b</span>
-          <span class="sched-desc">KIS 실데이터 연동</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        </div>
-      </details>
-
-      <details open>
-        <summary>🔄 진행 중</summary>
-        <div class="sched-list">
-        <div class="sched-row in-progress">
-          <span class="sched-id">DC-003</span>
-          <span class="sched-desc">탭2 파이프라인 & 활용 구현</span>
-          <div class="sched-pb"><div style="width:0%;background:#58a6ff;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        </div>
-      </details>
-
-      <details open>
-        <summary>📊 데이터센터 UI 라인 (DC-001~010)</summary>
-        <div class="sched-list">
-        <div class="sched-row completed">
-          <span class="sched-id">DC-001</span>
-          <span class="sched-desc">AI BROADCASTING → 데이터센터 메뉴 교체</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DC-002</span>
-          <span class="sched-desc">탭1 데이터 현황 구현 (KR/US/CRYPTO 서브탭 + 품질차트)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">DC-003</span>
-          <span class="sched-desc">탭2 파이프라인 & 활용 구현</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">DC-004</span>
-          <span class="sched-desc">탭3 AI 학습 현황 구현</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">DC-005</span>
-          <span class="sched-desc">탭4 모니터링 & 알림 구현</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">DC-006</span>
-          <span class="sched-desc">DAS 실시간 스캔 연동</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">DC-007</span>
-          <span class="sched-desc">AI 모델 배분 설정 (DeepSeek/Gemini Flash/Grok/GPT-4o-mini/로컬 Qwen)</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">DC-008</span>
-          <span class="sched-desc">텔레그램 알림 연동</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">DC-009</span>
-          <span class="sched-desc">자동 수집 스케줄러 공식 등록</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">DC-010</span>
-          <span class="sched-desc">전체 파이프라인 연결 검증</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        </div>
-      </details>
-
-      <details open>
-        <summary>📌 AI-ROUTE 연결 라인 (001~004)</summary>
-        <div class="sched-list">
-        <div class="sched-row pending">
-          <span class="sched-id">AI-ROUTE-001</span>
-          <span class="sched-desc">ai_route 서버 자동 실행</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">AI-ROUTE-002</span>
-          <span class="sched-desc">Market Agent → POST /route 연결</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">AI-ROUTE-003</span>
-          <span class="sched-desc">텔레그램 알람 연결</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">AI-ROUTE-004</span>
-          <span class="sched-desc">dev_agent 루프 활성화</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        </div>
-      </details>
-
-      <details open>
-        <summary>📥 DATA-FETCH 라인 (DF-005~010)</summary>
-        <div class="sched-list">
-        <div class="sched-row completed">
-          <span class="sched-id">DF-005</span>
-          <span class="sched-desc">코인 10년 (업비트 BTC/ETH/SOL/XRP/DOGE 10종)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DF-006</span>
-          <span class="sched-desc">KR 분봉 (10종목 1m×7d + 5m×60d, 67,318행)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DF-007</span>
-          <span class="sched-desc">US 분봉 (6종목 1m×7d + 5m×60d, 44,460행)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DF-008</span>
-          <span class="sched-desc">Feature 파이프라인 (219개 지표 × 46종목, 375.7MB)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DF-009</span>
-          <span class="sched-desc">뉴스/감성 (Naver+NewsAPI, 6,712건)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DF-010</span>
-          <span class="sched-desc">데이터 무결성 감시 스케줄러 (PASS 146/146)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DF-011</span>
-          <span class="sched-desc">한국 전체 KRX 2,875종목 일봉 (KR/stocks/daily/, 314MB)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DF-011b</span>
-          <span class="sched-desc">한국 주·월봉 전체 (KR/stocks/weekly+monthly/)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DF-012</span>
-          <span class="sched-desc">미국 전체 일봉 (S&P500+NASDAQ+NYSE, US/stocks/daily/)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row in-progress">
-          <span class="sched-id">DF-012b</span>
-          <span class="sched-desc">미국 분봉 전체 수집 (US/stocks/minutes/, 2.6GB)</span>
-          <div class="sched-pb"><div style="width:80%;background:#58a6ff;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">80%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DF-013</span>
-          <span class="sched-desc">코인 전체 265마켓 일봉 (CRYPTO/daily/, 2.1GB)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row in-progress">
-          <span class="sched-id">DF-013b</span>
-          <span class="sched-desc">코인 분봉 전체 수집 (CRYPTO/minutes/)</span>
-          <div class="sched-pb"><div style="width:30%;background:#58a6ff;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">30%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DF-013c</span>
-          <span class="sched-desc">코인 정보/스냅샷 수집</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        </div>
-      </details>
-
-      <details open>
-        <summary>🔗 DATA-PIPE 라인 (DP-001~006)</summary>
-        <div class="sched-list">
-        <div class="sched-row completed">
-          <span class="sched-id">DP-001</span>
-          <span class="sched-desc">DL → Feature 파이프라인 (증분 스케줄러, 매일 18:30 KST)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DP-002</span>
-          <span class="sched-desc">Feature → CR (crisis_replay.run_crisis_scan — 3템플릿)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DP-003</span>
-          <span class="sched-desc">CR → SQ (pipeline_connector.run_pipeline_and_save → pipeline_state.json)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DP-004</span>
-          <span class="sched-desc">SQ → Q (paper_operation_loop 실레짐 연동 — pipeline_state 24h 우선)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DP-005</span>
-          <span class="sched-desc">Q → Execution (pipeline_connector → paper_operation_loop 실공급)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">DP-006</span>
-          <span class="sched-desc">Execution → EVO (1000사이클마다 strategy_evolution 비동기 실행)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        </div>
-      </details>
-
-      <details open>
-        <summary>🎯 STRAT 전략 구현 (ST-001~005)</summary>
-        <div class="sched-list">
-        <div class="sched-row completed">
-          <span class="sched-id">ST-001</span>
-          <span class="sched-desc">전략 코드 기반 구현 완료 (10전략+BaseStrategy+API)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">100%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">ST-002</span>
-          <span class="sched-desc">평균회귀 Mean Reversion</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">ST-003</span>
-          <span class="sched-desc">변동성 수익화</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">ST-004</span>
-          <span class="sched-desc">위기 역발상 진입</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">ST-005</span>
-          <span class="sched-desc">멀티팩터 통합</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        </div>
-      </details>
-
-      <details open>
-        <summary>🤖 AGENT-LIVE 라인 (AL-001~005)</summary>
-        <div class="sched-list">
-        <div class="sched-row completed">
-          <span class="sched-id">AL-001</span>
-          <span class="sched-desc">에이전트 Heartbeat (5초 주기, lumi_api thread)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">✅ 완료</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">AL-002</span>
-          <span class="sched-desc">마크 판단 루프 (30초 주기, mark_api thread)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">✅ 완료</span>
-        </div>
-        <div class="sched-row partial">
-          <span class="sched-id">AL-003</span>
-          <span class="sched-desc">에이전트 간 통신 허브 (인메모리 싱글톤 — 프로세스 간 통신 불가)</span>
-          <div class="sched-pb"><div style="width:60%;background:#f0883e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#f0883e">⚠️ 부분완성</span>
-        </div>
-        <div class="sched-row completed">
-          <span class="sched-id">AL-004</span>
-          <span class="sched-desc">Paper 매매 루프 (60초 주기, lumi_api thread)</span>
-          <div class="sched-pb"><div style="width:100%;background:#2ea043;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct" style="color:#2ea043">✅ 완료</span>
-        </div>
-        <div class="sched-row pending">
-          <span class="sched-id">AL-005</span>
-          <span class="sched-desc">Postmortem 루프 (자동 분석 리포트)</span>
-          <div class="sched-pb"><div style="width:0%;background:#8b949e;height:100%;border-radius:2px"></div></div>
-          <span class="sched-pct">0%</span>
-        </div>
-        </div>
-      </details>
-    </div>
-
-    <div class="section" style="margin-top:24px">
-      <div class="sec-title">📋 개발 우선순위 (설계서 v3.0 기준)</div>
-      <table style="width:100%;border-collapse:collapse;font-size:.88em">
-        <thead>
-          <tr style="color:#8b949e;border-bottom:1px solid #30363d">
-            <th style="padding:8px 12px;text-align:left;width:60px">등급</th>
-            <th style="padding:8px 12px;text-align:left">항목</th>
-            <th style="padding:8px 12px;text-align:left;width:100px">라인 코드</th>
-            <th style="padding:8px 12px;text-align:left;width:110px">상태</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="background:rgba(46,160,67,.06);border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#2ea043">P0</td>
-            <td style="padding:7px 12px;color:#8b949e">Constitutional Engine (14개 관문)</td>
-            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">SEC-NEW</td>
-            <td style="padding:7px 12px;color:#2ea043">✅ 완료</td>
-          </tr>
-          <tr style="background:rgba(46,160,67,.06);border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#2ea043">P0</td>
-            <td style="padding:7px 12px;color:#8b949e">에이전트 7개 독립 프로세스</td>
-            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">AL-005</td>
-            <td style="padding:7px 12px;color:#2ea043">✅ 완료</td>
-          </tr>
-          <tr style="background:rgba(248,81,73,.08);border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#f85149">P0</td>
-            <td style="padding:7px 12px">KIS WebSocket 장중 검증</td>
-            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">BR-001</td>
-            <td style="padding:7px 12px;color:#d29922">❓ 검증필요</td>
-          </tr>
-          <tr style="background:rgba(227,179,65,.06);border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#e3b341">P1</td>
-            <td style="padding:7px 12px">Data Quality Gate</td>
-            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">DP-007</td>
-            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
-          </tr>
-          <tr style="background:rgba(227,179,65,.06);border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#e3b341">P1</td>
-            <td style="padding:7px 12px">전략 검증 3단계 (PH-04)</td>
-            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">ST-NEW</td>
-            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
-          </tr>
-          <tr style="background:rgba(227,179,65,.06);border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#e3b341">P1</td>
-            <td style="padding:7px 12px">AI JSON Contract</td>
-            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">AL-006</td>
-            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
-          </tr>
-          <tr style="background:rgba(227,179,65,.06);border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#e3b341">P1</td>
-            <td style="padding:7px 12px">키움 Windows 브릿지</td>
-            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">BR-002</td>
-            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
-          </tr>
-          <tr style="background:rgba(212,167,44,.04);border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#d4a72c">P2</td>
-            <td style="padding:7px 12px;color:#c9d1d9">뉴스·매크로 파이프라인</td>
-            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">DP-008</td>
-            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
-          </tr>
-          <tr style="background:rgba(212,167,44,.04);border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#d4a72c">P2</td>
-            <td style="padding:7px 12px;color:#c9d1d9">AI Audit 로그</td>
-            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">AL-007</td>
-            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
-          </tr>
-          <tr style="border-bottom:1px solid #21262d">
-            <td style="padding:7px 12px;font-weight:700;color:#8b949e">P3</td>
-            <td style="padding:7px 12px;color:#8b949e">경제 캘린더 연동</td>
-            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">DP-009</td>
-            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
-          </tr>
-          <tr>
-            <td style="padding:7px 12px;font-weight:700;color:#8b949e">P3</td>
-            <td style="padding:7px 12px;color:#8b949e">수익률 목표 수치화</td>
-            <td style="padding:7px 12px;color:#58a6ff;font-size:.83em">SEC-002</td>
-            <td style="padding:7px 12px;color:#f85149">❌ 미구현</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    </details>
 
     <footer>
-      <p>자동 생성 <span class="update-time">2026-06-21 18:18:06</span></p>
-      <p style="margin-top:4px">LUMI Quant Runtime OS — v5.20260621.18 — 실주문 PAPER MODE 유지</p>
+      <p>LUMI Quant Runtime OS — PAPER MODE 전용 &nbsp;|&nbsp; 2026-06-21 18:36:58 생성</p>
+      <p style="margin-top:4px;color:#484f58">실주문 절대 금지 · 마스터 확인 후만 진행</p>
     </footer>
   </div>
 </body>
