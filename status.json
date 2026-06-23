@@ -1,10 +1,10 @@
 {
-  "updated_at": "2026-06-24T03:59:54",
-  "version": "v4.20260624.0359",
+  "updated_at": "2026-06-24T04:20:25",
+  "version": "v4.20260624.0420",
   "paper_mode": true,
-  "overall_pct": 65.6,
-  "done": 90,
-  "warn": 5,
+  "overall_pct": 66.0,
+  "done": 91,
+  "warn": 4,
   "no": 46,
   "system": {
     "lumi_api": true,
