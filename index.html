@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LUMI 대시보드 v4.0 | v4.20260624.0420</title>
+  <title>LUMI 대시보드 v4.0 | v4.20260624.0434</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -98,13 +98,13 @@
     <div class="si"><span class="dot" style="background:#3fb950"></span>lumi_api 8001</div>
     <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 15.0MB (실시간)</div>
     <div class="paper">🔴 PAPER MODE</div>
-    <span class="sbar-time">2026-06-24 04:20:26</span>
+    <span class="sbar-time">2026-06-24 04:34:20</span>
   </div>
 
   <div class="container">
     <header>
       <h1>LUMI 개발 대시보드 v4.0</h1>
-      <p class="sub">v4.20260624.0420 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 24일</p>
+      <p class="sub">v4.20260624.0434 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 24일</p>
     </header>
 
     <!-- 섹션 1: 전체 개발 현황 -->
@@ -203,7 +203,7 @@
       <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
         <span class="lid" style="color:#388bfd">[CE]</span>
         <span class="lname">Constitutional Engine</span>
-        <span class="lcnt" style="color:#8b949e">✅5 ❌3 / 8개</span>
+        <span class="lcnt" style="color:#8b949e">✅7 ⚠️1 ❌0 / 8개</span>
         <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
       </summary>
       <div class="line-body">
@@ -252,29 +252,29 @@
               <td class="tc dev">Mac</td>
               <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">CE-006</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">15</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">CE-006</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">CE-006</td>
               <td class="tc step">CE 이중화 Primary</td>
-              <td class="tc desc">system/constitution/ Primary 포트 8003</td>
+              <td class="tc desc">utils/ce_client.py 브레이커+Primary/Backup</td>
               <td class="tc dev">Mac</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">CE-006B</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(240,136,62,.08)">
               <td class="tc seq">16</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">CE-006B</td>
+              <td class="tc code" style="color:#f0883e;font-weight:600">CE-006B</td>
               <td class="tc step">CE 이중화 Backup</td>
-              <td class="tc desc">Windows PC 포트 8004 Backup Engine</td>
+              <td class="tc desc">192.168.0.101:8004 Backup 자동전환 대기</td>
               <td class="tc dev">Win</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#f0883e">⚠️ 진행중</td>
               <td class="tc nxt" style="color:#8b949e">CE-006C</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">17</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">CE-006C</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">CE-006C</td>
               <td class="tc step">브레이커 패턴</td>
-              <td class="tc desc">Primary 무응답→0초차단→3초Backup활성화</td>
+              <td class="tc desc">3회실패→Backup→Local 60초리셋 ✅</td>
               <td class="tc dev">Mac+Win</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">AG-001</td>
             </tr></tbody>
         </table>
@@ -1628,12 +1628,12 @@
     <div class="sec-title">📊 섹션 3 — 전체 진행률 요약</div>
 
     <div class="s3-top">
-      <div class="s3-card"><div class="s3-num" style="color:#3fb950">91</div><div class="s3-lab">완료 ✅</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#f0883e">4</div><div class="s3-lab">진행중 ⚠️</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#484f58">46</div><div class="s3-lab">대기 ❌</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">66.0%</div><div class="s3-lab">전체 진행률</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#3fb950">93</div><div class="s3-lab">완료 ✅</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#f0883e">5</div><div class="s3-lab">진행중 ⚠️</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#484f58">43</div><div class="s3-lab">대기 ❌</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">67.7%</div><div class="s3-lab">전체 진행률</div></div>
     </div>
-    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:66.0%"></div></div>
+    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:67.7%"></div></div>
     <div style="margin-top:20px">
 <div class="lb-row">
           <span class="lb-id" style="color:#388bfd">INF</span>
@@ -1643,8 +1643,8 @@
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">CE</span>
           <span class="lb-name">Constitutional Engine</span>
-          <div class="lb-bg"><div class="lb-fill" style="width:62%;background:#388bfd"></div></div>
-          <span class="lb-pct" style="color:#388bfd">62%</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:94%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">94%</span>
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">AG</span>
           <span class="lb-name">에이전트 시스템</span>
@@ -1709,7 +1709,7 @@
     </div>
 
     <footer>
-      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-24 04:20:26 생성</p>
+      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-24 04:34:20 생성</p>
       <p style="margin-top:3px;color:#1e2d40">실주문 절대 금지 · 마스터 확인 후만 진행</p>
     </footer>
   </div>
