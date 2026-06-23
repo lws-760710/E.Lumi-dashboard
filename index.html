@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LUMI 대시보드 v4.0 | v4.20260623.1347</title>
+  <title>LUMI 대시보드 v4.0 | v4.20260623.1356</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -98,13 +98,13 @@
     <div class="si"><span class="dot" style="background:#3fb950"></span>lumi_api 8001</div>
     <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 15.0MB (실시간)</div>
     <div class="paper">🔴 PAPER MODE</div>
-    <span class="sbar-time">2026-06-23 13:47:35</span>
+    <span class="sbar-time">2026-06-23 13:56:20</span>
   </div>
 
   <div class="container">
     <header>
       <h1>LUMI 개발 대시보드 v4.0</h1>
-      <p class="sub">v4.20260623.1347 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 23일</p>
+      <p class="sub">v4.20260623.1356 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 23일</p>
     </header>
 
     <!-- 섹션 1: 전체 개발 현황 -->
@@ -1214,7 +1214,7 @@
       <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
         <span class="lid" style="color:#388bfd">[RL]</span>
         <span class="lname">Paper 검증 운영</span>
-        <span class="lcnt" style="color:#8b949e">✅3 ❌5 / 8개</span>
+        <span class="lcnt" style="color:#8b949e">✅5 ❌3 / 8개</span>
         <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
       </summary>
       <div class="line-body">
@@ -1223,21 +1223,21 @@
             <th>No</th><th>코드</th><th>단계</th><th>내용</th>
             <th>장비</th><th>상태</th><th>다음</th>
           </tr></thead>
-          <tbody><tr style="background:rgba(36,41,47,.6)">
+          <tbody><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">113</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">SY-004</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">SY-004</td>
               <td class="tc step">SY 레이어3 전략엔진</td>
-              <td class="tc desc">1000개 전략풀+레짐별선택+상관관계0.3</td>
+              <td class="tc desc">StrategyRouter+Ensemble 재사용 ✅</td>
               <td class="tc dev">Mac</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">SY-005</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">114</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">SY-005</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">SY-005</td>
               <td class="tc step">SY 레이어4 브로커게이트</td>
-              <td class="tc desc">키움REST 주문/체결/취소 100ms</td>
+              <td class="tc desc">3중잠금+PAPER_BLOCKED+0.02ms ✅</td>
               <td class="tc dev">Mac</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">SY-006</td>
             </tr><tr style="background:rgba(36,41,47,.6)">
               <td class="tc seq">115</td>
@@ -1434,15 +1434,15 @@
       <span class="ptitle" style="color:#3fb950">SY-레이어2 종목필터</span>
       <span class="psub">stock_filter.py 블랙리스트+하위20% ✅</span>
     </div>
-    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
-      <span class="picon" style="color:#484f58">❌</span>
-      <span class="ptitle" style="color:#eef6ff">SY-레이어3 전략엔진</span>
-      <span class="psub">strategy_engine.py 레짐별선택</span>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(63,185,80,.08);border:1px solid #3fb95020">
+      <span class="picon" style="color:#3fb950">✅</span>
+      <span class="ptitle" style="color:#3fb950">SY-레이어3 전략엔진</span>
+      <span class="psub">strategy_engine.py StrategyRouter+Ensemble ✅</span>
     </div>
-    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
-      <span class="picon" style="color:#484f58">❌</span>
-      <span class="ptitle" style="color:#eef6ff">SY-레이어4 브로커게이트</span>
-      <span class="psub">키움REST 주문/체결/취소 100ms</span>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(63,185,80,.08);border:1px solid #3fb95020">
+      <span class="picon" style="color:#3fb950">✅</span>
+      <span class="ptitle" style="color:#3fb950">SY-레이어4 브로커게이트</span>
+      <span class="psub">broker_gateway.py 3중잠금+0.02ms ✅</span>
     </div>
     <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
       <span class="picon" style="color:#484f58">❌</span>
@@ -1466,12 +1466,12 @@
     <div class="sec-title">📊 섹션 3 — 전체 진행률 요약</div>
 
     <div class="s3-top">
-      <div class="s3-card"><div class="s3-num" style="color:#3fb950">67</div><div class="s3-lab">완료 ✅</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#3fb950">69</div><div class="s3-lab">완료 ✅</div></div>
       <div class="s3-card"><div class="s3-num" style="color:#f0883e">4</div><div class="s3-lab">진행중 ⚠️</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#484f58">61</div><div class="s3-lab">대기 ❌</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">52.3%</div><div class="s3-lab">전체 진행률</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#484f58">59</div><div class="s3-lab">대기 ❌</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">53.8%</div><div class="s3-lab">전체 진행률</div></div>
     </div>
-    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:52.3%"></div></div>
+    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:53.8%"></div></div>
     <div style="margin-top:20px">
 <div class="lb-row">
           <span class="lb-id" style="color:#388bfd">INF</span>
@@ -1536,8 +1536,8 @@
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">RL</span>
           <span class="lb-name">Paper 검증 운영</span>
-          <div class="lb-bg"><div class="lb-fill" style="width:38%;background:#388bfd"></div></div>
-          <span class="lb-pct" style="color:#388bfd">38%</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:62%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">62%</span>
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">LIVE</span>
           <span class="lb-name">실전 투입 · 진화</span>
@@ -1547,7 +1547,7 @@
     </div>
 
     <footer>
-      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-23 13:47:35 생성</p>
+      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-23 13:56:20 생성</p>
       <p style="margin-top:3px;color:#1e2d40">실주문 절대 금지 · 마스터 확인 후만 진행</p>
     </footer>
   </div>
