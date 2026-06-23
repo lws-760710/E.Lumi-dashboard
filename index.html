@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LUMI 대시보드 v4.0 | v4.20260623.1554</title>
+  <title>LUMI 대시보드 v4.0 | v4.20260623.1808</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -98,13 +98,13 @@
     <div class="si"><span class="dot" style="background:#3fb950"></span>lumi_api 8001</div>
     <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 15.0MB (실시간)</div>
     <div class="paper">🔴 PAPER MODE</div>
-    <span class="sbar-time">2026-06-23 15:54:20</span>
+    <span class="sbar-time">2026-06-23 18:08:23</span>
   </div>
 
   <div class="container">
     <header>
       <h1>LUMI 개발 대시보드 v4.0</h1>
-      <p class="sub">v4.20260623.1554 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 23일</p>
+      <p class="sub">v4.20260623.1808 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 23일</p>
     </header>
 
     <!-- 섹션 1: 전체 개발 현황 -->
@@ -1173,7 +1173,7 @@
       <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
         <span class="lid" style="color:#388bfd">[SY]</span>
         <span class="lname">시스템팀 SY (키움 v5.0)</span>
-        <span class="lcnt" style="color:#8b949e">✅5 ⚠️1 ❌11 / 17개</span>
+        <span class="lcnt" style="color:#8b949e">✅8 ⚠️1 ❌8 / 17개</span>
         <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
       </summary>
       <div class="line-body">
@@ -1230,29 +1230,29 @@
               <td class="tc dev">Mac</td>
               <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">SY-007</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">116</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">SY-007</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">SY-007</td>
               <td class="tc step">레이어6 체결/정산</td>
-              <td class="tc desc">강제청산+수동감지+슬리피지+세금+자금3분할</td>
+              <td class="tc desc">settlement.py 강제청산+세금+자금3분할 WAL ✅</td>
               <td class="tc dev">Mac</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">SY-008</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">117</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">SY-008</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">SY-008</td>
               <td class="tc step">레이어7 감사/리포트</td>
-              <td class="tc desc">SHA256+팀별비교+Telegram 일일리포트</td>
+              <td class="tc desc">audit_reporter.py SHA256+팀비교+리포트 ✅</td>
               <td class="tc dev">Mac</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">SY-009</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">118</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">SY-009</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">SY-009</td>
               <td class="tc step">레이어8 포지션트래커</td>
-              <td class="tc desc">sy_positions 단일소스+섹터노출+수동감지</td>
+              <td class="tc desc">position_tracker.py sy_positions단일소스 ✅</td>
               <td class="tc dev">Mac</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">SY-010</td>
             </tr><tr style="background:rgba(36,41,47,.6)">
               <td class="tc seq">119</td>
@@ -1561,20 +1561,20 @@
       <span class="ptitle" style="color:#3fb950">SY-006 레이어5 리스크</span>
       <span class="psub">risk_manager.py Kelly+ATR+MDD ✅</span>
     </div>
-    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
-      <span class="picon" style="color:#484f58">❌</span>
-      <span class="ptitle" style="color:#eef6ff">SY-007 레이어6 정산</span>
-      <span class="psub">강제청산+수동감지+슬리피지+세금</span>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(63,185,80,.08);border:1px solid #3fb95020">
+      <span class="picon" style="color:#3fb950">✅</span>
+      <span class="ptitle" style="color:#3fb950">SY-007 레이어6 정산</span>
+      <span class="psub">settlement.py 강제청산+세금+자금3분할 ✅</span>
     </div>
-    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
-      <span class="picon" style="color:#484f58">❌</span>
-      <span class="ptitle" style="color:#eef6ff">SY-008 레이어7 감사</span>
-      <span class="psub">SHA256 체크섬+Telegram 리포트</span>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(63,185,80,.08);border:1px solid #3fb95020">
+      <span class="picon" style="color:#3fb950">✅</span>
+      <span class="ptitle" style="color:#3fb950">SY-008 레이어7 감사</span>
+      <span class="psub">audit_reporter.py SHA256+팀비교+리포트 ✅</span>
     </div>
-    <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
-      <span class="picon" style="color:#484f58">❌</span>
-      <span class="ptitle" style="color:#eef6ff">SY-009 레이어8 포지션</span>
-      <span class="psub">sy_positions 단일소스+섹터노출</span>
+    <div class="parrow">↓</div><div class="pnode" style="background:rgba(63,185,80,.08);border:1px solid #3fb95020">
+      <span class="picon" style="color:#3fb950">✅</span>
+      <span class="ptitle" style="color:#3fb950">SY-009 레이어8 포지션</span>
+      <span class="psub">position_tracker.py sy_positions단일소스 ✅</span>
     </div>
     <div class="parrow">↓</div><div class="pnode" style="background:rgba(36,41,47,.6);border:1px solid #484f5820">
       <span class="picon" style="color:#484f58">❌</span>
@@ -1623,12 +1623,12 @@
     <div class="sec-title">📊 섹션 3 — 전체 진행률 요약</div>
 
     <div class="s3-top">
-      <div class="s3-card"><div class="s3-num" style="color:#3fb950">69</div><div class="s3-lab">완료 ✅</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#3fb950">72</div><div class="s3-lab">완료 ✅</div></div>
       <div class="s3-card"><div class="s3-num" style="color:#f0883e">5</div><div class="s3-lab">진행중 ⚠️</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#484f58">67</div><div class="s3-lab">대기 ❌</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">50.7%</div><div class="s3-lab">전체 진행률</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#484f58">64</div><div class="s3-lab">대기 ❌</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">52.8%</div><div class="s3-lab">전체 진행률</div></div>
     </div>
-    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:50.7%"></div></div>
+    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:52.8%"></div></div>
     <div style="margin-top:20px">
 <div class="lb-row">
           <span class="lb-id" style="color:#388bfd">INF</span>
@@ -1688,8 +1688,8 @@
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">SY</span>
           <span class="lb-name">시스템팀 SY (키움 v5.0)</span>
-          <div class="lb-bg"><div class="lb-fill" style="width:32%;background:#388bfd"></div></div>
-          <span class="lb-pct" style="color:#388bfd">32%</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:50%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">50%</span>
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">RL</span>
           <span class="lb-name">Paper 검증 운영</span>
@@ -1704,7 +1704,7 @@
     </div>
 
     <footer>
-      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-23 15:54:20 생성</p>
+      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-23 18:08:23 생성</p>
       <p style="margin-top:3px;color:#1e2d40">실주문 절대 금지 · 마스터 확인 후만 진행</p>
     </footer>
   </div>
