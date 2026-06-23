@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LUMI 대시보드 v4.0 | v4.20260624.0440</title>
+  <title>LUMI 대시보드 v4.0 | v4.20260624.0510</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -98,17 +98,17 @@
     <div class="si"><span class="dot" style="background:#3fb950"></span>lumi_api 8001</div>
     <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 15.0MB (실시간)</div>
     <div class="paper">🔴 PAPER MODE</div>
-    <span class="sbar-time">2026-06-24 04:40:11</span>
+    <span class="sbar-time">2026-06-24 05:10:23</span>
   </div>
 
   <div class="container">
     <header>
       <h1>LUMI 개발 대시보드 v4.0</h1>
-      <p class="sub">v4.20260624.0440 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 24일</p>
+      <p class="sub">v4.20260624.0510 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 24일</p>
     </header>
 
     <!-- 섹션 1: 전체 개발 현황 -->
-    <div class="sec-title">📋 섹션 1 — 전체 개발 현황 (141개 항목)</div>
+    <div class="sec-title">📋 섹션 1 — 전체 개발 현황 (147개 항목)</div>
 
     <details class="line-block" open>
       <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
@@ -1476,6 +1476,71 @@
         </table>
       </div>
     </details>
+    <details class="line-block">
+      <summary class="line-sum" style="background:#161b22;border-left:4px solid #ff6b6b">
+        <span class="lid" style="color:#ff6b6b">[FIX]</span>
+        <span class="lname">긴급 보완</span>
+        <span class="lcnt" style="color:#8b949e">✅0 ❌6 / 6개</span>
+        <span class="larr" style="color:#ff6b6b;margin-left:auto">▸</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">142</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">FIX-001</td>
+              <td class="tc step">신호 파이프라인 검증</td>
+              <td class="tc desc">signal_pipeline 실제 신호 생성 확인</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">FIX-002</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">143</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">FIX-002</td>
+              <td class="tc step">CE 차단 테스트</td>
+              <td class="tc desc">금융법 25개 규칙 실제 차단 검증</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">FIX-003</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">144</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">FIX-003</td>
+              <td class="tc step">KIS_KR 데몬 구현</td>
+              <td class="tc desc">KIS 한국주식 독립 Paper 데몬</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">FIX-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">145</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">FIX-004</td>
+              <td class="tc step">KIS_US 데몬 구현</td>
+              <td class="tc desc">KIS 미국주식 독립 Paper 데몬 + 환율연동</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">FIX-005</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">146</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">FIX-005</td>
+              <td class="tc step">백테스트 Sharpe 개선</td>
+              <td class="tc desc">전략 파라미터 튜닝 Sharpe 1.0+ 목표</td>
+              <td class="tc dev">Mac+DAS</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">FIX-006</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">147</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">FIX-006</td>
+              <td class="tc step">CE vs 금융법 역할 정리</td>
+              <td class="tc desc">25개 규칙 vs 14개 게이트 계층 문서화</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">—</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
 
     <!-- 섹션 2: AI팀 파이프라인 -->
     <div class="sec-title">🔄 섹션 2 — AI팀 파이프라인 현황</div>
@@ -1630,10 +1695,10 @@
     <div class="s3-top">
       <div class="s3-card"><div class="s3-num" style="color:#3fb950">96</div><div class="s3-lab">완료 ✅</div></div>
       <div class="s3-card"><div class="s3-num" style="color:#f0883e">5</div><div class="s3-lab">진행중 ⚠️</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#484f58">40</div><div class="s3-lab">대기 ❌</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">69.9%</div><div class="s3-lab">전체 진행률</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#484f58">46</div><div class="s3-lab">대기 ❌</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">67.0%</div><div class="s3-lab">전체 진행률</div></div>
     </div>
-    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:69.9%"></div></div>
+    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:67.0%"></div></div>
     <div style="margin-top:20px">
 <div class="lb-row">
           <span class="lb-id" style="color:#388bfd">INF</span>
@@ -1705,11 +1770,16 @@
           <span class="lb-name">실전 투입·진화</span>
           <div class="lb-bg"><div class="lb-fill" style="width:7%;background:#388bfd"></div></div>
           <span class="lb-pct" style="color:#388bfd">7%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#484f58">FIX</span>
+          <span class="lb-name">긴급 보완</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:0%;background:#484f58"></div></div>
+          <span class="lb-pct" style="color:#484f58">0%</span>
         </div>
     </div>
 
     <footer>
-      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-24 04:40:11 생성</p>
+      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-24 05:10:23 생성</p>
       <p style="margin-top:3px;color:#1e2d40">실주문 절대 금지 · 마스터 확인 후만 진행</p>
     </footer>
   </div>
