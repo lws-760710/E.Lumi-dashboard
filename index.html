@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LUMI 대시보드 v4.0 | v4.20260623.1922</title>
+  <title>LUMI 대시보드 v4.0 | v4.20260623.1935</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -98,13 +98,13 @@
     <div class="si"><span class="dot" style="background:#3fb950"></span>lumi_api 8001</div>
     <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 15.0MB (실시간)</div>
     <div class="paper">🔴 PAPER MODE</div>
-    <span class="sbar-time">2026-06-23 19:22:21</span>
+    <span class="sbar-time">2026-06-23 19:35:13</span>
   </div>
 
   <div class="container">
     <header>
       <h1>LUMI 개발 대시보드 v4.0</h1>
-      <p class="sub">v4.20260623.1922 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 23일</p>
+      <p class="sub">v4.20260623.1935 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 23일</p>
     </header>
 
     <!-- 섹션 1: 전체 개발 현황 -->
@@ -567,7 +567,7 @@
       <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
         <span class="lid" style="color:#388bfd">[DP]</span>
         <span class="lname">데이터 파이프라인</span>
-        <span class="lcnt" style="color:#8b949e">✅2 ❌10 / 12개</span>
+        <span class="lcnt" style="color:#8b949e">✅3 ❌9 / 12개</span>
         <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
       </summary>
       <div class="line-body">
@@ -584,13 +584,13 @@
               <td class="tc dev">Mac+DAS</td>
               <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">DP-002</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">48</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">DP-002</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">DP-002</td>
               <td class="tc step">종목 데이터 파이프라인</td>
-              <td class="tc desc">KR/US/COIN 일봉+1등급분봉+등급분류+dp_registry 연동</td>
+              <td class="tc desc">KR 2875→등급분류+US/COIN수집+dp_data_master+launchd 16:00 ✅</td>
               <td class="tc dev">Mac+DAS</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">DP-003</td>
             </tr><tr style="background:rgba(36,41,47,.6)">
               <td class="tc seq">49</td>
@@ -1623,12 +1623,12 @@
     <div class="sec-title">📊 섹션 3 — 전체 진행률 요약</div>
 
     <div class="s3-top">
-      <div class="s3-card"><div class="s3-num" style="color:#3fb950">79</div><div class="s3-lab">완료 ✅</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#3fb950">80</div><div class="s3-lab">완료 ✅</div></div>
       <div class="s3-card"><div class="s3-num" style="color:#f0883e">4</div><div class="s3-lab">진행중 ⚠️</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#484f58">58</div><div class="s3-lab">대기 ❌</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">57.4%</div><div class="s3-lab">전체 진행률</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#484f58">57</div><div class="s3-lab">대기 ❌</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">58.2%</div><div class="s3-lab">전체 진행률</div></div>
     </div>
-    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:57.4%"></div></div>
+    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:58.2%"></div></div>
     <div style="margin-top:20px">
 <div class="lb-row">
           <span class="lb-id" style="color:#388bfd">INF</span>
@@ -1658,8 +1658,8 @@
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">DP</span>
           <span class="lb-name">데이터 파이프라인</span>
-          <div class="lb-bg"><div class="lb-fill" style="width:17%;background:#388bfd"></div></div>
-          <span class="lb-pct" style="color:#388bfd">17%</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:25%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">25%</span>
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">ST</span>
           <span class="lb-name">전략 시스템</span>
@@ -1704,7 +1704,7 @@
     </div>
 
     <footer>
-      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-23 19:22:21 생성</p>
+      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-23 19:35:13 생성</p>
       <p style="margin-top:3px;color:#1e2d40">실주문 절대 금지 · 마스터 확인 후만 진행</p>
     </footer>
   </div>
