@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-26T16:53:45",
-  "version": "v4.20260626.1653",
+  "updated_at": "2026-06-26T17:48:56",
+  "version": "v4.20260626.1748",
   "paper_mode": true,
   "overall_pct": 80.9,
   "done": 127,
@@ -12,7 +12,7 @@
   },
   "das": {
     "mounted": true,
-    "total_mb": 15.0,
-    "total_files": 107
+    "total_mb": 0.0,
+    "total_files": 0
   }
 }
