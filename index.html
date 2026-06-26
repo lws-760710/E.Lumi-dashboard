@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LUMI 대시보드 v4.0 | v4.20260626.1154</title>
+  <title>LUMI 대시보드 v4.0 | v4.20260626.1155</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -96,19 +96,19 @@
 <body>
   <div class="sbar">
     <div class="si"><span class="dot" style="background:#3fb950"></span>lumi_api 8001</div>
-    <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 0.0MB (실시간)</div>
+    <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 15.0MB (실시간)</div>
     <div class="paper">🔴 PAPER MODE</div>
-    <span class="sbar-time">2026-06-26 11:54:25</span>
+    <span class="sbar-time">2026-06-26 11:55:25</span>
   </div>
 
   <div class="container">
     <header>
       <h1>LUMI 개발 대시보드 v4.0</h1>
-      <p class="sub">v4.20260626.1154 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 26일</p>
+      <p class="sub">v4.20260626.1155 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 26일</p>
     </header>
 
     <!-- 섹션 1: 전체 개발 현황 -->
-    <div class="sec-title">📋 섹션 1 — 전체 개발 현황 (147개 항목)</div>
+    <div class="sec-title">📋 섹션 1 — 전체 개발 현황 (160개 항목)</div>
 
     <details class="line-block" open>
       <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
@@ -1541,6 +1541,178 @@
         </table>
       </div>
     </details>
+    <details class="line-block">
+      <summary class="line-sum" style="background:#161b22;border-left:4px solid #484f58">
+        <span class="lid" style="color:#484f58">[AGG]</span>
+        <span class="lname">Aggregation Layer</span>
+        <span class="lcnt" style="color:#8b949e">✅0 ❌4 / 4개</span>
+        <span class="larr" style="color:#484f58;margin-left:auto">▸</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">148</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">AGG-001</td>
+              <td class="tc step">일간 집계 테이블</td>
+              <td class="tc desc">daily_performance 테이블 + 자동집계 cron</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">AGG-002</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">149</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">AGG-002</td>
+              <td class="tc step">주간/월간/연간 집계</td>
+              <td class="tc desc">weekly/monthly/yearly rollup 테이블</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">AGG-003</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">150</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">AGG-003</td>
+              <td class="tc step">Aggregation API</td>
+              <td class="tc desc">/aggregate/daily·weekly·monthly·yearly</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">AGG-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">151</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">AGG-004</td>
+              <td class="tc step">과거 데이터 소급집계</td>
+              <td class="tc desc">Paper Trading 시작일~현재 소급</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">AM-001</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+    <details class="line-block">
+      <summary class="line-sum" style="background:#161b22;border-left:4px solid #484f58">
+        <span class="lid" style="color:#484f58">[AM]</span>
+        <span class="lname">AI Asset Management</span>
+        <span class="lcnt" style="color:#8b949e">✅0 ❌4 / 4개</span>
+        <span class="larr" style="color:#484f58;margin-left:auto">▸</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">152</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">AM-001</td>
+              <td class="tc step">퀀트시스템 탭 연동</td>
+              <td class="tc desc">실투자/모의투자 + aggregation 연동</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">AM-002</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">153</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">AM-002</td>
+              <td class="tc step">전체기간&연간 탭 연동</td>
+              <td class="tc desc">연간 수익률 추이 실데이터</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">AM-003</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">154</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">AM-003</td>
+              <td class="tc step">월간&주간 탭 연동</td>
+              <td class="tc desc">월간/주간 PnL 분석 실데이터</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">AM-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">155</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">AM-004</td>
+              <td class="tc step">당일현장중계 탭 연동</td>
+              <td class="tc desc">당일 실시간 성과 연동</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">DM-001</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+    <details class="line-block">
+      <summary class="line-sum" style="background:#161b22;border-left:4px solid #484f58">
+        <span class="lid" style="color:#484f58">[DM]</span>
+        <span class="lname">더미 제거</span>
+        <span class="lcnt" style="color:#8b949e">✅0 ❌4 / 4개</span>
+        <span class="larr" style="color:#484f58;margin-left:auto">▸</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">156</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">DM-001</td>
+              <td class="tc step">한투 HTS 더미 제거</td>
+              <td class="tc desc">AI점수/보유/계좌 → lumi_api 교체</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">DM-002</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">157</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">DM-002</td>
+              <td class="tc step">키움 HTS 더미 제거</td>
+              <td class="tc desc">보유6개/계좌/AI점수 → lumi_api 교체</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">DM-003</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">158</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">DM-003</td>
+              <td class="tc step">업비트 HTS 더미 제거</td>
+              <td class="tc desc">보유5개/계좌1.2억/AI점수 → lumi_api 교체</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">DM-004</td>
+            </tr><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">159</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">DM-004</td>
+              <td class="tc step">3개 HTS 공통 더미제거</td>
+              <td class="tc desc">포트폴리오비중/AI리스크 → 실데이터 교체</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">US-001</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
+    <details class="line-block">
+      <summary class="line-sum" style="background:#161b22;border-left:4px solid #484f58">
+        <span class="lid" style="color:#484f58">[US]</span>
+        <span class="lname">KIS US API</span>
+        <span class="lcnt" style="color:#8b949e">✅0 ❌1 / 1개</span>
+        <span class="larr" style="color:#484f58;margin-left:auto">▸</span>
+      </summary>
+      <div class="line-body">
+        <table class="lt">
+          <thead><tr>
+            <th>No</th><th>코드</th><th>단계</th><th>내용</th>
+            <th>장비</th><th>상태</th><th>다음</th>
+          </tr></thead>
+          <tbody><tr style="background:rgba(36,41,47,.6)">
+              <td class="tc seq">160</td>
+              <td class="tc code" style="color:#484f58;font-weight:600">US-001</td>
+              <td class="tc step">KIS US 현재가 API</td>
+              <td class="tc desc">/kis/us/price/{symbol} 구현</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc nxt" style="color:#8b949e">—</td>
+            </tr></tbody>
+        </table>
+      </div>
+    </details>
 
     <!-- 섹션 2: AI팀 파이프라인 -->
     <div class="sec-title">🔄 섹션 2 — AI팀 파이프라인 현황</div>
@@ -1695,10 +1867,10 @@
     <div class="s3-top">
       <div class="s3-card"><div class="s3-num" style="color:#3fb950">114</div><div class="s3-lab">완료 ✅</div></div>
       <div class="s3-card"><div class="s3-num" style="color:#f0883e">5</div><div class="s3-lab">진행중 ⚠️</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#484f58">28</div><div class="s3-lab">대기 ❌</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">79.3%</div><div class="s3-lab">전체 진행률</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#484f58">41</div><div class="s3-lab">대기 ❌</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">72.8%</div><div class="s3-lab">전체 진행률</div></div>
     </div>
-    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:79.3%"></div></div>
+    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:72.8%"></div></div>
     <div style="margin-top:20px">
 <div class="lb-row">
           <span class="lb-id" style="color:#388bfd">INF</span>
@@ -1775,11 +1947,31 @@
           <span class="lb-name">긴급 보완</span>
           <div class="lb-bg"><div class="lb-fill" style="width:83%;background:#388bfd"></div></div>
           <span class="lb-pct" style="color:#388bfd">83%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#484f58">AGG</span>
+          <span class="lb-name">Aggregation Layer</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:0%;background:#484f58"></div></div>
+          <span class="lb-pct" style="color:#484f58">0%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#484f58">AM</span>
+          <span class="lb-name">AI Asset Management</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:0%;background:#484f58"></div></div>
+          <span class="lb-pct" style="color:#484f58">0%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#484f58">DM</span>
+          <span class="lb-name">더미 제거</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:0%;background:#484f58"></div></div>
+          <span class="lb-pct" style="color:#484f58">0%</span>
+        </div><div class="lb-row">
+          <span class="lb-id" style="color:#484f58">US</span>
+          <span class="lb-name">KIS US API</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:0%;background:#484f58"></div></div>
+          <span class="lb-pct" style="color:#484f58">0%</span>
         </div>
     </div>
 
     <footer>
-      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-26 11:54:25 생성</p>
+      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-26 11:55:25 생성</p>
       <p style="margin-top:3px;color:#1e2d40">실주문 절대 금지 · 마스터 확인 후만 진행</p>
     </footer>
   </div>
