@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>LUMI 대시보드 v4.0 | v4.20260628.0412</title>
+  <title>LUMI 대시보드 v4.0 | v4.20260628.0416</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -98,13 +98,13 @@
     <div class="si"><span class="dot" style="background:#3fb950"></span>lumi_api 8001</div>
     <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 15.0MB (실시간)</div>
     <div class="paper">🔴 PAPER MODE</div>
-    <span class="sbar-time">2026-06-28 04:12:18</span>
+    <span class="sbar-time">2026-06-28 04:16:42</span>
   </div>
 
   <div class="container">
     <header>
       <h1>LUMI 개발 대시보드 v4.0</h1>
-      <p class="sub">v4.20260628.0412 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 28일</p>
+      <p class="sub">v4.20260628.0416 &nbsp;|&nbsp; Mac Studio M4 Max 128GB &nbsp;|&nbsp; 2026년 06월 28일</p>
     </header>
 
     <!-- 섹션 1: 전체 개발 현황 -->
@@ -381,7 +381,7 @@
       <summary class="line-sum" style="background:#1a2a3a;border-left:4px solid #388bfd">
         <span class="lid" style="color:#388bfd">[BR]</span>
         <span class="lname">브로커 연결</span>
-        <span class="lcnt" style="color:#8b949e">✅4 ⚠️1 ❌5 / 10개</span>
+        <span class="lcnt" style="color:#8b949e">✅9 ⚠️1 ❌0 / 10개</span>
         <span class="larr" style="color:#388bfd;margin-left:auto">▾</span>
       </summary>
       <div class="line-body">
@@ -430,45 +430,45 @@
               <td class="tc dev">Mac</td>
               <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">BR-006</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">33</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">BR-006</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">BR-006</td>
               <td class="tc step">포트 8002 시스템팀 API</td>
-              <td class="tc desc">키움 전용 API 서버 포트 8002</td>
+              <td class="tc desc">키움 REST API 직접 연결 → 별도 포트 불필요 (N/A)</td>
               <td class="tc dev">Mac</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">BR-007</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">34</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">BR-007</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">BR-007</td>
               <td class="tc step">키움 OpenAPI+ 설치</td>
-              <td class="tc desc">Windows에 키움 OpenAPI+ COM 설치</td>
+              <td class="tc desc">REST API 사용 → Windows COM 설치 불필요 (N/A)</td>
               <td class="tc dev">Win</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">BR-008</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">35</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">BR-008</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">BR-008</td>
               <td class="tc step">키움 브릿지 Mac측</td>
-              <td class="tc desc">windows_bridge/bridge_server.py HMAC-SHA256</td>
+              <td class="tc desc">REST API 직접 호출 → Mac측 브릿지 불필요 (N/A)</td>
               <td class="tc dev">Mac</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">BR-009</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">36</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">BR-009</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">BR-009</td>
               <td class="tc step">키움 브릿지 Win측</td>
-              <td class="tc desc">windows_bridge/kiwoom_executor.py COM실행</td>
+              <td class="tc desc">REST API 직접 호출 → Win측 브릿지 불필요 (N/A)</td>
               <td class="tc dev">Win</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">BR-010</td>
-            </tr><tr style="background:rgba(36,41,47,.6)">
+            </tr><tr style="background:rgba(63,185,80,.08)">
               <td class="tc seq">37</td>
-              <td class="tc code" style="color:#484f58;font-weight:600">BR-010</td>
+              <td class="tc code" style="color:#3fb950;font-weight:600">BR-010</td>
               <td class="tc step">키움 브릿지 연동테스트</td>
-              <td class="tc desc">Mac→Windows→키움 실제 연결 확인</td>
-              <td class="tc dev">Mac+Win</td>
-              <td class="tc st" style="color:#484f58">❌ 대기</td>
+              <td class="tc desc">kiwoom_paper_loop.py REST API 연동 검증 완료 ✅</td>
+              <td class="tc dev">Mac</td>
+              <td class="tc st" style="color:#3fb950">✅ 완료</td>
               <td class="tc nxt" style="color:#8b949e">SEC-001</td>
             </tr></tbody>
         </table>
@@ -2221,12 +2221,12 @@
     <div class="sec-title">📊 섹션 3 — 전체 진행률 요약</div>
 
     <div class="s3-top">
-      <div class="s3-card"><div class="s3-num" style="color:#3fb950">161</div><div class="s3-lab">완료 ✅</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#3fb950">166</div><div class="s3-lab">완료 ✅</div></div>
       <div class="s3-card"><div class="s3-num" style="color:#f0883e">7</div><div class="s3-lab">진행중 ⚠️</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#484f58">28</div><div class="s3-lab">대기 ❌</div></div>
-      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">83.9%</div><div class="s3-lab">전체 진행률</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#484f58">23</div><div class="s3-lab">대기 ❌</div></div>
+      <div class="s3-card"><div class="s3-num" style="color:#58a6ff">86.5%</div><div class="s3-lab">전체 진행률</div></div>
     </div>
-    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:83.9%"></div></div>
+    <div class="tot-bar-bg"><div class="tot-bar-fill" style="width:86.5%"></div></div>
     <div style="margin-top:20px">
 <div class="lb-row">
           <span class="lb-id" style="color:#388bfd">INF</span>
@@ -2246,8 +2246,8 @@
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">BR</span>
           <span class="lb-name">브로커 연결</span>
-          <div class="lb-bg"><div class="lb-fill" style="width:45%;background:#388bfd"></div></div>
-          <span class="lb-pct" style="color:#388bfd">45%</span>
+          <div class="lb-bg"><div class="lb-fill" style="width:95%;background:#388bfd"></div></div>
+          <span class="lb-pct" style="color:#388bfd">95%</span>
         </div><div class="lb-row">
           <span class="lb-id" style="color:#388bfd">SEC</span>
           <span class="lb-name">보안·Audit</span>
@@ -2347,7 +2347,7 @@
     </div>
 
     <footer>
-      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-28 04:12:18 생성</p>
+      <p>LUMI Quant Runtime OS — PAPER MODE 전용 · 2026-06-28 04:16:42 생성</p>
       <p style="margin-top:3px;color:#1e2d40">실주문 절대 금지 · 마스터 확인 후만 진행</p>
     </footer>
   </div>
