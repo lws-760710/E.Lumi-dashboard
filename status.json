@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-06-27T19:19:25",
-  "version": "v4.20260627.1919",
+  "updated_at": "2026-06-27T19:28:06",
+  "version": "v4.20260627.1928",
   "paper_mode": true,
-  "overall_pct": 80.9,
-  "done": 127,
-  "warn": 5,
-  "no": 28,
+  "overall_pct": 66.8,
+  "done": 128,
+  "warn": 6,
+  "no": 62,
   "system": {
     "lumi_api": true,
     "das_mounted": true
