@@ -2351,5 +2351,538 @@
       <p style="margin-top:3px;color:#1e2d40">실주문 절대 금지 · 마스터 확인 후만 진행</p>
     </footer>
   </div>
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION4-LUMI-FINAL: LUMI AI v4.0 FINAL 신규 개발 현황 -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div style="margin:60px 20px 40px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:rgba(8,12,22,0.6);border-radius:16px;padding:32px;border:1px solid rgba(100,148,210,0.15)">
+
+  <div style="border-bottom:3px solid #4fd1ff;padding-bottom:12px;margin-bottom:24px">
+    <h2 style="color:#4fd1ff;font-size:24px;margin:0 0 6px">
+      &#128203; 섹션 4 &mdash; LUMI AI Quant Runtime OS 신규 개발 (v4.0 FINAL)
+    </h2>
+    <p style="color:#a7bad6;font-size:14px;margin:0">
+      마지막 업데이트: 2026-06-30 11:02 KST &nbsp;|&nbsp; 전체 42개 작업
+    </p>
+  </div>
+
+  <div style="display:flex;gap:16px;margin-bottom:28px;flex-wrap:wrap">
+    <div style="background:rgba(14,20,36,0.94);border:1px solid rgba(22,163,74,0.3);border-radius:10px;padding:18px 28px;text-align:center;min-width:120px">
+      <div style="color:#16a34a;font-size:32px;font-weight:bold">11</div>
+      <div style="color:#a7bad6;font-size:13px;margin-top:3px">완료 ✅</div>
+    </div>
+    <div style="background:rgba(14,20,36,0.94);border:1px solid rgba(217,119,6,0.3);border-radius:10px;padding:18px 28px;text-align:center;min-width:120px">
+      <div style="color:#d97706;font-size:32px;font-weight:bold">1</div>
+      <div style="color:#a7bad6;font-size:13px;margin-top:3px">진행 중 ⏳</div>
+    </div>
+    <div style="background:rgba(14,20,36,0.94);border:1px solid rgba(100,148,210,0.2);border-radius:10px;padding:18px 28px;text-align:center;min-width:120px">
+      <div style="color:#6b7fa0;font-size:32px;font-weight:bold">21</div>
+      <div style="color:#a7bad6;font-size:13px;margin-top:3px">대기 🔒</div>
+    </div>
+    <div style="background:rgba(14,20,36,0.94);border:1px solid rgba(79,209,255,0.3);border-radius:10px;padding:18px 28px;text-align:center;min-width:150px">
+      <div style="color:#4fd1ff;font-size:32px;font-weight:bold">26.2%</div>
+      <div style="color:#a7bad6;font-size:13px;margin-top:3px">진행률 (11/42)</div>
+    </div>
+  </div>
+
+  <div style="background:rgba(100,148,210,0.08);border-radius:6px;height:12px;margin-bottom:28px;overflow:hidden">
+    <div style="background:linear-gradient(90deg,#16a34a,#4fd1ff);height:100%;width:26.2%;border-radius:6px"></div>
+  </div>
+
+  <table style="width:100%;border-collapse:collapse;font-size:13px">
+    <thead>
+      <tr style="background:rgba(37,99,235,0.2)">
+        <th style="padding:10px 16px;text-align:left;color:#eef6ff;border-bottom:2px solid rgba(100,148,210,0.3);width:80px">코드</th>
+        <th style="padding:10px 16px;text-align:left;color:#eef6ff;border-bottom:2px solid rgba(100,148,210,0.3)">작업명 / 설명</th>
+        <th style="padding:10px 16px;text-align:left;color:#eef6ff;border-bottom:2px solid rgba(100,148,210,0.3);width:260px">완료 기준</th>
+        <th style="padding:10px 16px;text-align:center;color:#eef6ff;border-bottom:2px solid rgba(100,148,210,0.3);width:100px">상태</th>
+        <th style="padding:10px 16px;text-align:center;color:#eef6ff;border-bottom:2px solid rgba(100,148,210,0.3);width:110px">완료일</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td colspan="5" style="padding:14px 16px;background:rgba(220,38,38,0.12);border:none;border-top:3px solid #dc2626">
+          <span style="color:#dc2626;font-size:17px;font-weight:bold">&#9889; Phase 0 &mdash; 두뇌 안정화</span>
+          <span style="color:#a7bad6;font-size:14px;margin-left:16px">3 / 5 완료</span>
+        </td>
+      </tr>
+      <tr style="background:rgba(22,163,74,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P0-001</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">API 키 5개 검증 스크립트</div>
+          <div style="color:#6b7fa0;font-size:12px">ai_route/.env — OPENAI / ANTHROPIC / XAI / FRED / FINNHUB</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 scripts/verify_api_keys.py → 5개 SET</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#16a34a;color:white;padding:3px 10px;border-radius:4px;font-size:12px">완료 ✅</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">2026-06-30</td>
+      </tr>
+      <tr style="background:rgba(22,163,74,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P0-002</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">LlmRouter 구현 — 메모리 폭발 해결 핵심</div>
+          <div style="color:#6b7fa0;font-size:12px">모델 등급제: qwen2.5:14b(주력) / gemma2:2b(감시) / Claude API(폴백)</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 scripts/verify_llm_router.py → 6/6 ALL PASS</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#16a34a;color:white;padding:3px 10px;border-radius:4px;font-size:12px">완료 ✅</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">2026-06-30</td>
+      </tr>
+      <tr style="background:rgba(22,163,74,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P0-003</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">레거시 72b 하드코딩 완전 제거</div>
+          <div style="color:#6b7fa0;font-size:12px">4개 파일 14개 라인 → qwen2.5:14b 교체</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">grep -r '72b' agents/ | wc -l → 0</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#16a34a;color:white;padding:3px 10px;border-radius:4px;font-size:12px">완료 ✅</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">2026-06-30</td>
+      </tr>
+      <tr style="background:rgba(217,119,6,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P0-004</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">24시간 안정성 검증</div>
+          <div style="color:#6b7fa0;font-size:12px">평균 메모리 &lt;65% / OOM 0회 / memory_monitor.py PID 67078</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 scripts/check_stability.py → PASS</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#d97706;color:white;padding:3px 10px;border-radius:4px;font-size:12px">진행 중 ⏳</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">모니터링 중</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P0-005</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">포트 충돌 방지 startup_check.py</div>
+          <div style="color:#6b7fa0;font-size:12px">8000/8001/8003/8007 포트 확인 + 자동 정리</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 scripts/startup_check.py → ALL ports clean</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr>
+        <td colspan="5" style="padding:14px 16px;background:rgba(217,119,6,0.12);border:none;border-top:3px solid #d97706">
+          <span style="color:#d97706;font-size:17px;font-weight:bold">&#9889; Phase 1 &mdash; 에이전트 독립화</span>
+          <span style="color:#a7bad6;font-size:14px;margin-left:16px">3 / 7 완료</span>
+        </td>
+      </tr>
+      <tr style="background:rgba(22,163,74,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P1-001</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">4개 DB 분리 스키마 생성</div>
+          <div style="color:#6b7fa0;font-size:12px">lumi_agents.db / lumi_trading.db / lumi_intel.db / lumi_audit.db</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">ls lumi_data/*.db → 5개 파일 확인</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#16a34a;color:white;padding:3px 10px;border-radius:4px;font-size:12px">완료 ✅</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">2026-06-30</td>
+      </tr>
+      <tr style="background:rgba(22,163,74,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P1-002</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">BaseAgent 공통 클래스 강화</div>
+          <div style="color:#6b7fa0;font-size:12px">하트비트 5초 / 메시지큐 1초 폴링 / 자동복구 / 4개 DB 분리</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">from agents.core.base_agent import BaseAgent → OK</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#16a34a;color:white;padding:3px 10px;border-radius:4px;font-size:12px">완료 ✅</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">2026-06-30</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P1-003</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">닥터 에이전트 독립 프로세스 (첫 번째)</div>
+          <div style="color:#6b7fa0;font-size:12px">모든 에이전트 감시 / 장애감지 / 자동복구 / Telegram 알림</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">launchctl list | grep doctor → PID 확인 + launchd 등록</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">P0-004 완료 후</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P1-004</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">MessageBus + EventBus</div>
+          <div style="color:#6b7fa0;font-size:12px">에이전트 간 미들웨어 / 이벤트 발행·구독 구조</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 tests/test_message_bus.py → E2E 체인 PASS</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P1-005</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">나머지 에이전트 독립 프로세스</div>
+          <div style="color:#6b7fa0;font-size:12px">루미/마크/전략/신호/리스/코그/인텔/리서치 — 각각 독립 PID + launchd</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">bash scripts/check_all_agents.sh → 11명 PID 확인</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P1-006</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">에이전트 장애 시나리오 6개 테스트</div>
+          <div style="color:#6b7fa0;font-size:12px">kill→재시작 / 닥터kill→launchd / 좀비감지 / 메모리누수 / 큐적체 / 재시작루프</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 tests/test_agent_failure.py → 6개 PASS &lt;30초</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(22,163,74,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P1-007</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">에이전트 충돌 해결 로직 (conflict_resolver)</div>
+          <div style="color:#6b7fa0;font-size:12px">같은 종목 동시 매수/매도 시 우선순위 판정 (ris &gt; mark &gt; 전략)</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">resolve_conflict() 테스트 PASS</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#16a34a;color:white;padding:3px 10px;border-radius:4px;font-size:12px">완료 ✅</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">2026-06-30</td>
+      </tr>
+      <tr>
+        <td colspan="5" style="padding:14px 16px;background:rgba(37,99,235,0.12);border:none;border-top:3px solid #2563eb">
+          <span style="color:#2563eb;font-size:17px;font-weight:bold">&#9889; Phase 2 &mdash; 퀀트 심장</span>
+          <span style="color:#a7bad6;font-size:14px;margin-left:16px">0 / 5 완료</span>
+        </td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P2-000</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">백테스트용 임시 데이터 다운로드 (최소 3년)</div>
+          <div style="color:#6b7fa0;font-size:12px">KR 10종목 / US 5종목 / COIN 3종목 OHLCV 3년치</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 scripts/download_backtest_data.py → 최소 3년 확인</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P2-001</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">BaseStrategy + BacktestEngine (Walk-Forward)</div>
+          <div style="color:#6b7fa0;font-size:12px">Walk-Forward 검증 / OOS 20% 분리 / 거래비용 포함 순손익</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 -m pytest tests/test_base_strategy.py → PASS</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P2-002</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">전략 5개 구현</div>
+          <div style="color:#6b7fa0;font-size:12px">데이트레이딩 3개 + Bear 1개 + Crisis 1개 (레짐별 On/Off)</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 strategies/backtest_engine.py --run-all → Sharpe≥1.5 통과</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P2-003</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">CE 14관문 강화 + 레짐전환 포지션 처리</div>
+          <div style="color:#6b7fa0;font-size:12px">레짐 변경 시 기존 포지션 처리 / 새 전략 즉시 적용</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">curl localhost:8003/constitution/status → 14관문 PASS</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P2-004</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">코인 전용 전략 2개</div>
+          <div style="color:#6b7fa0;font-size:12px">펀딩비 차익 / BTC 도미넌스 기반 + 새벽 3단 모드 (00-06 KST)</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">백테스트 PASS + 새벽모드 테스트</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr>
+        <td colspan="5" style="padding:14px 16px;background:rgba(13,148,136,0.12);border:none;border-top:3px solid #0d9488">
+          <span style="color:#0d9488;font-size:17px;font-weight:bold">&#9889; Phase 3 &mdash; 정보 파이프라인</span>
+          <span style="color:#a7bad6;font-size:14px;margin-left:16px">5 / 7 완료</span>
+        </td>
+      </tr>
+      <tr style="background:rgba(22,163,74,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P3-001</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">통합 데이터 스키마 + 5등급 DB (lumi_intel.db)</div>
+          <div style="color:#6b7fa0;font-size:12px">특급~3등급+등외 5단계 / 위기 이벤트 10건 초기 등록 / 야간 자동 재평가</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">sqlite3 lumi_intel.db '.tables' → 테이블 8개 확인</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#16a34a;color:white;padding:3px 10px;border-radius:4px;font-size:12px">완료 ✅</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">2026-06-30</td>
+      </tr>
+      <tr style="background:rgba(22,163,74,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P3-002</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">OHLCV 자동수집 + 야간 배치</div>
+          <div style="color:#6b7fa0;font-size:12px">KR 2,878종목 DAS parquet / US 13종목 yfinance / COIN 7종목 Upbit</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">launchctl list | grep dp-stock → KR 수집 확인</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#16a34a;color:white;padding:3px 10px;border-radius:4px;font-size:12px">완료 ✅</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">2026-06-30</td>
+      </tr>
+      <tr style="background:rgba(22,163,74,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P3-003</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">뉴스 파이프라인 (Ollama 감성분석)</div>
+          <div style="color:#6b7fa0;font-size:12px">네이버금융 + RSS 5개 + Finnhub / gemma2:2b 감성분석 + keyword 폴백</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">intel_news 97건+ / 긍정60 부정9 중립28</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#16a34a;color:white;padding:3px 10px;border-radius:4px;font-size:12px">완료 ✅</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">2026-06-30</td>
+      </tr>
+      <tr style="background:rgba(22,163,74,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P3-004</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">매크로 파이프라인 (한은/FRED/공포탐욕)</div>
+          <div style="color:#6b7fa0;font-size:12px">환율 4종 / 지수 8종 / 공포탐욕 / VIX / BOK 금리 / 종합 레짐 계산</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">intel_macro 16건+ / 레짐=sideways</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#16a34a;color:white;padding:3px 10px;border-radius:4px;font-size:12px">완료 ✅</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">2026-06-30</td>
+      </tr>
+      <tr style="background:rgba(22,163,74,0.07)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P3-005</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">Intel Agent 독립 프로세스</div>
+          <div style="color:#6b7fa0;font-size:12px">5분 주기 OHLCV+뉴스+매크로 수집 / intel_package 생성 → mark 전송</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">curl localhost:8001/intel/status → ALIVE + PID 확인</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#16a34a;color:white;padding:3px 10px;border-radius:4px;font-size:12px">완료 ✅</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">2026-06-30</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P3-006</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">Research Agent 독립 프로세스</div>
+          <div style="color:#6b7fa0;font-size:12px">감성 고도화 / 등급 재평가 / AI 참조 가중치 자동 조정</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">curl localhost:8001/research/status → ALIVE</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P3-007</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">야간 등급 재평가 배치 + 데이터 닥터</div>
+          <div style="color:#6b7fa0;font-size:12px">00:00 전체 등급 재계산 / 승급·강등·폐기대기 / 30일 폐기 마스터 확인</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">launchctl list | grep grade → 00:00 자동 실행 확인</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr>
+        <td colspan="5" style="padding:14px 16px;background:rgba(124,58,237,0.12);border:none;border-top:3px solid #7c3aed">
+          <span style="color:#7c3aed;font-size:17px;font-weight:bold">&#9889; Phase 4 &mdash; MCP·스킬·학습</span>
+          <span style="color:#a7bad6;font-size:14px;margin-left:16px">0 / 6 완료</span>
+        </td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P4-001</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">MCP 서버 4개 설치</div>
+          <div style="color:#6b7fa0;font-size:12px">sqlite / filesystem / git / custom-lumi MCP 설치</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">claude mcp list → 4개 등록 확인</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P4-002</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">에이전트별 스킬 구현</div>
+          <div style="color:#6b7fa0;font-size:12px">레짐판별(마크) / 무릎어깨(마크) / 손절계산(리스) 등 Few-shot+CoT+Pydantic</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 tests/test_skills.py → 스키마 95%+ / 일관성 80%+</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P4-003</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">Hook 체인 End-to-End 연결</div>
+          <div style="color:#6b7fa0;font-size:12px">신호 → CE → 리스크 → 주문 → 감사 전체 자동 파이프라인</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 tests/test_hook_chain.py → 레이턴시 3초 이내</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P4-004</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">Windows GPU SSH + LSTM 학습 시작</div>
+          <div style="color:#6b7fa0;font-size:12px">DAS 30GB+ 달성 후 / RTX4060 LSTM 야간배치 학습 / Mac→Win SSH 자동</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">ssh lumi-gpu@192.168.0.101 'echo ok' → SSH 연결 + GPU 확인</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">DAS 30GB+ 후</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P4-005</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">Trade Postmortem 자동화 (EVO-001)</div>
+          <div style="color:#6b7fa0;font-size:12px">거래 종료 후 자동 분석 / 진입이유·청산이유·PnL / 유사패턴 / 개선제안</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 tests/test_postmortem.py → 10분 내 리포트 생성</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P4-006</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">로컬 모델 벤치마크</div>
+          <div style="color:#6b7fa0;font-size:12px">qwen2.5:14b vs gemma2:2b vs Claude API 비교 / 비용/정확도/일관성</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">lumi_audit.db benchmark_history → 스키마 95%+ 확인</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr>
+        <td colspan="5" style="padding:14px 16px;background:rgba(234,88,12,0.12);border:none;border-top:3px solid #ea580c">
+          <span style="color:#ea580c;font-size:17px;font-weight:bold">&#9889; Phase 5 &mdash; 실전 전환</span>
+          <span style="color:#a7bad6;font-size:14px;margin-left:16px">0 / 3 완료</span>
+        </td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P5-001</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">168시간 사전 운영 (실주문 전)</div>
+          <div style="color:#6b7fa0;font-size:12px">7일 연속 무중단 / 에이전트 11명 + CE + 정보 파이프라인 전체 연결</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">python3 scripts/check_168h_stability.py → 11명 ALIVE + CE 100%</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">—</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P5-002</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">마스터 최종 승인 + Live 전환 체크리스트 7개</div>
+          <div style="color:#6b7fa0;font-size:12px">PAPER_MODE=false / 실거래 키 교체 / 투자원금 이체 / 테스트주문 확인</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">마스터 직접 확인 후 PAPER_MODE → LIVE 3중 잠금 해제</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">마스터 승인 필수</td>
+      </tr>
+      <tr style="background:rgba(10,14,26,0.35)">
+        <td style="padding:11px 16px;color:#4fd1ff;font-weight:bold;font-size:14px;border-bottom:1px solid rgba(100,148,210,0.1);white-space:nowrap">P5-003</td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#eef6ff;font-size:14px;font-weight:bold;margin-bottom:3px">Controlled Live 100만원 시작</div>
+          <div style="color:#6b7fa0;font-size:12px">1단계(100만) → 2단계(500만) → 3단계(1000만) → 4단계(마스터판단)</div>
+        </td>
+        <td style="padding:11px 16px;border-bottom:1px solid rgba(100,148,210,0.1)">
+          <div style="color:#8b949e;font-size:11px;margin-bottom:2px">완료 기준:</div>
+          <div style="color:#a7bad6;font-size:12px">실주문 체결 확인 + 손절 자동동작 + CE 100% 통과</div>
+        </td>
+        <td style="padding:11px 16px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)"><span style="background:#334155;color:#94a3b8;padding:3px 10px;border-radius:4px;font-size:12px">대기 🔒</span></td>
+        <td style="padding:11px 16px;color:#a7bad6;font-size:13px;text-align:center;border-bottom:1px solid rgba(100,148,210,0.1)">마스터 승인 필수</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:28px;padding:14px 18px;background:rgba(220,38,38,0.08);border-left:4px solid #dc2626;border-radius:4px;font-size:13px;color:#fca5a5;line-height:1.8">
+    <div style="font-weight:bold;font-size:15px;margin-bottom:6px;color:#f87171">&#128308; 절대 규칙 (v4.0 FINAL)</div>
+    &bull; lumi_api nohup 수동 실행 금지 &mdash; launchctl로만 제어<br>
+    &bull; ai_route/ 폴더 내부 수정 절대 금지<br>
+    &bull; PAPER MODE 3중 잠금 유지 &mdash; 마스터 승인 전 해제 불가<br>
+    &bull; 완료 기준 = 터미널 실행 결과 (파일 존재 &ne; 완료)<br>
+    &bull; 모든 행동 마스터 허가 후에만 &mdash; 1번에 1개만
+  </div>
+
+  <div style="margin-top:16px;font-size:12px;color:#4a5a7a;text-align:right;border-top:1px solid rgba(100,148,210,0.1);padding-top:10px">
+    LUMI AI Quant Runtime OS v4.0 FINAL &nbsp;|&nbsp; 2026-06-30 11:02 KST 생성
+  </div>
+</div>
+
 </body>
 </html>
