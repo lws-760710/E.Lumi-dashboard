@@ -108,9 +108,12 @@
       try {
         const r = await fetch('http://localhost:8001/system/metrics', { signal: AbortSignal.timeout(3000) })
         const d = await r.json()
-        const gb = d?.storage?.cold?.used_gb
-        if (gb != null) {
-          document.querySelector('.das-size').textContent = `DAS ${gb}GB (실시간)`
+        // storage.cold = 실제 DAS(/Volumes/DAS_WooSub) 사용량. storage.warm은 내장
+        // 부트볼륨이라 DAS가 아님 — 혼동 방지를 위해 cold만 사용(OPS-01/02 원칙 유지).
+        const usedGb = d?.storage?.cold?.used_gb
+        const totalGb = d?.storage?.cold?.total_gb
+        if (usedGb != null && totalGb != null) {
+          document.querySelector('.das-size').textContent = `DAS ${usedGb}GB / ${totalGb}GB (실시간)`
         }
       } catch (e) {
         // lumi_api 미기동/CORS/다른 기기에서 열람 등 — 조용히 실패, 정적 텍스트 유지
