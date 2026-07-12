@@ -96,10 +96,29 @@
 <body>
   <div class="sbar">
     <div class="si"><span class="dot" style="background:#f85149"></span>lumi_api 8001</div>
-    <div class="si"><span class="dot" style="background:#3fb950"></span>DAS 0.0MB (실시간)</div>
+    <div class="si"><span class="dot" style="background:#3fb950"></span><span class="das-size">DAS 0.0MB (실시간)</span></div>
     <div class="paper">🔴 PAPER MODE</div>
     <span class="sbar-time">2026-06-30 08:05:48</span>
   </div>
+  <script>
+    // OPS-02: 상단바 DAS 용량을 정적 텍스트 대신 로컬 lumi_api에서 동적 조회.
+    // GitHub Pages(https) 페이지가 localhost:8001(http)을 호출하므로 다른 기기/
+    // lumi_api 미기동 상태에서는 실패하는 게 정상 — 그때는 기존 정적 텍스트 유지.
+    async function updateDasSize() {
+      try {
+        const r = await fetch('http://localhost:8001/system/metrics', { signal: AbortSignal.timeout(3000) })
+        const d = await r.json()
+        const gb = d?.storage?.cold?.used_gb
+        if (gb != null) {
+          document.querySelector('.das-size').textContent = `DAS ${gb}GB (실시간)`
+        }
+      } catch (e) {
+        // lumi_api 미기동/CORS/다른 기기에서 열람 등 — 조용히 실패, 정적 텍스트 유지
+      }
+    }
+    updateDasSize()
+    setInterval(updateDasSize, 30000)
+  </script>
 
   <div class="container">
     <header>
